@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<AssemblyVersion>1.9.8</AssemblyVersion>
-		<PackageVersion>1.0.5</PackageVersion>
+		<PackageVersion>1.0.6</PackageVersion>
 		<Authors>Juna Meinhold</Authors>
 		<Description>A .NET wrapper for the DirectXTex library.</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/JunaMeinhold/HexaEngine</RepositoryUrl>
+		<RepositoryUrl>https://github.com/JunaMeinhold/HexaEngine.DirectXTex</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>

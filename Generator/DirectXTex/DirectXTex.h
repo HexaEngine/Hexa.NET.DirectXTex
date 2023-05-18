@@ -2,21 +2,39 @@
 #pragma comment(lib, "d3d12.lib")
 
 #include <stdint.h>
+#include <DirectXMath.h>
+
+#if WIN32
 #include <d3d12.h>
 #include <d3d11_1.h>
 #include <dxgiformat.h>
 #include <wincodec.h>
-#include <DirectXMath.h>
+#endif
 
+#if defined(_MSC_VER)
+//  Microsoft
 #define API __declspec(dllexport)
+#define IMPORT __declspec(dllimport)
+#elif defined(__GNUC__)
+//  GCC
+#define API __attribute__((visibility("default")))
+#define IMPORT
+#else
+//  do nothing and hope for the best?
+#define API
+#define IMPORT
+#pragma warning Unknown dynamic link import/export semantics.
+#endif
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+#if WIN32
 	typedef void(__cdecl* SetCustomProps)(IPropertyBag2* pBag);
 	typedef void(__cdecl* GetMQR)(IWICMetadataQueryReader* qMqr);
+#endif
 	typedef void(__cdecl* EvaluateImageFunc)(const DirectX::XMVECTOR* pixels, size_t width, size_t y);
 	typedef void(__cdecl* TransformImageFunc)(DirectX::XMVECTOR* outPixels, const DirectX::XMVECTOR* inPixels, size_t width, size_t y);
 

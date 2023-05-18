@@ -35,6 +35,10 @@
 
         public Dictionary<string, string> KnownEnumPrefixes { get; set; } = new();
 
+        public Dictionary<string, string> KnownExtensionPrefixes { get; set; } = new();
+
+        public Dictionary<string, string> KnownExtensionNames { get; set; } = new();
+
         public Dictionary<string, List<string>> KnownStructMethods { get; set; } = new();
 
         public HashSet<string> IgnoredParts { get; set; } = new(StringComparer.OrdinalIgnoreCase);

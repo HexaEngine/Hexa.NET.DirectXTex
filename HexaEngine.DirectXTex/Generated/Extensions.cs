@@ -10,8 +10,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Silk.NET.Direct3D12;
-using Silk.NET.Direct3D11;
 
 namespace HexaEngine.DirectXTex
 {

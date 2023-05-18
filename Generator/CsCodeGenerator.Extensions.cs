@@ -13,9 +13,7 @@
             using var writer = new CodeWriter(Path.Combine(outputPath, "Extensions.cs"),
                 "System",
                 "System.Runtime.CompilerServices",
-                "System.Runtime.InteropServices",
-                "Silk.NET.Direct3D12",
-                "Silk.NET.Direct3D11"
+                "System.Runtime.InteropServices"
                 );
             using (writer.PushBlock($"public static unsafe class Extensions"))
             {
@@ -27,8 +25,6 @@
                         continue;
                     }
 
-                    var csHandleName = GetCsCleanName(typedef.Name);
-
                     for (int j = 0; j < compilation.Functions.Count; j++)
                     {
                         var cppFunction = compilation.Functions[j];
@@ -38,20 +34,22 @@
 
                         if (cppFunction.Parameters[0].Type.GetDisplayName().Contains(typedef.GetDisplayName()))
                         {
+                            var extensionPrefix = GetExtensionNamePrefix(typedef.Name);
                             var csFunctionName = GetCsCleanName(cppFunction.Name);
+                            var csExtensionName = GetPrettyExtensionName(csFunctionName, extensionPrefix);
                             bool canUseOut = s_outReturnFunctions.Contains(cppFunction.Name);
                             var argumentsString = GetParameterSignature(cppFunction, canUseOut);
                             var sigs = GetVariantParameterSignatures(cppFunction.Parameters, argumentsString, canUseOut);
                             sigs.Add(argumentsString);
 
-                            WriteExtensions(writer, cppFunction, csHandleName, csFunctionName, sigs);
+                            WriteExtensions(writer, cppFunction, csFunctionName, csExtensionName, sigs);
                         }
                     }
                 }
             }
         }
 
-        private static void WriteExtensions(CodeWriter writer, CppFunction cppFunction, string handle, string command, List<string> signatures)
+        private static void WriteExtensions(CodeWriter writer, CppFunction cppFunction, string command, string extension, List<string> signatures)
         {
             bool voidReturn = IsVoid(cppFunction.ReturnType);
             bool stringReturn = IsString(cppFunction.ReturnType);
@@ -62,13 +60,13 @@
                 string signature = "this " + signatures[i];
 
                 if (stringReturn)
-                    WriteExtensionMethod(writer, cppFunction, handle, command, voidReturn, true, "string", signature);
+                    WriteExtensionMethod(writer, cppFunction, command, extension, voidReturn, true, "string", signature);
 
-                WriteExtensionMethod(writer, cppFunction, handle, command, voidReturn, false, returnCsName, signature);
+                WriteExtensionMethod(writer, cppFunction, command, extension, voidReturn, false, returnCsName, signature);
             }
         }
 
-        private static void WriteExtensionMethod(CodeWriter writer, CppFunction cppFunction, string handle, string command, bool voidReturn, bool stringReturn, string returnCsName, string signature)
+        private static void WriteExtensionMethod(CodeWriter writer, CppFunction cppFunction, string command, string extension, bool voidReturn, bool stringReturn, string returnCsName, string signature)
         {
             string[] paramList = signature.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
@@ -77,11 +75,11 @@
 
             if (stringReturn)
             {
-                header = $"public static string {command.Replace(handle, string.Empty)}S({signature})";
+                header = $"public static string {extension}S({signature})";
             }
             else
             {
-                header = $"public static {returnCsName} {command.Replace(handle, string.Empty)}({signature})";
+                header = $"public static {returnCsName} {extension}({signature})";
             }
 
             using (writer.PushBlock(header))
@@ -151,6 +149,52 @@
             }
 
             writer.WriteLine();
+        }
+
+        public static string GetExtensionNamePrefix(string typeName)
+        {
+            if (CsCodeGeneratorSettings.Default.KnownExtensionPrefixes.TryGetValue(typeName, out string? knownValue))
+            {
+                return knownValue;
+            }
+
+            string[] parts = typeName.Split('_', StringSplitOptions.RemoveEmptyEntries).SelectMany(x => x.SplitByCase()).ToArray();
+
+            return string.Join("_", parts.Select(s => s.ToUpper()));
+        }
+
+        public static string GetPrettyExtensionName(string value, string extensionPrefix)
+        {
+            if (CsCodeGeneratorSettings.Default.KnownExtensionNames.TryGetValue(value, out string? knownName))
+            {
+                return knownName;
+            }
+
+            string[] parts = value.Split('_', StringSplitOptions.RemoveEmptyEntries).SelectMany(x => x.SplitByCase()).ToArray();
+            string[] prefixParts = extensionPrefix.Split('_', StringSplitOptions.RemoveEmptyEntries);
+
+            bool capture = false;
+            var sb = new StringBuilder();
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i];
+                if (prefixParts.Contains(part, StringComparer.InvariantCultureIgnoreCase) && !capture)
+                {
+                    continue;
+                }
+
+                part = part.ToLower();
+
+                sb.Append(char.ToUpper(part[0]));
+                sb.Append(part[1..]);
+                capture = true;
+            }
+
+            if (sb.Length == 0)
+                sb.Append(value);
+
+            string prettyName = sb.ToString();
+            return (char.IsNumber(prettyName[0])) ? prefixParts[^1].ToCamelCase() + prettyName : prettyName;
         }
     }
 }

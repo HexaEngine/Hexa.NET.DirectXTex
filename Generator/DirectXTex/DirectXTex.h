@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <DirectXMath.h>
 
-#if WIN32
+#ifdef _WIN32
 #include <d3d12.h>
 #include <d3d11_1.h>
 #include <dxgiformat.h>
@@ -31,7 +31,7 @@ extern "C"
 {
 #endif
 
-#if WIN32
+#ifdef _WIN32
 	typedef void(__cdecl* SetCustomProps)(IPropertyBag2* pBag);
 	typedef void(__cdecl* GetMQR)(IWICMetadataQueryReader* qMqr);
 #endif
@@ -480,7 +480,7 @@ extern "C"
 		TGA_FLAGS flags,
 		TexMetadata* metadata) noexcept;
 
-#ifdef WIN32
+#ifdef _WIN32
 	API HRESULT GetMetadataFromWICMemory(
 		const void* pSource, size_t size,
 		WIC_FLAGS flags,
@@ -599,7 +599,7 @@ extern "C"
 	API HRESULT SaveToTGAFile(Image image, TGA_FLAGS flags, const wchar_t* szFile, const TexMetadata* metadata = nullptr) noexcept;
 
 	// WIC operations
-#ifdef WIN32
+#ifdef _WIN32
 
 	API HRESULT LoadFromWICMemory(const void* pSource, size_t size, WIC_FLAGS flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR = nullptr);
 	API HRESULT LoadFromWICFile(const wchar_t* szFile, WIC_FLAGS flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR = nullptr);
@@ -609,7 +609,7 @@ extern "C"
 
 	API HRESULT SaveToWICFile(Image image, WIC_FLAGS flags, GUID guidContainerFormat, const wchar_t* szFile, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
 	API HRESULT SaveToWICFile2(const Image* images, size_t nimages, WIC_FLAGS flags, GUID guidContainerFormat, const wchar_t* szFile, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
-#endif // WIN32
+#endif // _WIN32
 
 	// Compatability helpers
 	API HRESULT LoadFromTGAMemory2(const void* pSource, size_t size, TexMetadata* metadata, ScratchImage image) noexcept;
@@ -622,7 +622,7 @@ extern "C"
 
 #pragma region Texture conversion, resizing, mipmap generation, and block compression
 
-#ifdef WIN32
+#ifdef _WIN32
 	API HRESULT FlipRotate(Image srcImage, TEX_FR_FLAGS flags, ScratchImage image) noexcept;
 	API HRESULT FlipRotate2(const Image* srcImages, size_t nimages, TexMetadata metadata, TEX_FR_FLAGS flags, ScratchImage result) noexcept;
 	// Flip and/or rotate image
@@ -692,7 +692,7 @@ extern "C"
 
 #pragma region WIC utility code
 
-#ifdef WIN32
+#ifdef _WIN32
 	API GUID GetWICCodec(WICCodecs codec) noexcept;
 
 	API IWICImagingFactory* GetWICFactory(BOOL* iswic2) noexcept;

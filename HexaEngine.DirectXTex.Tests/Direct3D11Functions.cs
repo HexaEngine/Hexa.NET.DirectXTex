@@ -124,14 +124,14 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            Assert.True(DirectXTex.IsSupportedTexture(Device, &metadata));
+            Assert.True(DirectXTex.IsSupportedTexture(Device, metadata));
         }
 
         [Test]
@@ -142,17 +142,18 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image = new();
-            image.Initialize(metadata, CPFlags.None);
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTexture(Device, image.GetImages(), image.GetImageCount(), &metadata, &resource);
+            DirectXTex.CreateTexture(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, &resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -166,17 +167,18 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image = new();
-            image.Initialize(metadata, CPFlags.None);
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceView(Device, image.GetImages(), image.GetImageCount(), &metadata, &srv);
+            DirectXTex.CreateShaderResourceView(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, &srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -190,7 +192,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -198,9 +200,10 @@
                 MiscFlags2 = 0,
             };
             ScratchImage image = new();
-            image.Initialize(metadata, CPFlags.None);
+            DirectXTex.NewScratchImage(&image);
+            DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTextureEx(Device, image.GetImages(), image.GetImageCount(), &metadata, Usage.Immutable, BindFlag.ShaderResource, CpuAccessFlag.None, ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
+            DirectXTex.CreateTextureEx(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -214,7 +217,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -222,9 +225,10 @@
                 MiscFlags2 = 0,
             };
             ScratchImage image = new();
-            image.Initialize(metadata, CPFlags.None);
+            DirectXTex.NewScratchImage(&image);
+            DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceViewEx(Device, image.GetImages(), image.GetImageCount(), &metadata, Usage.Immutable, BindFlag.ShaderResource, CpuAccessFlag.None, ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
+            DirectXTex.CreateShaderResourceViewEx(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -238,18 +242,19 @@
             Device.CreateTexture2D(&desc, (SubresourceData*)null, (ID3D11Texture2D**)&resource);
 
             ScratchImage image = new();
-            DirectXTex.CaptureTexture(Device, DeviceContext, resource, &image);
+            DirectXTex.NewScratchImage(&image);
+            DirectXTex.CaptureTexture(Device, DeviceContext, resource, image);
 
             resource->Release();
 
-            TexMetadata metadata = image.GetMetadata();
+            TexMetadata metadata = DirectXTex.GetMetadata(image);
 
-            Assert.That(metadata.Height, Is.EqualTo(desc.Height));
-            Assert.That(metadata.Width, Is.EqualTo(desc.Width));
-            Assert.That(metadata.ArraySize, Is.EqualTo(desc.ArraySize));
-            Assert.That(metadata.Format, Is.EqualTo(desc.Format));
+            Assert.That(metadata.Height, Is.EqualTo((nuint)desc.Height));
+            Assert.That(metadata.Width, Is.EqualTo((nuint)desc.Width));
+            Assert.That(metadata.ArraySize, Is.EqualTo((nuint)desc.ArraySize));
+            Assert.That((Format)metadata.Format, Is.EqualTo(desc.Format));
             Assert.That((int)metadata.MiscFlags, Is.EqualTo((int)desc.MiscFlags));
-            Assert.That(metadata.MipLevels, Is.EqualTo(desc.MipLevels));
+            Assert.That(metadata.MipLevels, Is.EqualTo((nuint)desc.MipLevels));
 
             image.Release();
         }

@@ -24,9 +24,7 @@
 
                 var csName = GetCsCleanName(typedef.Name);
 
-                writer.WriteLine($"/// <summary>");
-                writer.WriteLine($"/// A {(isDispatchable ? "dispatchable" : "non-dispatchable")} handle.");
-                writer.WriteLine("/// </summary>");
+                WriteCsSummary(typedef.Comment, writer);
                 writer.WriteLine($"[DebuggerDisplay(\"{{DebuggerDisplay,nq}}\")]");
                 using (writer.PushBlock($"public readonly partial struct {csName} : IEquatable<{csName}>"))
                 {

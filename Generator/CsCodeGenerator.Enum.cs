@@ -1,33 +1,14 @@
 ﻿namespace Generator
 {
+    using CppAst;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using CppAst;
 
     public static partial class CsCodeGenerator
     {
-        private static readonly Dictionary<string, string> s_knownEnumValueNames = new Dictionary<string, string>
-        {
-            {  "", "" },
-        };
-
-        private static readonly Dictionary<string, string> s_knownEnumPrefixes = new Dictionary<string, string>
-        {
-        };
-
-        private static readonly HashSet<string> s_ignoredParts = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "bit",
-        };
-
-        private static readonly HashSet<string> s_preserveCaps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "",
-        };
-
         public static void GenerateEnums(CppCompilation compilation, string outputPath)
         {
             using var writer = new CodeWriter(Path.Combine(outputPath, "Enumerations.cs"), "System");
@@ -36,7 +17,6 @@
             foreach (CppEnum cppEnum in compilation.Enums)
             {
                 string csName = GetCsCleanName(cppEnum.Name);
-                string csType = GetCsTypeName(cppEnum.IntegerType);
                 string enumNamePrefix = GetEnumNamePrefix(cppEnum.Name);
                 if (csName.EndsWith("_"))
                 {
@@ -49,7 +29,8 @@
                 createdEnums.Add(csName, cppEnum.Name);
 
                 bool noneAdded = false;
-                using (writer.PushBlock($"public enum {csName} : {csType}"))
+                WriteCsSummary(cppEnum.Comment, writer);
+                using (writer.PushBlock($"public enum {csName}"))
                 {
                     foreach (var enumItem in cppEnum.Items)
                     {
@@ -65,6 +46,7 @@
                             continue;
                         }
 
+                        var commentWritten = WriteCsSummary(enumItem.Comment, writer);
                         if (enumItem.ValueExpression is CppRawExpression rawExpression)
                         {
                             string enumValueName = GetEnumItemName(cppEnum, rawExpression.Text, enumNamePrefix);
@@ -79,7 +61,7 @@
 
                             if (rawExpression.Kind == CppExpressionKind.Unexposed)
                             {
-                                writer.WriteLine($"{enumItemName} = unchecked(({csType}){enumValueName.Replace("_", "")}),");
+                                writer.WriteLine($"{enumItemName} = unchecked((int){enumValueName.Replace("_", "")}),");
                             }
                             else
                             {
@@ -88,8 +70,11 @@
                         }
                         else
                         {
-                            writer.WriteLine($"{enumItemName} = unchecked(({csType}){enumItem.Value}),");
+                            writer.WriteLine($"{enumItemName} = unchecked({enumItem.Value}),");
                         }
+
+                        if (commentWritten)
+                            writer.WriteLine();
                     }
                 }
 
@@ -136,12 +121,15 @@
 
         public static string GetEnumNamePrefix(string typeName)
         {
-            if (s_knownEnumPrefixes.TryGetValue(typeName, out string? knownValue))
+            if (CsCodeGeneratorSettings.Default.KnownEnumPrefixes.TryGetValue(typeName, out string? knownValue))
             {
                 return knownValue;
             }
-
-            List<string> parts = new List<string>(4);
+            if (typeName.Contains('_'))
+            {
+                return typeName;
+            }
+            List<string> parts = new(4);
             int chunkStart = 0;
             for (int i = 0; i < typeName.Length; i++)
             {
@@ -189,44 +177,105 @@
 
         private static string GetPrettyEnumName(string value, string enumPrefix)
         {
-            if (s_knownEnumValueNames.TryGetValue(value, out string? knownName))
+            if (CsCodeGeneratorSettings.Default.KnownEnumValueNames.TryGetValue(value, out string? knownName))
             {
                 return knownName;
             }
-            string[] parts;
-            if (value.IndexOf(enumPrefix, StringComparison.InvariantCultureIgnoreCase) != 0)
-            {
-                parts = value.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            }
-            else
-            {
-                parts = value[enumPrefix.Length..].Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            }
 
+            if (value.StartsWith("0x"))
+                return value;
+
+            string[] parts = value.Split('_', StringSplitOptions.RemoveEmptyEntries).SelectMany(x => x.SplitByCase()).ToArray();
+            string[] prefixParts = enumPrefix.Split('_', StringSplitOptions.RemoveEmptyEntries);
+
+            bool capture = false;
             var sb = new StringBuilder();
-            foreach (string part in parts)
+            for (int i = 0; i < parts.Length; i++)
             {
-                if (s_ignoredParts.Contains(part))
+                string part = parts[i];
+                if (CsCodeGeneratorSettings.Default.IgnoredParts.Contains(part, StringComparer.InvariantCultureIgnoreCase) || (prefixParts.Contains(part, StringComparer.InvariantCultureIgnoreCase) && !capture))
                 {
                     continue;
                 }
 
-                if (s_preserveCaps.Contains(part))
+                part = part.ToLower();
+
+                sb.Append(char.ToUpper(part[0]));
+                sb.Append(part[1..]);
+                capture = true;
+            }
+
+            if (sb.Length == 0)
+                sb.Append(value);
+
+            string prettyName = sb.ToString();
+            return (char.IsNumber(prettyName[0])) ? prefixParts[^1].ToCamelCase() + prettyName : prettyName;
+        }
+
+        public static unsafe string ToCamelCase(this string str)
+        {
+            string output = new('\0', str.Length);
+            fixed (char* p = output)
+            {
+                p[0] = char.ToUpper(str[0]);
+                for (int i = 1; i < str.Length; i++)
                 {
-                    sb.Append(part);
+                    p[i] = char.ToLower(str[i]);
+                }
+            }
+            return output;
+        }
+
+        public static string[] SplitByCase(this string s)
+        {
+            var ʀ = new List<string>();
+            var ᴛ = new StringBuilder();
+            var previous = SplitByCaseModes.None;
+            foreach (var ɪ in s)
+            {
+                SplitByCaseModes mode_ɪ;
+                if (string.IsNullOrWhiteSpace(ɪ.ToString()))
+                {
+                    mode_ɪ = SplitByCaseModes.WhiteSpace;
+                }
+                else if ("0123456789".Contains(ɪ))
+                {
+                    mode_ɪ = SplitByCaseModes.Digit;
+                }
+                else if (ɪ == ɪ.ToString().ToUpper()[0])
+                {
+                    mode_ɪ = SplitByCaseModes.UpperCase;
                 }
                 else
                 {
-                    sb.Append(char.ToUpper(part[0]));
-                    for (int i = 1; i < part.Length; i++)
-                    {
-                        sb.Append(char.ToLower(part[i]));
-                    }
+                    mode_ɪ = SplitByCaseModes.LowerCase;
                 }
+                if ((previous == SplitByCaseModes.None) || (previous == mode_ɪ))
+                {
+                    ᴛ.Append(ɪ);
+                }
+                else if ((previous == SplitByCaseModes.UpperCase) && (mode_ɪ == SplitByCaseModes.LowerCase))
+                {
+                    if (ᴛ.Length > 1)
+                    {
+                        ʀ.Add(ᴛ.ToString().Substring(0, ᴛ.Length - 1));
+                        ᴛ.Remove(0, ᴛ.Length - 1);
+                    }
+                    ᴛ.Append(ɪ);
+                }
+                else
+                {
+                    ʀ.Add(ᴛ.ToString());
+                    ᴛ.Clear();
+                    ᴛ.Append(ɪ);
+                }
+                previous = mode_ɪ;
             }
-
-            string prettyName = sb.ToString();
-            return (char.IsNumber(prettyName[0])) ? "_" + prettyName : prettyName;
+            if (ᴛ.Length != 0) ʀ.Add(ᴛ.ToString());
+            return ʀ.ToArray();
         }
+
+        private enum SplitByCaseModes
+        { None, WhiteSpace, Digit, UpperCase, LowerCase }
     }
 }

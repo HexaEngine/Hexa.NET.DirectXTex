@@ -5,31 +5,26 @@
         [Test]
         public void CreateAndRelease()
         {
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
             blob.Release();
-            if (blob.pBlob != null)
-            {
-                Assert.Fail("Mem leak");
-            }
         }
 
         [Test]
         public void Init()
         {
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
             blob.Initialize(256);
-            Assert.That(blob.GetBufferSize(), Is.EqualTo(256u));
+            Assert.That(blob.GetBufferSize(), Is.EqualTo((nuint)256));
             blob.Release();
-            if (blob.pBlob != null)
-            {
-                Assert.Fail("Mem leak");
-            }
         }
 
         [Test]
         public void GetBufferPointerAndBufferSizeAndWrite()
         {
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
             blob.Initialize(256);
             ulong size = blob.GetBufferSize();
             Assert.That(size, Is.EqualTo(256u));
@@ -38,16 +33,13 @@
             bytes.Fill(1);
 
             blob.Release();
-            if (blob.pBlob != null)
-            {
-                Assert.Fail("Mem leak");
-            }
         }
 
         [Test]
         public void Resize()
         {
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
             blob.Initialize(256);
             ulong size = blob.GetBufferSize();
             Assert.That(size, Is.EqualTo(256u));
@@ -57,16 +49,13 @@
             Assert.That(size, Is.EqualTo(1024u));
 
             blob.Release();
-            if (blob.pBlob != null)
-            {
-                Assert.Fail("Mem leak");
-            }
         }
 
         [Test]
         public void Trim()
         {
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
             blob.Initialize(256);
             ulong size = blob.GetBufferSize();
             Assert.That(size, Is.EqualTo(256u));
@@ -76,10 +65,6 @@
             Assert.That(size, Is.EqualTo(128u));
 
             blob.Release();
-            if (blob.pBlob != null)
-            {
-                Assert.Fail("Mem leak");
-            }
         }
     }
 }

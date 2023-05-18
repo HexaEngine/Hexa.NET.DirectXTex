@@ -7,7 +7,7 @@
             ArraySize = 1,
             Depth = 6,
             Dimension = TexDimension.Texture3D,
-            Format = Format.FormatR8G8B8A8Unorm,
+            Format = (int)Format.FormatR8G8B8A8Unorm,
             Height = 64,
             Width = 64,
             MipLevels = 4,
@@ -20,11 +20,11 @@
             ArraySize = 6,
             Depth = 1,
             Dimension = TexDimension.Texture2D,
-            Format = Format.FormatR8G8B8A8Unorm,
+            Format = (int)Format.FormatR8G8B8A8Unorm,
             Height = 64,
             Width = 64,
             MipLevels = 4,
-            MiscFlags = TexMiscFlags.TextureCube,
+            MiscFlags = (uint)TexMiscFlag.Texturecube,
             MiscFlags2 = 0,
         };
 
@@ -33,7 +33,7 @@
             ArraySize = 6,
             Depth = 1,
             Dimension = TexDimension.Texture2D,
-            Format = Format.FormatR8G8B8A8Unorm,
+            Format = (int)Format.FormatR8G8B8A8Unorm,
             Height = 64,
             Width = 64,
             MipLevels = 4,
@@ -46,7 +46,7 @@
             ArraySize = 1,
             Depth = 1,
             Dimension = TexDimension.Texture2D,
-            Format = Format.FormatR8G8B8A8Unorm,
+            Format = (int)Format.FormatR8G8B8A8Unorm,
             Height = 64,
             Width = 64,
             MipLevels = 4,
@@ -59,18 +59,18 @@
             ArraySize = 1,
             Depth = 1,
             Dimension = TexDimension.Texture2D,
-            Format = Format.FormatBC7Unorm,
+            Format = (int)Format.FormatBC7Unorm,
             Height = 64,
             Width = 64,
             MipLevels = 4,
             MiscFlags = 0,
-            MiscFlags2 = (TexMiscFlags2)2,
+            MiscFlags2 = 2,
         };
 
         [Test]
         public void ComputeIndex()
         {
-            Assert.That(texArray.ComputeIndex(1, 1, 0), Is.EqualTo(5u));
+            Assert.That(texArray.ComputeIndex(1, 1, 0), Is.EqualTo((nuint)5));
         }
 
         [Test]
@@ -101,7 +101,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatBC7Unorm,
+                Format = (int)Format.FormatBC7Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,

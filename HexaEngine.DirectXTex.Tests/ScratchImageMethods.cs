@@ -5,22 +5,22 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void CreateAndFree()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void Init()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -30,23 +30,22 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize(metadata, CPFlags.None);
 
-            Assert.That(image.GetMetadata(), Is.EqualTo(metadata));
+            Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void Init1D()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture1D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 1,
                 Width = 64,
                 MipLevels = 4,
@@ -54,24 +53,23 @@ namespace HexaEngine.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize1D(Format.FormatR8G8B8A8Unorm, 64, 1, 4, CPFlags.None);
+            image.Initialize1D((int)Format.FormatR8G8B8A8Unorm, 64, 1, 4, CPFlags.None);
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void Init2D()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Width = 64,
                 Height = 32,
                 Depth = 1,
@@ -81,24 +79,23 @@ namespace HexaEngine.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize2D(Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
+            image.Initialize2D((int)Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void Init3D()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture3D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Width = 64,
                 Height = 32,
                 Depth = 4,
@@ -108,53 +105,51 @@ namespace HexaEngine.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize3D(Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
+            image.Initialize3D((int)Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void InitCube()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Width = 64,
                 Height = 32,
                 Depth = 1,
                 ArraySize = 6,
                 MipLevels = 2,
-                MiscFlags = TexMiscFlags.TextureCube,
+                MiscFlags = (uint)TexMiscFlag.Texturecube,
                 MiscFlags2 = 0,
             };
 
-            image.InitializeCube(Format.FormatR8G8B8A8Unorm, 64, 32, 1, 2, CPFlags.None);
+            image.InitializeCube((int)Format.FormatR8G8B8A8Unorm, 64, 32, 1, 2, CPFlags.None);
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void OverrrideFormat()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -167,30 +162,29 @@ namespace HexaEngine.DirectXTex.Tests
             }
 
             {
-                bool result = image.OverrideFormat(Format.FormatB8G8R8A8Unorm);
+                bool result = image.OverrideFormat((int)Format.FormatB8G8R8A8Unorm);
                 if (!result)
                     throw new Exception();
             }
 
-            metadata.Format = Format.FormatB8G8R8A8Unorm;
-            var meta = image.GetMetadata();
+            metadata.Format = (int)Format.FormatB8G8R8A8Unorm;
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void GetMetadata()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -200,24 +194,23 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize(metadata, CPFlags.None);
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void GetImage()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -229,29 +222,28 @@ namespace HexaEngine.DirectXTex.Tests
 
             var img = image.GetImage(0, 0, 0);
 
-            if (img->Width != metadata.Width &&
-                img->Height != metadata.Height &&
-                img->Format != metadata.Format)
+            if (img.Width != metadata.Width &&
+                img.Height != metadata.Height &&
+                img.Format != metadata.Format)
                 Trace.Fail("img doesn't match");
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void GetImagesAndGetImageCount()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -261,9 +253,9 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize(metadata, CPFlags.None);
 
-            var imgs = image.GetImages();
+            var imgs = DirectXTex.GetImages(image);
 
-            for (int i = 0; i < (int)image.GetImageCount(); i++)
+            for (int i = 0; i < (int)DirectXTex.GetImageCount(image); i++)
             {
                 var img = imgs[i];
                 if (img.Width != metadata.Width &&
@@ -272,24 +264,23 @@ namespace HexaEngine.DirectXTex.Tests
                     Trace.Fail("img doesn't match");
             }
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void GetPixelsAndGetPixelsSizeAndModify()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -304,24 +295,23 @@ namespace HexaEngine.DirectXTex.Tests
             Span<byte> data = new(pixels, (int)count);
             data.Fill(1);
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void IsAlphaAllOpaque()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR16G16Float,
+                Format = (int)Format.FormatR16G16Float,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -335,12 +325,10 @@ namespace HexaEngine.DirectXTex.Tests
             if (!image.IsAlphaAllOpaque())
                 throw new();
 
-            var meta = image.GetMetadata();
+            var meta = DirectXTex.GetMetadata(image);
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
     }
 }

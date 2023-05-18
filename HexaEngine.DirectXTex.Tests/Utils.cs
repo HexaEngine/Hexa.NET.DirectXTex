@@ -16,5 +16,10 @@
                 throw new D3D11Exception(resultCode);
             }
         }
+
+        public static unsafe Span<byte> AsBytes(this Blob blob)
+        {
+            return new(blob.GetBufferPointer(), (int)blob.GetBufferSize());
+        }
     }
 }

@@ -12,20 +12,25 @@
         [Test]
         public void LoadAndSaveFromDDSMemory()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             Span<byte> src = LoadTexture(DDSFilename);
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
 
-            DirectXTex.LoadFromDDSMemory(src, DDSFlags.None, &image);
-            DirectXTex.SaveToDDSMemory(&image, DDSFlags.None, &blob);
+            TexMetadata metadata;
+            fixed (byte* srcPtr = src)
+            {
+                DirectXTex.LoadFromDDSMemory(srcPtr, (nuint)src.Length, DDSFlags.None, &metadata, image);
+            }
 
-            Span<byte> dest = blob.ToBytes();
+            DirectXTex.SaveToDDSMemory2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DDSFlags.None, blob);
+
+            Span<byte> dest = blob.AsBytes();
             Assert.True(src.SequenceEqual(dest));
 
             blob.Release();
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
@@ -33,37 +38,42 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromDDSFile), "test.dds");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            TexMetadata metadata;
 
-            DirectXTex.LoadFromDDSFile(DDSFilename, DDSFlags.None, &image);
-            DirectXTex.SaveToDDSFile(&image, DDSFlags.None, path);
+            DirectXTex.LoadFromDDSFile(DDSFilename, DDSFlags.None, &metadata, image);
+            DirectXTex.SaveToDDSFile2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DDSFlags.None, path);
 
             Span<byte> src = LoadTexture(DDSFilename);
             Span<byte> dest = LoadTexture(path);
             Assert.True(src.SequenceEqual(dest));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void LoadAndSaveFromHDRMemory()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            TexMetadata metadata;
             Span<byte> src = LoadTexture(HDRFilename);
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
 
-            DirectXTex.LoadFromHDRMemory(src, &image);
-            DirectXTex.SaveToHDRMemory(&image, 0, &blob);
+            fixed (byte* srcPtr = src)
+            {
+                DirectXTex.LoadFromHDRMemory(srcPtr, (nuint)src.Length, &metadata, image);
+            }
 
-            Span<byte> dest = blob.ToBytes();
+            DirectXTex.SaveToHDRMemory(image.GetImages()[0], blob);
+
+            Span<byte> dest = blob.AsBytes();
             Assert.True(src.SequenceEqual(dest));
 
             blob.Release();
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
@@ -71,37 +81,38 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromHDRFile), "test.hdr");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            TexMetadata metadata;
 
-            DirectXTex.LoadFromHDRFile(HDRFilename, &image);
-            DirectXTex.SaveToHDRFile(&image, 0, path);
+            DirectXTex.LoadFromHDRFile(HDRFilename, &metadata, image);
+            DirectXTex.SaveToHDRFile(image.GetImages()[0], path);
 
             Span<byte> src = LoadTexture(HDRFilename);
             Span<byte> dest = LoadTexture(path);
             Assert.True(src.SequenceEqual(dest));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void LoadAndSaveFromTGAMemory()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            TexMetadata metadata;
             Span<byte> src = LoadTexture(TGAFilename);
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
 
-            DirectXTex.LoadFromTGAMemory(src, TGAFlags.None, &image);
-            DirectXTex.SaveToTGAMemory(&image, 0, TGAFlags.None, &blob);
-
-            Span<byte> dest = blob.ToBytes();
-            Assert.True(src.SequenceEqual(dest));
+            fixed (byte* srcPtr = src)
+            {
+                DirectXTex.LoadFromTGAMemory(srcPtr, (nuint)src.Length, TGAFlags.None, &metadata, image);
+            }
+            DirectXTex.SaveToTGAMemory(image.GetImages()[0], TGAFlags.None, blob, &metadata);
 
             blob.Release();
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
@@ -109,37 +120,39 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromTGAFile), "test.tga");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            TexMetadata metadata;
 
-            DirectXTex.LoadFromTGAFile(TGAFilename, TGAFlags.None, &image);
-            DirectXTex.SaveToTGAFile(&image, 0, 0, path);
-
-            Span<byte> src = LoadTexture(TGAFilename);
-            Span<byte> dest = LoadTexture(path);
-            Assert.True(src.SequenceEqual(dest));
+            DirectXTex.LoadFromTGAFile(TGAFilename, TGAFlags.None, &metadata, image);
+            TexMetadata metadata1 = image.GetMetadata();
+            DirectXTex.SaveToTGAFile(image.GetImages()[0], 0, path, &metadata1);
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
         public void LoadAndSaveFromWICMemory()
         {
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
+            TexMetadata metadata;
             Span<byte> src = LoadTexture(WICFilename);
-            TexBlob blob = new();
+            Blob blob;
+            DirectXTex.NewBlob(&blob);
 
-            DirectXTex.LoadFromWICMemory(src, WICFlags.None, &image, null);
-            DirectXTex.SaveToWICMemory(&image, WICFlags.None, DirectXTex.GetWICCodec(WICCodecs.PNG), &blob);
+            fixed (byte* srcPtr = src)
+            {
+                DirectXTex.LoadFromWICMemory(srcPtr, (nuint)src.Length, WICFlags.None, &metadata, image, default);
+            }
+            Guid guid = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);
+            DirectXTex.SaveToWICMemory2(image.GetImages(), image.GetImageCount(), WICFlags.None, guid, blob, null, default);
 
-            Span<byte> dest = blob.ToBytes();
+            Span<byte> dest = blob.AsBytes();
             Assert.True(src.SequenceEqual(dest));
 
             blob.Release();
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         [Test]
@@ -147,18 +160,19 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromTGAFile), "test.png");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
 
-            DirectXTex.LoadFromWICFile(WICFilename, WICFlags.None, &image);
-            DirectXTex.SaveToWICFile(&image, 0, DirectXTex.GetWICCodec(WICCodecs.PNG), path);
+            TexMetadata metadata;
+            Guid guid = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);
+            DirectXTex.LoadFromWICFile(WICFilename, WICFlags.None, &metadata, image, default);
+            DirectXTex.SaveToWICFile2(image.GetImages(), image.GetImageCount(), 0, guid, path, null, default);
 
             Span<byte> src = LoadTexture(WICFilename);
             Span<byte> dest = LoadTexture(path);
             Assert.True(src.SequenceEqual(dest));
 
             image.Release();
-            if (image.pScratchImage != null)
-                Trace.Fail("Mem leak");
         }
 
         public void Dispose()

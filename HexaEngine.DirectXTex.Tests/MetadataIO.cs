@@ -16,7 +16,11 @@
             TexMetadata metadata2;
 
             Span<byte> bytes = LoadTexture(DDSFilename);
-            DirectXTex.GetMetadataFromDDSMemory(bytes, DDSFlags.None, &metadata1);
+            fixed (byte* ptr = bytes)
+            {
+                DirectXTex.GetMetadataFromDDSMemory(ptr, (nuint)bytes.Length, DDSFlags.None, &metadata1);
+            }
+
             DirectXTex.GetMetadataFromDDSFile(DDSFilename, DDSFlags.None, &metadata2);
 
             Assert.That(metadata2, Is.EqualTo(metadata1));
@@ -29,7 +33,11 @@
             TexMetadata metadata2;
 
             Span<byte> bytes = LoadTexture(HDRFilename);
-            DirectXTex.GetMetadataFromHDRMemory(bytes, &metadata1);
+            fixed (byte* ptr = bytes)
+            {
+                DirectXTex.GetMetadataFromHDRMemory(ptr, (nuint)bytes.Length, &metadata1);
+            }
+
             DirectXTex.GetMetadataFromHDRFile(HDRFilename, &metadata2);
 
             Assert.That(metadata2, Is.EqualTo(metadata1));
@@ -42,7 +50,11 @@
             TexMetadata metadata2;
 
             Span<byte> bytes = LoadTexture(TGAFilename);
-            DirectXTex.GetMetadataFromTGAMemory(bytes, TGAFlags.None, &metadata1);
+            fixed (byte* ptr = bytes)
+            {
+                DirectXTex.GetMetadataFromTGAMemory(ptr, (nuint)bytes.Length, TGAFlags.None, &metadata1);
+            }
+
             DirectXTex.GetMetadataFromTGAFile(TGAFilename, TGAFlags.None, &metadata2);
 
             Assert.That(metadata2, Is.EqualTo(metadata1));
@@ -55,7 +67,11 @@
             TexMetadata metadata2;
 
             Span<byte> bytes = LoadTexture(WICFilename);
-            DirectXTex.GetMetadataFromWICMemory(bytes, WICFlags.None, &metadata1);
+            fixed (byte* ptr = bytes)
+            {
+                DirectXTex.GetMetadataFromWICMemory(ptr, (nuint)bytes.Length, WICFlags.None, &metadata1);
+            }
+
             DirectXTex.GetMetadataFromWICFile(WICFilename, WICFlags.None, &metadata2);
 
             Assert.That(metadata2, Is.EqualTo(metadata1));

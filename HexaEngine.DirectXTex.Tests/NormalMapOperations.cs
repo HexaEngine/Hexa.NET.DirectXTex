@@ -10,20 +10,22 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image = new();
+            ScratchImage image;
+            DirectXTex.NewScratchImage(&image);
             image.Initialize(metadata, CPFlags.None);
 
-            ScratchImage normalMap = new();
+            ScratchImage normalMap;
+            DirectXTex.NewScratchImage(&normalMap);
             normalMap.Initialize(metadata, CPFlags.None);
 
-            DirectXTex.ComputeNormalMap(&image, CNMAPFlags.Default, 2, Format.FormatR8G8B8A8Unorm, &normalMap);
+            DirectXTex.ComputeNormalMap2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), CNMAPFlags.Default, 2, (int)Format.FormatR8G8B8A8Unorm, normalMap);
 
             image.Release();
             normalMap.Release();

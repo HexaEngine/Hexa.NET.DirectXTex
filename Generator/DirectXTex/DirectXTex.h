@@ -1,10 +1,12 @@
 #pragma once
 #pragma comment(lib, "d3d12.lib")
 
+#include <stdint.h>
 #include <d3d12.h>
 #include <d3d11_1.h>
 #include <dxgiformat.h>
-#include "DirectXTex/DirectXTex/DirectXTex.h"
+#include <wincodec.h>
+#include <DirectXMath.h>
 
 #define API __declspec(dllexport)
 
@@ -12,6 +14,7 @@
 extern "C"
 {
 #endif
+
 	typedef void(__cdecl* SetCustomProps)(IPropertyBag2* pBag);
 	typedef void(__cdecl* GetMQR)(IWICMetadataQueryReader* qMqr);
 	typedef void(__cdecl* EvaluateImageFunc)(const DirectX::XMVECTOR* pixels, size_t width, size_t y);
@@ -404,17 +407,17 @@ extern "C"
 
 #pragma region DXGI Format Utilities
 
-	API bool IsValid(DXGI_FORMAT fmt) noexcept;
-	API bool IsCompressed(DXGI_FORMAT fmt) noexcept;
-	API bool IsPacked(DXGI_FORMAT fmt) noexcept;
-	API bool IsVideo(DXGI_FORMAT fmt) noexcept;
-	API bool IsPlanar(DXGI_FORMAT fmt) noexcept;
-	API bool IsPalettized(DXGI_FORMAT fmt) noexcept;
-	API bool IsDepthStencil(DXGI_FORMAT fmt) noexcept;
-	API bool IsSRGB(DXGI_FORMAT fmt) noexcept;
-	API bool IsTypeless(DXGI_FORMAT fmt, bool partialTypeless) noexcept;
+	API BOOL IsValid(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsCompressed(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsPacked(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsVideo(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsPlanar(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsPalettized(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsDepthStencil(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsSRGB(DXGI_FORMAT fmt) noexcept;
+	API BOOL IsTypeless(DXGI_FORMAT fmt, BOOL partialTypeless) noexcept;
 
-	API bool HasAlpha(DXGI_FORMAT fmt) noexcept;
+	API BOOL HasAlpha(DXGI_FORMAT fmt) noexcept;
 
 	API size_t BitsPerPixel(DXGI_FORMAT fmt) noexcept;
 
@@ -483,70 +486,70 @@ extern "C"
 
 #pragma region TexMetadata Methods
 
-	API size_t ComputeIndex(TexMetadata* metadata, size_t mip, size_t item, size_t slice) noexcept;
+	API size_t ComputeIndex(TexMetadata metadata, size_t mip, size_t item, size_t slice) noexcept;
 	// Returns size_t(-1) to indicate an out-of-range error
 
-	API bool IsCubemap(TexMetadata* metadata) noexcept;
+	API BOOL IsCubemap(TexMetadata metadata) noexcept;
 	// Helper for miscFlags
 
-	API bool IsPMAlpha(TexMetadata* metadata) noexcept;
+	API BOOL IsPMAlpha(TexMetadata metadata) noexcept;
 	API void SetAlphaMode(TexMetadata* metadata, TEX_ALPHA_MODE mode) noexcept;
-	API TEX_ALPHA_MODE GetAlphaMode(TexMetadata* metadata) noexcept;
+	API TEX_ALPHA_MODE GetAlphaMode(TexMetadata metadata) noexcept;
 	// Helpers for miscFlags2
 
-	API bool IsVolumemap(TexMetadata* metadata) noexcept;
+	API BOOL IsVolumemap(TexMetadata metadata) noexcept;
 	// Helper for dimension
 
 #pragma endregion
 
 #pragma region ScratchImage Methods
 
-	API ScratchImage* NewScratchImage();
+	API void NewScratchImage(ScratchImage* img);
 
-	API HRESULT Initialize(ScratchImage* img, const TexMetadata* mdata, CP_FLAGS flags) noexcept;
+	API HRESULT Initialize(ScratchImage img, TexMetadata mdata, CP_FLAGS flags) noexcept;
 
-	API HRESULT Initialize1D(ScratchImage* img, DXGI_FORMAT fmt, size_t length, size_t arraySize, size_t mipLevels, CP_FLAGS flags) noexcept;
-	API HRESULT Initialize2D(ScratchImage* img, DXGI_FORMAT fmt, size_t width, size_t height, size_t arraySize, size_t mipLevels, CP_FLAGS flags) noexcept;
-	API HRESULT Initialize3D(ScratchImage* img, DXGI_FORMAT fmt, size_t width, size_t height, size_t depth, size_t mipLevels, CP_FLAGS flags) noexcept;
-	API HRESULT InitializeCube(ScratchImage* img, DXGI_FORMAT fmt, size_t width, size_t height, size_t nCubes, size_t mipLevels, CP_FLAGS flags) noexcept;
+	API HRESULT Initialize1D(ScratchImage img, DXGI_FORMAT fmt, size_t length, size_t arraySize, size_t mipLevels, CP_FLAGS flags) noexcept;
+	API HRESULT Initialize2D(ScratchImage img, DXGI_FORMAT fmt, size_t width, size_t height, size_t arraySize, size_t mipLevels, CP_FLAGS flags) noexcept;
+	API HRESULT Initialize3D(ScratchImage img, DXGI_FORMAT fmt, size_t width, size_t height, size_t depth, size_t mipLevels, CP_FLAGS flags) noexcept;
+	API HRESULT InitializeCube(ScratchImage img, DXGI_FORMAT fmt, size_t width, size_t height, size_t nCubes, size_t mipLevels, CP_FLAGS flags) noexcept;
 
-	API HRESULT InitializeFromImage(ScratchImage* img, const Image srcImage, bool allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
-	API HRESULT InitializeArrayFromImages(ScratchImage* img, const Image* images, size_t nImages, bool allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
-	API HRESULT InitializeCubeFromImages(ScratchImage* img, const Image* images, size_t nImages, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
-	API HRESULT Initialize3DFromImages(ScratchImage* img, const Image* images, size_t depth, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
+	API HRESULT InitializeFromImage(ScratchImage img, const Image srcImage, BOOL allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
+	API HRESULT InitializeArrayFromImages(ScratchImage img, const Image* images, size_t nImages, BOOL allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
+	API HRESULT InitializeCubeFromImages(ScratchImage img, const Image* images, size_t nImages, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
+	API HRESULT Initialize3DFromImages(ScratchImage img, const Image* images, size_t depth, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
 
-	API void ScratchImageRelease(ScratchImage** img) noexcept;
+	API void ScratchImageRelease(ScratchImage img) noexcept;
 
-	API bool OverrideFormat(ScratchImage* img, DXGI_FORMAT f) noexcept;
+	API BOOL OverrideFormat(ScratchImage img, DXGI_FORMAT f) noexcept;
 
-	API const TexMetadata* GetMetadata(ScratchImage* img) noexcept;
-	API const Image* GetImage(ScratchImage* img, size_t mip, size_t item, size_t slice) noexcept;
+	API const TexMetadata GetMetadata(ScratchImage img) noexcept;
+	API const Image GetImage(ScratchImage img, size_t mip, size_t item, size_t slice) noexcept;
 
-	API const Image* GetImages(ScratchImage* img) noexcept;
-	API size_t GetImageCount(ScratchImage* img) noexcept;
+	API const Image* GetImages(ScratchImage img) noexcept;
+	API size_t GetImageCount(ScratchImage img) noexcept;
 
-	API uint8_t* GetPixels(ScratchImage* img) noexcept;
-	API size_t GetPixelsSize(ScratchImage* img) noexcept;
+	API uint8_t* GetPixels(ScratchImage img) noexcept;
+	API size_t GetPixelsSize(ScratchImage img) noexcept;
 
-	API bool IsAlphaAllOpaque(ScratchImage* img);
+	API BOOL IsAlphaAllOpaque(ScratchImage img);
 
 #pragma endregion
 
 #pragma region BlobMethods
 
-	API Blob* NewBlob();
+	API void NewBlob(Blob* blob);
 
-	API HRESULT BlobInitialize(Blob* blob, size_t size) noexcept;
+	API HRESULT BlobInitialize(Blob blob, size_t size) noexcept;
 
-	API void BlobRelease(Blob** blob) noexcept;
+	API void BlobRelease(Blob blob) noexcept;
 
-	API void* BlobGetBufferPointer(Blob* blob) noexcept;
-	API size_t BlobGetBufferSize(Blob* blob) noexcept;
+	API void* BlobGetBufferPointer(Blob blob) noexcept;
+	API size_t BlobGetBufferSize(Blob blob) noexcept;
 
-	API HRESULT BlobResize(Blob* blob, size_t size) noexcept;
+	API HRESULT BlobResize(Blob blob, size_t size) noexcept;
 	// Reallocate for a new size
 
-	API HRESULT BlobTrim(Blob* blob, size_t size) noexcept;
+	API HRESULT BlobTrim(Blob blob, size_t size) noexcept;
 	// Shorten size without reallocation
 
 #pragma endregion
@@ -554,127 +557,127 @@ extern "C"
 #pragma region ImageIO
 
 	// DDS operations
-	API HRESULT LoadFromDDSMemory(const void* pSource, size_t size, DDS_FLAGS flags, TexMetadata* metadata, ScratchImage* image) noexcept;
-	API HRESULT LoadFromDDSFile(const wchar_t* szFile, DDS_FLAGS flags, TexMetadata* metadata, ScratchImage* image) noexcept;
+	API HRESULT LoadFromDDSMemory(const void* pSource, size_t size, DDS_FLAGS flags, TexMetadata* metadata, ScratchImage image) noexcept;
+	API HRESULT LoadFromDDSFile(const wchar_t* szFile, DDS_FLAGS flags, TexMetadata* metadata, ScratchImage image) noexcept;
 
-	API HRESULT SaveToDDSMemory(const Image* image, DDS_FLAGS flags, Blob* blob) noexcept;
-	API HRESULT SaveToDDSMemory2(const Image* images, size_t nimages, const TexMetadata* metadata, DDS_FLAGS flags, Blob* blob) noexcept;
+	API HRESULT SaveToDDSMemory(Image image, DDS_FLAGS flags, Blob blob) noexcept;
+	API HRESULT SaveToDDSMemory2(const Image* images, size_t nimages, TexMetadata metadata, DDS_FLAGS flags, Blob blob) noexcept;
 
-	API HRESULT SaveToDDSFile(const Image* image, DDS_FLAGS flags, const wchar_t* szFile) noexcept;
-	API HRESULT SaveToDDSFile2(const Image* images, size_t nimages, const TexMetadata* metadata, DDS_FLAGS flags, const wchar_t* szFile) noexcept;
+	API HRESULT SaveToDDSFile(Image image, DDS_FLAGS flags, const wchar_t* szFile) noexcept;
+	API HRESULT SaveToDDSFile2(const Image* images, size_t nimages, TexMetadata metadata, DDS_FLAGS flags, const wchar_t* szFile) noexcept;
 
 	// HDR operations
-	API HRESULT LoadFromHDRMemory(const void* pSource, size_t size, TexMetadata* metadata, ScratchImage* image) noexcept;
-	API HRESULT LoadFromHDRFile(const wchar_t* szFile, TexMetadata* metadata, ScratchImage* image) noexcept;
+	API HRESULT LoadFromHDRMemory(const void* pSource, size_t size, TexMetadata* metadata, ScratchImage image) noexcept;
+	API HRESULT LoadFromHDRFile(const wchar_t* szFile, TexMetadata* metadata, ScratchImage image) noexcept;
 
-	API HRESULT SaveToHDRMemory(const Image* image, Blob* blob) noexcept;
-	API HRESULT SaveToHDRFile(const Image* image, const wchar_t* szFile) noexcept;
+	API HRESULT SaveToHDRMemory(Image image, Blob blob) noexcept;
+	API HRESULT SaveToHDRFile(Image image, const wchar_t* szFile) noexcept;
 
 	// TGA operations
-	API HRESULT LoadFromTGAMemory(const void* pSource, size_t size, TGA_FLAGS flags, TexMetadata* metadata, ScratchImage* image) noexcept;
-	API HRESULT LoadFromTGAFile(const wchar_t* szFile, TGA_FLAGS flags, TexMetadata* metadata, ScratchImage* image) noexcept;
+	API HRESULT LoadFromTGAMemory(const void* pSource, size_t size, TGA_FLAGS flags, TexMetadata* metadata, ScratchImage image) noexcept;
+	API HRESULT LoadFromTGAFile(const wchar_t* szFile, TGA_FLAGS flags, TexMetadata* metadata, ScratchImage image) noexcept;
 
-	API HRESULT SaveToTGAMemory(const Image* image, TGA_FLAGS flags, Blob* blob, const TexMetadata* metadata = nullptr) noexcept;
-	API HRESULT SaveToTGAFile(const Image* image, TGA_FLAGS flags, const wchar_t* szFile, const TexMetadata* metadata = nullptr) noexcept;
+	API HRESULT SaveToTGAMemory(Image image, TGA_FLAGS flags, Blob blob, const TexMetadata* metadata = nullptr) noexcept;
+	API HRESULT SaveToTGAFile(Image image, TGA_FLAGS flags, const wchar_t* szFile, const TexMetadata* metadata = nullptr) noexcept;
 
 	// WIC operations
 #ifdef WIN32
 
-	API HRESULT LoadFromWICMemory(const void* pSource, size_t size, WIC_FLAGS flags, TexMetadata* metadata, ScratchImage* image, GetMQR getMQR = nullptr);
-	API HRESULT LoadFromWICFile(const wchar_t* szFile, WIC_FLAGS flags, TexMetadata* metadata, ScratchImage* image, GetMQR getMQR = nullptr);
+	API HRESULT LoadFromWICMemory(const void* pSource, size_t size, WIC_FLAGS flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR = nullptr);
+	API HRESULT LoadFromWICFile(const wchar_t* szFile, WIC_FLAGS flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR = nullptr);
 
-	API HRESULT SaveToWICMemory(const Image* image, WIC_FLAGS flags, GUID* guidContainerFormat, Blob* blob, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
-	API HRESULT SaveToWICMemory2(const Image* images, size_t nimages, WIC_FLAGS flags, GUID* guidContainerFormat, Blob* blob, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
+	API HRESULT SaveToWICMemory(Image image, WIC_FLAGS flags, GUID guidContainerFormat, Blob blob, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
+	API HRESULT SaveToWICMemory2(const Image* images, size_t nimages, WIC_FLAGS flags, GUID guidContainerFormat, Blob blob, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
 
-	API HRESULT SaveToWICFile(const Image* image, WIC_FLAGS flags, GUID* guidContainerFormat, const wchar_t* szFile, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
-	API HRESULT SaveToWICFile2(const Image* images, size_t nimages, WIC_FLAGS flags, GUID* guidContainerFormat, const wchar_t* szFile, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
+	API HRESULT SaveToWICFile(Image image, WIC_FLAGS flags, GUID guidContainerFormat, const wchar_t* szFile, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
+	API HRESULT SaveToWICFile2(const Image* images, size_t nimages, WIC_FLAGS flags, GUID guidContainerFormat, const wchar_t* szFile, const GUID* targetFormat = nullptr, SetCustomProps customProps = nullptr);
 #endif // WIN32
 
 	// Compatability helpers
-	API HRESULT LoadFromTGAMemory2(const void* pSource, size_t size, TexMetadata* metadata, ScratchImage* image) noexcept;
-	API HRESULT LoadFromTGAFile2(const wchar_t* szFile, TexMetadata* metadata, ScratchImage* image) noexcept;
+	API HRESULT LoadFromTGAMemory2(const void* pSource, size_t size, TexMetadata* metadata, ScratchImage image) noexcept;
+	API HRESULT LoadFromTGAFile2(const wchar_t* szFile, TexMetadata* metadata, ScratchImage image) noexcept;
 
-	API HRESULT SaveToTGAMemory2(const Image* image, Blob* blob, const TexMetadata* metadata = nullptr) noexcept;
-	API HRESULT SaveToTGAFile2(const Image* image, const wchar_t* szFile, const TexMetadata* metadata = nullptr) noexcept;
+	API HRESULT SaveToTGAMemory2(Image image, Blob blob, const TexMetadata* metadata = nullptr) noexcept;
+	API HRESULT SaveToTGAFile2(Image image, const wchar_t* szFile, const TexMetadata* metadata = nullptr) noexcept;
 
 #pragma endregion
 
 #pragma region Texture conversion, resizing, mipmap generation, and block compression
 
 #ifdef WIN32
-	API HRESULT FlipRotate(const Image* srcImage, TEX_FR_FLAGS flags, ScratchImage* image) noexcept;
-	API HRESULT FlipRotate2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, TEX_FR_FLAGS flags, ScratchImage* result) noexcept;
+	API HRESULT FlipRotate(Image srcImage, TEX_FR_FLAGS flags, ScratchImage image) noexcept;
+	API HRESULT FlipRotate2(const Image* srcImages, size_t nimages, TexMetadata metadata, TEX_FR_FLAGS flags, ScratchImage result) noexcept;
 	// Flip and/or rotate image
 #endif
 
-	API HRESULT Resize(const Image* srcImage, size_t width, size_t height, TEX_FILTER_FLAGS filter, ScratchImage* image) noexcept;
-	API HRESULT Resize2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, size_t width, size_t height, TEX_FILTER_FLAGS filter, ScratchImage* result) noexcept;
+	API HRESULT Resize(Image srcImage, size_t width, size_t height, TEX_FILTER_FLAGS filter, ScratchImage image) noexcept;
+	API HRESULT Resize2(const Image* srcImages, size_t nimages, TexMetadata metadata, size_t width, size_t height, TEX_FILTER_FLAGS filter, ScratchImage result) noexcept;
 
-	API HRESULT Convert(const Image* srcImage, DXGI_FORMAT format, TEX_FILTER_FLAGS filter, float threshold, ScratchImage* image) noexcept;
-	API HRESULT Convert2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, DXGI_FORMAT format, TEX_FILTER_FLAGS filter, float threshold, ScratchImage* result) noexcept;
+	API HRESULT Convert(Image srcImage, DXGI_FORMAT format, TEX_FILTER_FLAGS filter, float threshold, ScratchImage image) noexcept;
+	API HRESULT Convert2(const Image* srcImages, size_t nimages, TexMetadata metadata, DXGI_FORMAT format, TEX_FILTER_FLAGS filter, float threshold, ScratchImage result) noexcept;
 	// Convert the image to a new format
 
-	API HRESULT ConvertToSinglePlane(const Image* srcImage, ScratchImage* image) noexcept;
-	API HRESULT ConvertToSinglePlane2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, ScratchImage* image) noexcept;
+	API HRESULT ConvertToSinglePlane(Image srcImage, ScratchImage image) noexcept;
+	API HRESULT ConvertToSinglePlane2(const Image* srcImages, size_t nimages, TexMetadata metadata, ScratchImage image) noexcept;
 	// Converts the image from a planar format to an equivalent non-planar format
 
-	API HRESULT GenerateMipMaps(const Image* baseImage, TEX_FILTER_FLAGS filter, size_t levels, _Inout_ ScratchImage* mipChain, bool allow1D = false) noexcept;
-	API HRESULT GenerateMipMaps2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, TEX_FILTER_FLAGS filter, size_t levels, _Inout_ ScratchImage* mipChain);
+	API HRESULT GenerateMipMaps(Image baseImage, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain, BOOL allow1D = false) noexcept;
+	API HRESULT GenerateMipMaps2(const Image* srcImages, size_t nimages, TexMetadata metadata, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain);
 	// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)
 	// Defaults to Fant filtering which is equivalent to a box filter
 
-	API HRESULT GenerateMipMaps3D(const Image* baseImages, size_t depth, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage* mipChain) noexcept;
-	API HRESULT GenerateMipMaps3D2(const Image* srcImages, size_t nimages, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage* mipChain);
+	API HRESULT GenerateMipMaps3D(const Image* baseImages, size_t depth, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain) noexcept;
+	API HRESULT GenerateMipMaps3D2(const Image* srcImages, size_t nimages, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain);
 	// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)
 	// Defaults to Fant filtering which is equivalent to a box filter
 
-	API HRESULT ScaleMipMapsAlphaForCoverage(const Image* srcImages, size_t nimages, const TexMetadata* metadata, size_t item, float alphaReference, _Inout_ ScratchImage* mipChain) noexcept;
+	API HRESULT ScaleMipMapsAlphaForCoverage(const Image* srcImages, size_t nimages, TexMetadata metadata, size_t item, float alphaReference, ScratchImage mipChain) noexcept;
 
-	API HRESULT PremultiplyAlpha(const Image* srcImage, TEX_PMALPHA_FLAGS flags, ScratchImage* image) noexcept;
-	API HRESULT PremultiplyAlpha2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, TEX_PMALPHA_FLAGS flags, ScratchImage* result) noexcept;
+	API HRESULT PremultiplyAlpha(Image srcImage, TEX_PMALPHA_FLAGS flags, ScratchImage image) noexcept;
+	API HRESULT PremultiplyAlpha2(const Image* srcImages, size_t nimages, TexMetadata metadata, TEX_PMALPHA_FLAGS flags, ScratchImage result) noexcept;
 
-	API HRESULT Compress(const Image* srcImage, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float threshold, ScratchImage* cImage) noexcept;
-	API HRESULT Compress2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float threshold, ScratchImage* cImages) noexcept;
+	API HRESULT Compress(Image srcImage, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float threshold, ScratchImage cImage) noexcept;
+	API HRESULT Compress2(const Image* srcImages, size_t nimages, TexMetadata metadata, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float threshold, ScratchImage cImages) noexcept;
 	// Note that threshold is only used by BC1. TEX_THRESHOLD_DEFAULT is a typical value to use
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
-	API HRESULT Compress3(ID3D11Device* pDevice, const Image* srcImage, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float alphaWeight, ScratchImage* image) noexcept;
-	API HRESULT Compress4(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, const TexMetadata* metadata, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float alphaWeight, ScratchImage* cImages) noexcept;
+	API HRESULT Compress3(ID3D11Device* pDevice, Image srcImage, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float alphaWeight, ScratchImage image) noexcept;
+	API HRESULT Compress4(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, DXGI_FORMAT format, TEX_COMPRESS_FLAGS compress, float alphaWeight, ScratchImage cImages) noexcept;
 	// DirectCompute-based compression (alphaWeight is only used by BC7. 1.0 is the typical value to use)
 #endif
 
-	API HRESULT Decompress(const Image* cImage, DXGI_FORMAT format, ScratchImage* image) noexcept;
-	API HRESULT Decompress2(const Image* cImages, size_t nimages, const TexMetadata* metadata, DXGI_FORMAT format, ScratchImage* images) noexcept;
+	API HRESULT Decompress(Image cImage, DXGI_FORMAT format, ScratchImage image) noexcept;
+	API HRESULT Decompress2(const Image* cImages, size_t nimages, TexMetadata metadata, DXGI_FORMAT format, ScratchImage images) noexcept;
 
 #pragma endregion
 
 #pragma region Normal map operations
 
-	API HRESULT ComputeNormalMap(const Image* srcImage, CNMAP_FLAGS flags, float amplitude, DXGI_FORMAT format, ScratchImage* normalMap) noexcept;
-	API HRESULT ComputeNormalMap2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, CNMAP_FLAGS flags, float amplitude, DXGI_FORMAT format, ScratchImage* normalMaps) noexcept;
+	API HRESULT ComputeNormalMap(Image srcImage, CNMAP_FLAGS flags, float amplitude, DXGI_FORMAT format, ScratchImage normalMap) noexcept;
+	API HRESULT ComputeNormalMap2(const Image* srcImages, size_t nimages, TexMetadata metadata, CNMAP_FLAGS flags, float amplitude, DXGI_FORMAT format, ScratchImage normalMaps) noexcept;
 
 #pragma endregion
 
 #pragma region Misc image operations
 
-	API HRESULT CopyRectangle(const Image* srcImage, const Rect* srcRect, const Image* dstImage, TEX_FILTER_FLAGS filter, size_t xOffset, size_t yOffset) noexcept;
+	API HRESULT CopyRectangle(Image srcImage, Rect srcRect, Image dstImage, TEX_FILTER_FLAGS filter, size_t xOffset, size_t yOffset) noexcept;
 
-	API HRESULT ComputeMSE(const Image* image1, const Image* image2, float* mse, float* mseV, CMSE_FLAGS flags = CMSE_DEFAULT) noexcept;
+	API HRESULT ComputeMSE(Image image1, Image image2, float* mse, float* mseV, CMSE_FLAGS flags = CMSE_DEFAULT) noexcept;
 
-	API HRESULT EvaluateImage(const Image* image, EvaluateImageFunc pixelFunc);
-	API HRESULT EvaluateImage2(const Image* images, size_t nimages, const TexMetadata* metadata, EvaluateImageFunc pixelFunc);
+	API HRESULT EvaluateImage(Image image, EvaluateImageFunc pixelFunc);
+	API HRESULT EvaluateImage2(const Image* images, size_t nimages, TexMetadata metadata, EvaluateImageFunc pixelFunc);
 
-	API HRESULT TransformImage(const Image* image, TransformImageFunc pixelFunc, ScratchImage* result);
-	API HRESULT TransformImage2(const Image* srcImages, size_t nimages, const TexMetadata* metadata, TransformImageFunc pixelFunc, ScratchImage* result);
+	API HRESULT TransformImage(Image image, TransformImageFunc pixelFunc, ScratchImage result);
+	API HRESULT TransformImage2(const Image* srcImages, size_t nimages, TexMetadata metadata, TransformImageFunc pixelFunc, ScratchImage result);
 
 #pragma endregion
 
 #pragma region WIC utility code
 
 #ifdef WIN32
-	API GUID* GetWICCodec(WICCodecs codec) noexcept;
+	API GUID GetWICCodec(WICCodecs codec) noexcept;
 
-	API IWICImagingFactory* GetWICFactory(bool* iswic2) noexcept;
+	API IWICImagingFactory* GetWICFactory(BOOL* iswic2) noexcept;
 	API void SetWICFactory(IWICImagingFactory* pWIC) noexcept;
 #endif
 
@@ -682,26 +685,26 @@ extern "C"
 
 #pragma region DDS helper functions
 
-	API HRESULT EncodeDDSHeader(const TexMetadata* metadata, DDS_FLAGS flags, void* pDestination, size_t maxsize, size_t* required) noexcept;
+	API HRESULT EncodeDDSHeader(TexMetadata metadata, DDS_FLAGS flags, void* pDestination, size_t maxsize, size_t* required) noexcept;
 
 #pragma endregion
 
 #pragma region Direct3D 11 functions
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
-	API bool IsSupportedTexture(ID3D11Device* pDevice, const TexMetadata* metadata) noexcept;
+	API BOOL IsSupportedTexture(ID3D11Device* pDevice, TexMetadata metadata) noexcept;
 
-	API HRESULT CreateTexture(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, const TexMetadata* metadata, ID3D11Resource** ppResource) noexcept;
+	API HRESULT CreateTexture(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, ID3D11Resource** ppResource) noexcept;
 
-	API HRESULT CreateShaderResourceView(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, const TexMetadata* metadata, ID3D11ShaderResourceView** ppSRV) noexcept;
+	API HRESULT CreateShaderResourceView(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, ID3D11ShaderResourceView** ppSRV) noexcept;
 
-	API HRESULT CreateTextureEx(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, const TexMetadata* metadata, D3D11_USAGE usage, unsigned int bindFlags, unsigned int cpuAccessFlags, unsigned int miscFlags, CREATETEX_FLAGS createFlags, ID3D11Resource** ppResource) noexcept;
+	API HRESULT CreateTextureEx(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, D3D11_USAGE usage, unsigned int bindFlags, unsigned int cpuAccessFlags, unsigned int miscFlags, CREATETEX_FLAGS createFlags, ID3D11Resource** ppResource) noexcept;
 
-	API HRESULT CreateTextureEx2(ID3D11Device* pDevice, ScratchImage* img, uint32_t usage, uint32_t bindFlags, uint32_t cpuAccessFlags, uint32_t miscFlags, CREATETEX_FLAGS createFlags, ID3D11Resource** ppResource) noexcept;
+	API HRESULT CreateTextureEx2(ID3D11Device* pDevice, ScratchImage img, uint32_t usage, uint32_t bindFlags, uint32_t cpuAccessFlags, uint32_t miscFlags, CREATETEX_FLAGS createFlags, ID3D11Resource** ppResource) noexcept;
 
-	API HRESULT CreateShaderResourceViewEx(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, const TexMetadata* metadata, D3D11_USAGE usage, unsigned int bindFlags, unsigned int cpuAccessFlags, unsigned int miscFlags, CREATETEX_FLAGS createFlags, ID3D11ShaderResourceView** ppSRV) noexcept;
+	API HRESULT CreateShaderResourceViewEx(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, D3D11_USAGE usage, unsigned int bindFlags, unsigned int cpuAccessFlags, unsigned int miscFlags, CREATETEX_FLAGS createFlags, ID3D11ShaderResourceView** ppSRV) noexcept;
 
-	API HRESULT CaptureTexture(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, ID3D11Resource* pSource, ScratchImage* result) noexcept;
+	API HRESULT CaptureTexture(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, ID3D11Resource* pSource, ScratchImage result) noexcept;
 #endif
 
 #pragma endregion
@@ -709,15 +712,15 @@ extern "C"
 #pragma region Direct3D 12 functions
 
 #if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
-	API bool IsSupportedTextureD3D12(ID3D12Device* pDevice, const TexMetadata* metadata) noexcept;
+	API BOOL IsSupportedTextureD3D12(ID3D12Device* pDevice, TexMetadata metadata) noexcept;
 
-	API HRESULT CreateTextureD3D12(ID3D12Device* pDevice, const TexMetadata* metadata, ID3D12Resource** ppResource) noexcept;
+	API HRESULT CreateTextureD3D12(ID3D12Device* pDevice, TexMetadata metadata, ID3D12Resource** ppResource) noexcept;
 
-	API HRESULT CreateTextureExD3D12(ID3D12Device* pDevice, const TexMetadata* metadata, D3D12_RESOURCE_FLAGS resFlags, CREATETEX_FLAGS createFlags, ID3D12Resource** ppResource) noexcept;
+	API HRESULT CreateTextureExD3D12(ID3D12Device* pDevice, TexMetadata metadata, D3D12_RESOURCE_FLAGS resFlags, CREATETEX_FLAGS createFlags, ID3D12Resource** ppResource) noexcept;
 
-	API HRESULT PrepareUpload(ID3D12Device* pDevice, const Image* srcImages, size_t nimages, const TexMetadata* metadata, void** subresources, size_t* nSubresources);
+	API HRESULT PrepareUpload(ID3D12Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, void** subresources, size_t* nSubresources);
 
-	API HRESULT CaptureTextureD3D12(ID3D12CommandQueue* pCommandQueue, ID3D12Resource* pSource, bool isCubeMap, ScratchImage* result, D3D12_RESOURCE_STATES beforeState = D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATES afterState = D3D12_RESOURCE_STATE_RENDER_TARGET) noexcept;
+	API HRESULT CaptureTextureD3D12(ID3D12CommandQueue* pCommandQueue, ID3D12Resource* pSource, BOOL isCubeMap, ScratchImage result, D3D12_RESOURCE_STATES beforeState = D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATES afterState = D3D12_RESOURCE_STATE_RENDER_TARGET) noexcept;
 #endif
 
 #pragma endregion

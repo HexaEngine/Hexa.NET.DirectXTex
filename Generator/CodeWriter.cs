@@ -38,7 +38,7 @@
                 _writer.WriteLine();
             }
 
-            BeginBlock("namespace HexaEngine.Shaderc");
+            BeginBlock($"namespace {CsCodeGeneratorSettings.Default.Namespace}");
         }
 
         public void Dispose()

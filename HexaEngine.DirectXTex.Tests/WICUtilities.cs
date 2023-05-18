@@ -5,7 +5,7 @@
         [Test]
         public void GetWICCodec()
         {
-            var ptr = DirectXTex.GetWICCodec(WICCodecs.PNG);
+            var ptr = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);
             if (ptr == null)
             {
                 Assert.Fail("Ptr is null");

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexaEngine.DirectXTex", "HexaEngine.DirectXTex\HexaEngine.DirectXTex.csproj", "{234165A8-D64C-4196-8569-D26FC0DF293C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexaEngine.DirectXTex", "HexaEngine.DirectXTex\HexaEngine.DirectXTex.csproj", "{234165A8-D64C-4196-8569-D26FC0DF293C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Generator.csproj", "{5BBE08AD-426E-4F04-A057-A544ADC807F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", "Generator\Generator.csproj", "{5BBE08AD-426E-4F04-A057-A544ADC807F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexaEngine.DirectXTex.Tests", "HexaEngine.DirectXTex.Tests\HexaEngine.DirectXTex.Tests.csproj", "{00C4288B-82F5-4FBB-9D05-31E4CC6CAA7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HexaEngine.DirectXTex.Tests", "HexaEngine.DirectXTex.Tests\HexaEngine.DirectXTex.Tests.csproj", "{00C4288B-82F5-4FBB-9D05-31E4CC6CAA7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,22 +12,23 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage = new();
-            srcImage.Initialize(metadataSrc, CPFlags.None);
+            ScratchImage srcImage;
+            DirectXTex.NewScratchImage(&srcImage);
+            DirectXTex.Initialize(srcImage, metadataSrc, CPFlags.None);
 
             TexMetadata metadataDest = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 512,
                 Width = 512,
                 MipLevels = 1,
@@ -35,10 +36,11 @@
                 MiscFlags2 = 0,
             };
             ScratchImage dstImage = new();
-            dstImage.Initialize(metadataDest, CPFlags.None);
+            DirectXTex.NewScratchImage(&dstImage);
+            DirectXTex.Initialize(dstImage, metadataDest, CPFlags.None);
 
             Rect rect = new() { X = 0, Y = 0, W = 64, H = 64 };
-            DirectXTex.CopyRectangle(srcImage.GetImage(0, 0, 0), &rect, dstImage.GetImage(0, 0, 0), TexFilterFlags.Default, 100, 50);
+            DirectXTex.CopyRectangle(srcImage.GetImage(0, 0, 0), rect, dstImage.GetImage(0, 0, 0), TexFilterFlags.Default, 100, 50);
 
             srcImage.Release();
             dstImage.Release();
@@ -52,61 +54,66 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage = new();
+            ScratchImage srcImage;
+            DirectXTex.NewScratchImage(&srcImage);
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
-            ScratchImage dstImage = new();
+            ScratchImage dstImage;
+            DirectXTex.NewScratchImage(&dstImage);
             dstImage.Initialize(metadataSrc, CPFlags.None);
             Vector4 mseV;
             float mse;
 
-            DirectXTex.ComputeMSE(srcImage.GetImage(0, 0, 0), dstImage.GetImage(0, 0, 0), &mse, (float*)&mseV);
+            DirectXTex.ComputeMSE(srcImage.GetImage(0, 0, 0), dstImage.GetImage(0, 0, 0), &mse, (float*)&mseV, CMSEFlags.Default);
 
             srcImage.Release();
             dstImage.Release();
         }
 
+        private static Vector4 maxLum = Vector4.Zero;
+
+        private static void EvaluateImageFunc(Vector4* pixels, nuint width, nuint y)
+        {
+            for (nuint j = 0; j < width; ++j)
+            {
+                Vector4 s_luminance = new(0.3f, 0.59f, 0.11f, 0.0f);
+
+                Vector4 v = *pixels++;
+
+                v = new(Vector4.Dot(v, s_luminance));
+
+                maxLum = Vector4.Max(v, maxLum);
+            }
+        }
+
         [Test]
         public void EvaluateImage()
         {
-            Vector4 maxLum = Vector4.Zero;
-            void func(Vector4* pixels, ulong width, ulong y)
-            {
-                for (ulong j = 0; j < width; ++j)
-                {
-                    Vector4 s_luminance = new(0.3f, 0.59f, 0.11f, 0.0f);
-
-                    Vector4 v = *pixels++;
-
-                    v = new(Vector4.Dot(v, s_luminance));
-
-                    maxLum = Vector4.Max(v, maxLum);
-                }
-            }
-
             TexMetadata metadataSrc = new()
             {
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage = new();
+            ScratchImage srcImage;
+            DirectXTex.NewScratchImage(&srcImage);
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
-            DirectXTex.EvaluateImage(srcImage.GetImage(0, 0, 0), func);
+            EvaluateImageFunc evaluateImageFunc = new((nint)(delegate*<Vector4*, nuint, nuint, void>)&EvaluateImageFunc);
+            DirectXTex.EvaluateImage(srcImage.GetImage(0, 0, 0), evaluateImageFunc);
         }
 
         public static bool NearEqual(Vector4 V1, Vector4 V2, Vector4 Epsilon)
@@ -119,12 +126,12 @@
         [Test]
         public void TransformImage()
         {
-            static void func(Vector4* outPixels, Vector4* inPixels, ulong width, ulong y)
+            static void func(Vector4* outPixels, Vector4* inPixels, nuint width, nuint y)
             {
                 Vector4 s_chromaKey = new(0.0f, 1.0f, 0.0f, 0.0f);
                 Vector4 s_tolerance = new(0.2f, 0.2f, 0.2f, 0.0f);
 
-                for (ulong j = 0; j < width; ++j)
+                for (nuint j = 0; j < width; ++j)
                 {
                     Vector4 value = inPixels[j];
 
@@ -142,20 +149,22 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.FormatR8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage = new();
+            ScratchImage srcImage;
+            DirectXTex.NewScratchImage(&srcImage);
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
-            ScratchImage dstImage = new();
+            ScratchImage dstImage;
+            DirectXTex.NewScratchImage(&dstImage);
             dstImage.Initialize(metadataSrc, CPFlags.None);
-
-            DirectXTex.TransformImage(srcImage.GetImage(0, 0, 0), func, &dstImage);
+            TransformImageFunc transformImageFunc = new((nint)(delegate*<Vector4*, Vector4*, nuint, nuint, void>)&func);
+            DirectXTex.TransformImage(srcImage.GetImage(0, 0, 0), transformImageFunc, dstImage);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<AssemblyVersion>1.9.8</AssemblyVersion>
-		<PackageVersion>1.0.6</PackageVersion>
+		<PackageVersion>2.0.0</PackageVersion>
 		<Authors>Juna Meinhold</Authors>
 		<Description>A .NET wrapper for the DirectXTex library.</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -40,5 +40,9 @@
 	<ItemGroup>
 		<None Update="README.md" Pack="true" PackagePath="\" />
 		<None Update="LICENSE.txt" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Generated\" />
 	</ItemGroup>
 </Project>

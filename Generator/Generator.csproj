@@ -18,10 +18,7 @@
 	  <None Update="DirectXTex\DirectXTex.h">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="DirectXTex\DirectXTex\DirectXTex\DirectXTex.h">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="DirectXTex\DirectXTex\DirectXTex\DirectXTex.inl">
+	  <None Update="generator.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>

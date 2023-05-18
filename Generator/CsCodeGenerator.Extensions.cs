@@ -33,7 +33,10 @@
                     {
                         var cppFunction = compilation.Functions[j];
 
-                        if (cppFunction.Parameters[0].Type.GetDisplayName() == typedef.GetDisplayName())
+                        if (cppFunction.Parameters.Count == 0 || cppFunction.Parameters[0].Type.TypeKind == CppTypeKind.Pointer)
+                            continue;
+
+                        if (cppFunction.Parameters[0].Type.GetDisplayName().Contains(typedef.GetDisplayName()))
                         {
                             var csFunctionName = GetCsCleanName(cppFunction.Name);
                             bool canUseOut = s_outReturnFunctions.Contains(cppFunction.Name);

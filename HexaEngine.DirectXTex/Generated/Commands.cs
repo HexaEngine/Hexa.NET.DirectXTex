@@ -992,9 +992,9 @@ namespace HexaEngine.DirectXTex
 		}
 
 		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LoadFromWICMemory")]
-		public static extern int LoadFromWICMemory(void* source, nuint size, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR* getMQR);
+		public static extern int LoadFromWICMemory(void* source, nuint size, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR);
 
-		public static int LoadFromWICMemory(void* source, nuint size, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR* getMQR)
+		public static int LoadFromWICMemory(void* source, nuint size, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR getMQR)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1003,31 +1003,10 @@ namespace HexaEngine.DirectXTex
 			}
 		}
 
-		public static int LoadFromWICMemory(void* source, nuint size, WICFlags flags, TexMetadata* metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			fixed (GetMQR* pgetMQR = &getMQR)
-			{
-				int ret = LoadFromWICMemory(source, size, flags, metadata, image, pgetMQR);
-				return ret;
-			}
-		}
-
-		public static int LoadFromWICMemory(void* source, nuint size, WICFlags flags, ref TexMetadata metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			fixed (TexMetadata* pmetadata = &metadata)
-			{
-				fixed (GetMQR* pgetMQR = &getMQR)
-				{
-					int ret = LoadFromWICMemory(source, size, flags, pmetadata, image, pgetMQR);
-					return ret;
-				}
-			}
-		}
-
 		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LoadFromWICFile")]
-		public static extern int LoadFromWICFile(char* szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR* getMQR);
+		public static extern int LoadFromWICFile(char* szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR);
 
-		public static int LoadFromWICFile(ref char szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR* getMQR)
+		public static int LoadFromWICFile(ref char szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR)
 		{
 			fixed (char* pszFile = &szFile)
 			{
@@ -1036,7 +1015,7 @@ namespace HexaEngine.DirectXTex
 			}
 		}
 
-		public static int LoadFromWICFile(string szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR* getMQR)
+		public static int LoadFromWICFile(string szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, GetMQR getMQR)
 		{
 			char* pStr0 = (char*)Marshal.StringToHGlobalUni(szFile);
 			int ret = LoadFromWICFile(pStr0, flags, metadata, image, getMQR);
@@ -1044,7 +1023,7 @@ namespace HexaEngine.DirectXTex
 			return ret;
 		}
 
-		public static int LoadFromWICFile(char* szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR* getMQR)
+		public static int LoadFromWICFile(char* szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR getMQR)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1053,7 +1032,7 @@ namespace HexaEngine.DirectXTex
 			}
 		}
 
-		public static int LoadFromWICFile(ref char szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR* getMQR)
+		public static int LoadFromWICFile(ref char szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR getMQR)
 		{
 			fixed (char* pszFile = &szFile)
 			{
@@ -1065,7 +1044,7 @@ namespace HexaEngine.DirectXTex
 			}
 		}
 
-		public static int LoadFromWICFile(string szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR* getMQR)
+		public static int LoadFromWICFile(string szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, GetMQR getMQR)
 		{
 			char* pStr0 = (char*)Marshal.StringToHGlobalUni(szFile);
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -1073,79 +1052,6 @@ namespace HexaEngine.DirectXTex
 				int ret = LoadFromWICFile(pStr0, flags, pmetadata, image, getMQR);
 				Marshal.FreeHGlobal((nint)pStr0);
 				return ret;
-			}
-		}
-
-		public static int LoadFromWICFile(char* szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			fixed (GetMQR* pgetMQR = &getMQR)
-			{
-				int ret = LoadFromWICFile(szFile, flags, metadata, image, pgetMQR);
-				return ret;
-			}
-		}
-
-		public static int LoadFromWICFile(ref char szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			fixed (char* pszFile = &szFile)
-			{
-				fixed (GetMQR* pgetMQR = &getMQR)
-				{
-					int ret = LoadFromWICFile(pszFile, flags, metadata, image, pgetMQR);
-					return ret;
-				}
-			}
-		}
-
-		public static int LoadFromWICFile(string szFile, WICFlags flags, TexMetadata* metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			char* pStr0 = (char*)Marshal.StringToHGlobalUni(szFile);
-			fixed (GetMQR* pgetMQR = &getMQR)
-			{
-				int ret = LoadFromWICFile(pStr0, flags, metadata, image, pgetMQR);
-				Marshal.FreeHGlobal((nint)pStr0);
-				return ret;
-			}
-		}
-
-		public static int LoadFromWICFile(char* szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			fixed (TexMetadata* pmetadata = &metadata)
-			{
-				fixed (GetMQR* pgetMQR = &getMQR)
-				{
-					int ret = LoadFromWICFile(szFile, flags, pmetadata, image, pgetMQR);
-					return ret;
-				}
-			}
-		}
-
-		public static int LoadFromWICFile(ref char szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			fixed (char* pszFile = &szFile)
-			{
-				fixed (TexMetadata* pmetadata = &metadata)
-				{
-					fixed (GetMQR* pgetMQR = &getMQR)
-					{
-						int ret = LoadFromWICFile(pszFile, flags, pmetadata, image, pgetMQR);
-						return ret;
-					}
-				}
-			}
-		}
-
-		public static int LoadFromWICFile(string szFile, WICFlags flags, ref TexMetadata metadata, ScratchImage image, ref GetMQR getMQR)
-		{
-			char* pStr0 = (char*)Marshal.StringToHGlobalUni(szFile);
-			fixed (TexMetadata* pmetadata = &metadata)
-			{
-				fixed (GetMQR* pgetMQR = &getMQR)
-				{
-					int ret = LoadFromWICFile(pStr0, flags, pmetadata, image, pgetMQR);
-					Marshal.FreeHGlobal((nint)pStr0);
-					return ret;
-				}
 			}
 		}
 

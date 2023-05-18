@@ -5,16 +5,14 @@
         [Test]
         public void CreateAndRelease()
         {
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
             blob.Release();
         }
 
         [Test]
         public void Init()
         {
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
             blob.Initialize(256);
             Assert.That(blob.GetBufferSize(), Is.EqualTo((nuint)256));
             blob.Release();
@@ -23,8 +21,7 @@
         [Test]
         public void GetBufferPointerAndBufferSizeAndWrite()
         {
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
             blob.Initialize(256);
             ulong size = blob.GetBufferSize();
             Assert.That(size, Is.EqualTo(256u));
@@ -38,8 +35,7 @@
         [Test]
         public void Resize()
         {
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
             blob.Initialize(256);
             ulong size = blob.GetBufferSize();
             Assert.That(size, Is.EqualTo(256u));
@@ -54,8 +50,7 @@
         [Test]
         public void Trim()
         {
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
             blob.Initialize(256);
             ulong size = blob.GetBufferSize();
             Assert.That(size, Is.EqualTo(256u));

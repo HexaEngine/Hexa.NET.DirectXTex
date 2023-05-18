@@ -12,11 +12,9 @@
         [Test]
         public void LoadAndSaveFromDDSMemory()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             Span<byte> src = LoadTexture(DDSFilename);
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
 
             TexMetadata metadata;
             fixed (byte* srcPtr = src)
@@ -38,8 +36,7 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromDDSFile), "test.dds");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
 
             DirectXTex.LoadFromDDSFile(DDSFilename, DDSFlags.None, &metadata, image);
@@ -55,12 +52,10 @@
         [Test]
         public void LoadAndSaveFromHDRMemory()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
             Span<byte> src = LoadTexture(HDRFilename);
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
 
             fixed (byte* srcPtr = src)
             {
@@ -81,8 +76,7 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromHDRFile), "test.hdr");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
 
             DirectXTex.LoadFromHDRFile(HDRFilename, &metadata, image);
@@ -98,12 +92,10 @@
         [Test]
         public void LoadAndSaveFromTGAMemory()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
             Span<byte> src = LoadTexture(TGAFilename);
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
 
             fixed (byte* srcPtr = src)
             {
@@ -120,8 +112,7 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromTGAFile), "test.tga");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
 
             DirectXTex.LoadFromTGAFile(TGAFilename, TGAFlags.None, &metadata, image);
@@ -134,12 +125,10 @@
         [Test]
         public void LoadAndSaveFromWICMemory()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
             Span<byte> src = LoadTexture(WICFilename);
-            Blob blob;
-            DirectXTex.NewBlob(&blob);
+            Blob blob = DirectXTex.CreateBlob();
 
             fixed (byte* srcPtr = src)
             {
@@ -160,8 +149,7 @@
         {
             var path = Path.Combine("results", nameof(LoadAndSaveFromTGAFile), "test.png");
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
 
             TexMetadata metadata;
             Guid guid = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);

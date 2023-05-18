@@ -5,16 +5,14 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void CreateAndFree()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             image.Release();
         }
 
         [Test]
         public void Init()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -38,8 +36,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void Init1D()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -64,8 +61,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void Init2D()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture2D,
@@ -90,8 +86,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void Init3D()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture3D,
@@ -116,8 +111,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void InitCube()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture2D,
@@ -142,8 +136,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void OverrrideFormat()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -177,8 +170,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void GetMetadata()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -203,8 +195,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void GetImage()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -236,8 +227,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void GetImagesAndGetImageCount()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -273,8 +263,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void GetPixelsAndGetPixelsSizeAndModify()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,
@@ -304,8 +293,7 @@ namespace HexaEngine.DirectXTex.Tests
         [Test]
         public void IsAlphaAllOpaque()
         {
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = new()
             {
                 ArraySize = 1,

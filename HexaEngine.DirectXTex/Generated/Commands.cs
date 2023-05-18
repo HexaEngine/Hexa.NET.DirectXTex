@@ -481,16 +481,8 @@ namespace HexaEngine.DirectXTex
 		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "IsVolumemap")]
 		public static extern bool IsVolumemap(TexMetadata metadata);
 
-		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "NewScratchImage")]
-		public static extern void NewScratchImage(ScratchImage* img);
-
-		public static void NewScratchImage(ref ScratchImage img)
-		{
-			fixed (ScratchImage* pimg = &img)
-			{
-				NewScratchImage(pimg);
-			}
-		}
+		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "CreateScratchImage")]
+		public static extern ScratchImage CreateScratchImage();
 
 		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "Initialize")]
 		public static extern int Initialize(ScratchImage img, TexMetadata mdata, CPFlags flags);
@@ -575,16 +567,8 @@ namespace HexaEngine.DirectXTex
 		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "IsAlphaAllOpaque")]
 		public static extern bool IsAlphaAllOpaque(ScratchImage img);
 
-		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "NewBlob")]
-		public static extern void NewBlob(Blob* blob);
-
-		public static void NewBlob(ref Blob blob)
-		{
-			fixed (Blob* pblob = &blob)
-			{
-				NewBlob(pblob);
-			}
-		}
+		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "CreateBlob")]
+		public static extern Blob CreateBlob();
 
 		[DllImport(LibName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "BlobInitialize")]
 		public static extern int BlobInitialize(Blob blob, nuint size);

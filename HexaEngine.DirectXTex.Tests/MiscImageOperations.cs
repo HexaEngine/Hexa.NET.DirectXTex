@@ -19,8 +19,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage;
-            DirectXTex.NewScratchImage(&srcImage);
+            ScratchImage srcImage = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(srcImage, metadataSrc, CPFlags.None);
 
             TexMetadata metadataDest = new()
@@ -35,8 +34,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage dstImage = new();
-            DirectXTex.NewScratchImage(&dstImage);
+            ScratchImage dstImage = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(dstImage, metadataDest, CPFlags.None);
 
             Rect rect = new() { X = 0, Y = 0, W = 64, H = 64 };
@@ -61,12 +59,10 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage;
-            DirectXTex.NewScratchImage(&srcImage);
+            ScratchImage srcImage = DirectXTex.CreateScratchImage();
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
-            ScratchImage dstImage;
-            DirectXTex.NewScratchImage(&dstImage);
+            ScratchImage dstImage = DirectXTex.CreateScratchImage();
             dstImage.Initialize(metadataSrc, CPFlags.None);
             Vector4 mseV;
             float mse;
@@ -108,8 +104,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage;
-            DirectXTex.NewScratchImage(&srcImage);
+            ScratchImage srcImage = DirectXTex.CreateScratchImage();
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
             EvaluateImageFunc evaluateImageFunc = new((nint)(delegate*<Vector4*, nuint, nuint, void>)&EvaluateImageFunc);
@@ -156,12 +151,10 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage srcImage;
-            DirectXTex.NewScratchImage(&srcImage);
+            ScratchImage srcImage = DirectXTex.CreateScratchImage();
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
-            ScratchImage dstImage;
-            DirectXTex.NewScratchImage(&dstImage);
+            ScratchImage dstImage = DirectXTex.CreateScratchImage();
             dstImage.Initialize(metadataSrc, CPFlags.None);
             TransformImageFunc transformImageFunc = new((nint)(delegate*<Vector4*, Vector4*, nuint, nuint, void>)&func);
             DirectXTex.TransformImage(srcImage.GetImage(0, 0, 0), transformImageFunc, dstImage);

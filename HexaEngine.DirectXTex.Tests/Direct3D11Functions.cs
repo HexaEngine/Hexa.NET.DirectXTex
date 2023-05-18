@@ -149,8 +149,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11Resource* resource;
             DirectXTex.CreateTexture(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, &resource);
@@ -174,8 +173,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image;
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
             DirectXTex.CreateShaderResourceView(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, &srv);
@@ -199,8 +197,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image = new();
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11Resource* resource;
             DirectXTex.CreateTextureEx(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
@@ -224,8 +221,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            ScratchImage image = new();
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
             DirectXTex.CreateShaderResourceViewEx(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
@@ -241,8 +237,7 @@
             Texture2DDesc desc = new(64, 64, 1, 1, Format.FormatR8G8B8A8Unorm, new(1, 0), Usage.Default, 8, 0, 0);
             Device.CreateTexture2D(&desc, (SubresourceData*)null, (ID3D11Texture2D**)&resource);
 
-            ScratchImage image = new();
-            DirectXTex.NewScratchImage(&image);
+            ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.CaptureTexture(Device, DeviceContext, resource, image);
 
             resource->Release();

@@ -504,7 +504,7 @@ extern "C"
 
 #pragma region ScratchImage Methods
 
-	API void NewScratchImage(ScratchImage* img);
+	API ScratchImage CreateScratchImage();
 
 	API HRESULT Initialize(ScratchImage img, TexMetadata mdata, CP_FLAGS flags) noexcept;
 
@@ -537,7 +537,7 @@ extern "C"
 
 #pragma region BlobMethods
 
-	API void NewBlob(Blob* blob);
+	API Blob CreateBlob();
 
 	API HRESULT BlobInitialize(Blob blob, size_t size) noexcept;
 

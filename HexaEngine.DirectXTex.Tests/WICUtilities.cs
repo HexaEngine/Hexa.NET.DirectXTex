@@ -13,9 +13,9 @@
         }
 
         [Test]
-        public void GetSetWICTestory()
+        public void GetSetWICFactory()
         {
-            bool isWIC2;
+            byte isWIC2;
             var factory = DirectXTex.GetWICFactory(&isWIC2);
             DirectXTex.SetWICFactory(factory);
         }

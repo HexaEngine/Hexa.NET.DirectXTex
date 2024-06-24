@@ -23,60 +23,6 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
-		{
-			fixed (char* pszFile = &szFile)
-			{
-				int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
-		{
-			char* pStr0 = null;
-			int pStrSize0 = 0;
-			if (szFile != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF16(szFile);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = (char*)pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = '\0';
-			}
-			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
-		{
-			fixed (Image* pimages = &images)
-			{
-				fixed (char* pszFile = &szFile)
-				{
-					int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
 		{
 			fixed (Image* pimages = &images)
@@ -1057,37 +1003,21 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "GenerateMipMaps")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int GenerateMipMapsNative([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D);
+		internal static partial int GenerateMipMapsNative([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] byte allow1D);
 
 		/// <summary>/// Converts the image from a planar format to an equivalent non-planar format<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D)
+		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
 		{
-			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (int)1 : (int)0);
+			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (byte)1 : (byte)0);
 			return ret;
 		}
 
 		/// <summary>/// Converts the image from a planar format to an equivalent non-planar format<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D)
+		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
 		{
-			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (int)1 : (int)0);
-			return ret;
-		}
-
-		/// <summary>/// Converts the image from a planar format to an equivalent non-planar format<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D)
-		{
-			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D);
-			return ret;
-		}
-
-		/// <summary>/// Converts the image from a planar format to an equivalent non-planar format<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D)
-		{
-			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D);
+			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (byte)1 : (byte)0);
 			return ret;
 		}
 
@@ -2060,11 +1990,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
 		[LibraryImport(LibName, EntryPoint = "GetWICFactory")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial IWICImagingFactory* GetWICFactoryNative([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "BOOL*")] bool* iswic2);
+		internal static partial IWICImagingFactory* GetWICFactoryNative([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool*")] byte* iswic2);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GetWICFactory")]
 		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
-		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "BOOL*")] bool* iswic2)
+		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool*")] byte* iswic2)
 		{
 			IWICImagingFactory* ret = GetWICFactoryNative(iswic2);
 			return ret;
@@ -2072,11 +2002,11 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GetWICFactory")]
 		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
-		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "BOOL*")] ref int iswic2)
+		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool*")] ref byte iswic2)
 		{
-			fixed (int* piswic2 = &iswic2)
+			fixed (byte* piswic2 = &iswic2)
 			{
-				IWICImagingFactory* ret = GetWICFactoryNative((bool*)piswic2);
+				IWICImagingFactory* ret = GetWICFactoryNative((byte*)piswic2);
 				return ret;
 			}
 		}
@@ -2158,26 +2088,26 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsSupportedTexture")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsSupportedTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
+		internal static partial byte IsSupportedTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
-			int ret = IsSupportedTextureNative(pDevice, metadata);
+			byte ret = IsSupportedTextureNative(pDevice, metadata);
 			return ret != 0;
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
-				int ret = IsSupportedTextureNative((ID3D11Device*)ppDevice, metadata);
+				byte ret = IsSupportedTextureNative((ID3D11Device*)ppDevice, metadata);
 				return ret != 0;
 			}
 		}
@@ -3184,26 +3114,26 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsSupportedTextureD3D12")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsSupportedTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
+		internal static partial byte IsSupportedTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
-			int ret = IsSupportedTextureD3D12Native(pDevice, metadata);
+			byte ret = IsSupportedTextureD3D12Native(pDevice, metadata);
 			return ret != 0;
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
-				int ret = IsSupportedTextureD3D12Native((ID3D12Device*)ppDevice, metadata);
+				byte ret = IsSupportedTextureD3D12Native((ID3D12Device*)ppDevice, metadata);
 				return ret != 0;
 			}
 		}
@@ -3530,91 +3460,47 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "CaptureTextureD3D12")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CaptureTextureD3D12Native([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] int isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState);
+		internal static partial int CaptureTextureD3D12Native([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] byte isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
+		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
 		{
-			int ret = CaptureTextureD3D12Native(pCommandQueue, pSource, isCubeMap ? (int)1 : (int)0, result, beforeState, afterState);
+			int ret = CaptureTextureD3D12Native(pCommandQueue, pSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
 			return ret;
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
+		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
 		{
 			fixed (ID3D12CommandQueue* ppCommandQueue = &pCommandQueue)
 			{
-				int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, pSource, isCubeMap ? (int)1 : (int)0, result, beforeState, afterState);
+				int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, pSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
 				return ret;
 			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
+		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
 		{
 			fixed (ID3D12Resource* ppSource = &pSource)
 			{
-				int ret = CaptureTextureD3D12Native(pCommandQueue, (ID3D12Resource*)ppSource, isCubeMap ? (int)1 : (int)0, result, beforeState, afterState);
+				int ret = CaptureTextureD3D12Native(pCommandQueue, (ID3D12Resource*)ppSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
 				return ret;
 			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
+		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
 		{
 			fixed (ID3D12CommandQueue* ppCommandQueue = &pCommandQueue)
 			{
 				fixed (ID3D12Resource* ppSource = &pSource)
 				{
-					int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, (ID3D12Resource*)ppSource, isCubeMap ? (int)1 : (int)0, result, beforeState, afterState);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] int isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
-		{
-			int ret = CaptureTextureD3D12Native(pCommandQueue, pSource, isCubeMap, result, beforeState, afterState);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] int isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
-		{
-			fixed (ID3D12CommandQueue* ppCommandQueue = &pCommandQueue)
-			{
-				int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, pSource, isCubeMap, result, beforeState, afterState);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] int isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
-		{
-			fixed (ID3D12Resource* ppSource = &pSource)
-			{
-				int ret = CaptureTextureD3D12Native(pCommandQueue, (ID3D12Resource*)ppSource, isCubeMap, result, beforeState, afterState);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "BOOL")] int isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] ResourceStates afterState)
-		{
-			fixed (ID3D12CommandQueue* ppCommandQueue = &pCommandQueue)
-			{
-				fixed (ID3D12Resource* ppSource = &pSource)
-				{
-					int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, (ID3D12Resource*)ppSource, isCubeMap, result, beforeState, afterState);
+					int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, (ID3D12Resource*)ppSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
 					return ret;
 				}
 			}

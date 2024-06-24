@@ -425,17 +425,17 @@ extern "C"
 
 #pragma region DXGI Format Utilities
 
-	API BOOL IsValid(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsCompressed(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsPacked(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsVideo(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsPlanar(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsPalettized(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsDepthStencil(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsSRGB(DXGI_FORMAT fmt) noexcept;
-	API BOOL IsTypeless(DXGI_FORMAT fmt, BOOL partialTypeless) noexcept;
+	API bool IsValid(DXGI_FORMAT fmt) noexcept;
+	API bool IsCompressed(DXGI_FORMAT fmt) noexcept;
+	API bool IsPacked(DXGI_FORMAT fmt) noexcept;
+	API bool IsVideo(DXGI_FORMAT fmt) noexcept;
+	API bool IsPlanar(DXGI_FORMAT fmt) noexcept;
+	API bool IsPalettized(DXGI_FORMAT fmt) noexcept;
+	API bool IsDepthStencil(DXGI_FORMAT fmt) noexcept;
+	API bool IsSRGB(DXGI_FORMAT fmt) noexcept;
+	API bool IsTypeless(DXGI_FORMAT fmt, bool partialTypeless) noexcept;
 
-	API BOOL HasAlpha(DXGI_FORMAT fmt) noexcept;
+	API bool HasAlpha(DXGI_FORMAT fmt) noexcept;
 
 	API size_t BitsPerPixel(DXGI_FORMAT fmt) noexcept;
 
@@ -507,15 +507,15 @@ extern "C"
 	API size_t ComputeIndex(TexMetadata metadata, size_t mip, size_t item, size_t slice) noexcept;
 	// Returns size_t(-1) to indicate an out-of-range error
 
-	API BOOL IsCubemap(TexMetadata metadata) noexcept;
+	API bool IsCubemap(TexMetadata metadata) noexcept;
 	// Helper for miscFlags
 
-	API BOOL IsPMAlpha(TexMetadata metadata) noexcept;
+	API bool IsPMAlpha(TexMetadata metadata) noexcept;
 	API void SetAlphaMode(TexMetadata* metadata, TEX_ALPHA_MODE mode) noexcept;
 	API TEX_ALPHA_MODE GetAlphaMode(TexMetadata metadata) noexcept;
 	// Helpers for miscFlags2
 
-	API BOOL IsVolumemap(TexMetadata metadata) noexcept;
+	API bool IsVolumemap(TexMetadata metadata) noexcept;
 	// Helper for dimension
 
 #pragma endregion
@@ -531,14 +531,14 @@ extern "C"
 	API HRESULT Initialize3D(ScratchImage img, DXGI_FORMAT fmt, size_t width, size_t height, size_t depth, size_t mipLevels, CP_FLAGS flags) noexcept;
 	API HRESULT InitializeCube(ScratchImage img, DXGI_FORMAT fmt, size_t width, size_t height, size_t nCubes, size_t mipLevels, CP_FLAGS flags) noexcept;
 
-	API HRESULT InitializeFromImage(ScratchImage img, const Image srcImage, BOOL allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
-	API HRESULT InitializeArrayFromImages(ScratchImage img, const Image* images, size_t nImages, BOOL allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
+	API HRESULT InitializeFromImage(ScratchImage img, const Image srcImage, bool allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
+	API HRESULT InitializeArrayFromImages(ScratchImage img, const Image* images, size_t nImages, bool allow1D = false, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
 	API HRESULT InitializeCubeFromImages(ScratchImage img, const Image* images, size_t nImages, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
 	API HRESULT Initialize3DFromImages(ScratchImage img, const Image* images, size_t depth, CP_FLAGS flags = CP_FLAGS_NONE) noexcept;
 
 	API void ScratchImageRelease(ScratchImage img) noexcept;
 
-	API BOOL OverrideFormat(ScratchImage img, DXGI_FORMAT f) noexcept;
+	API bool OverrideFormat(ScratchImage img, DXGI_FORMAT f) noexcept;
 
 	API const TexMetadata GetMetadata(ScratchImage img) noexcept;
 	API const Image GetImage(ScratchImage img, size_t mip, size_t item, size_t slice) noexcept;
@@ -549,7 +549,7 @@ extern "C"
 	API uint8_t* GetPixels(ScratchImage img) noexcept;
 	API size_t GetPixelsSize(ScratchImage img) noexcept;
 
-	API BOOL IsAlphaAllOpaque(ScratchImage img);
+	API bool IsAlphaAllOpaque(ScratchImage img);
 
 #pragma endregion
 
@@ -639,7 +639,7 @@ extern "C"
 	API HRESULT ConvertToSinglePlane2(const Image* srcImages, size_t nimages, TexMetadata metadata, ScratchImage image) noexcept;
 	// Converts the image from a planar format to an equivalent non-planar format
 
-	API HRESULT GenerateMipMaps(Image baseImage, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain, BOOL allow1D = false) noexcept;
+	API HRESULT GenerateMipMaps(Image baseImage, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain, bool allow1D = false) noexcept;
 	API HRESULT GenerateMipMaps2(const Image* srcImages, size_t nimages, TexMetadata metadata, TEX_FILTER_FLAGS filter, size_t levels, ScratchImage mipChain);
 	// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)
 	// Defaults to Fant filtering which is equivalent to a box filter
@@ -695,7 +695,7 @@ extern "C"
 #ifdef _WIN32
 	API GUID GetWICCodec(WICCodecs codec) noexcept;
 
-	API IWICImagingFactory* GetWICFactory(BOOL* iswic2) noexcept;
+	API IWICImagingFactory* GetWICFactory(bool* iswic2) noexcept;
 	API void SetWICFactory(IWICImagingFactory* pWIC) noexcept;
 #endif
 
@@ -710,7 +710,7 @@ extern "C"
 #pragma region Direct3D 11 functions
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
-	API BOOL IsSupportedTexture(ID3D11Device* pDevice, TexMetadata metadata) noexcept;
+	API bool IsSupportedTexture(ID3D11Device* pDevice, TexMetadata metadata) noexcept;
 
 	API HRESULT CreateTexture(ID3D11Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, ID3D11Resource** ppResource) noexcept;
 
@@ -730,7 +730,7 @@ extern "C"
 #pragma region Direct3D 12 functions
 
 #if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
-	API BOOL IsSupportedTextureD3D12(ID3D12Device* pDevice, TexMetadata metadata) noexcept;
+	API bool IsSupportedTextureD3D12(ID3D12Device* pDevice, TexMetadata metadata) noexcept;
 
 	API HRESULT CreateTextureD3D12(ID3D12Device* pDevice, TexMetadata metadata, ID3D12Resource** ppResource) noexcept;
 
@@ -738,7 +738,7 @@ extern "C"
 
 	API HRESULT PrepareUpload(ID3D12Device* pDevice, const Image* srcImages, size_t nimages, TexMetadata metadata, void** subresources, size_t* nSubresources);
 
-	API HRESULT CaptureTextureD3D12(ID3D12CommandQueue* pCommandQueue, ID3D12Resource* pSource, BOOL isCubeMap, ScratchImage result, D3D12_RESOURCE_STATES beforeState = D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATES afterState = D3D12_RESOURCE_STATE_RENDER_TARGET) noexcept;
+	API HRESULT CaptureTextureD3D12(ID3D12CommandQueue* pCommandQueue, ID3D12Resource* pSource, bool isCubeMap, ScratchImage result, D3D12_RESOURCE_STATES beforeState = D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATES afterState = D3D12_RESOURCE_STATE_RENDER_TARGET) noexcept;
 #endif
 
 #pragma endregion

@@ -13,6 +13,7 @@
 		<IsAotCompatible>true</IsAotCompatible>
 		
 		<AssemblyVersion>1.9.8</AssemblyVersion>
+		<PackageId>Hexa.NET.DirectXTex</PackageId>
 		<PackageVersion>2.0.0</PackageVersion>
 		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
 		<Description>A .NET wrapper for the DirectXTex library.</Description>

@@ -26,16 +26,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsValid")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsValid")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsValidNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsValidNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsValid")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsValid([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsValidNative(fmt);
+			byte ret = IsValidNative(fmt);
 			return ret != 0;
 		}
 
@@ -43,16 +43,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsCompressed")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsCompressed")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsCompressedNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsCompressedNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsCompressed")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsCompressed([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsCompressedNative(fmt);
+			byte ret = IsCompressedNative(fmt);
 			return ret != 0;
 		}
 
@@ -60,16 +60,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsPacked")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsPacked")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsPackedNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsPackedNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsPacked")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsPacked([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsPackedNative(fmt);
+			byte ret = IsPackedNative(fmt);
 			return ret != 0;
 		}
 
@@ -77,16 +77,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsVideo")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsVideo")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsVideoNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsVideoNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsVideo")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsVideo([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsVideoNative(fmt);
+			byte ret = IsVideoNative(fmt);
 			return ret != 0;
 		}
 
@@ -94,16 +94,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsPlanar")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsPlanar")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsPlanarNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsPlanarNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsPlanar")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsPlanar([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsPlanarNative(fmt);
+			byte ret = IsPlanarNative(fmt);
 			return ret != 0;
 		}
 
@@ -111,16 +111,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsPalettized")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsPalettized")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsPalettizedNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsPalettizedNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsPalettized")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsPalettized([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsPalettizedNative(fmt);
+			byte ret = IsPalettizedNative(fmt);
 			return ret != 0;
 		}
 
@@ -128,16 +128,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsDepthStencil")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsDepthStencil")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsDepthStencilNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsDepthStencilNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsDepthStencil")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsDepthStencil([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsDepthStencilNative(fmt);
+			byte ret = IsDepthStencilNative(fmt);
 			return ret != 0;
 		}
 
@@ -145,16 +145,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSRGB")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsSRGB")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsSRGBNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte IsSRGBNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSRGB")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsSRGB([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = IsSRGBNative(fmt);
+			byte ret = IsSRGBNative(fmt);
 			return ret != 0;
 		}
 
@@ -162,24 +162,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsTypeless")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsTypeless")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsTypelessNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "partialTypeless")] [NativeName(NativeNameType.Type, "BOOL")] int partialTypeless);
+		internal static partial byte IsTypelessNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "partialTypeless")] [NativeName(NativeNameType.Type, "bool")] byte partialTypeless);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsTypeless")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
-		public static bool IsTypeless([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "partialTypeless")] [NativeName(NativeNameType.Type, "BOOL")] bool partialTypeless)
+		[return: NativeName(NativeNameType.Type, "bool")]
+		public static bool IsTypeless([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "partialTypeless")] [NativeName(NativeNameType.Type, "bool")] bool partialTypeless)
 		{
-			int ret = IsTypelessNative(fmt, partialTypeless ? (int)1 : (int)0);
-			return ret != 0;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsTypeless")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
-		public static bool IsTypeless([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "partialTypeless")] [NativeName(NativeNameType.Type, "BOOL")] int partialTypeless)
-		{
-			int ret = IsTypelessNative(fmt, partialTypeless);
+			byte ret = IsTypelessNative(fmt, partialTypeless ? (byte)1 : (byte)0);
 			return ret != 0;
 		}
 
@@ -187,16 +179,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "HasAlpha")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "HasAlpha")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int HasAlphaNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
+		internal static partial byte HasAlphaNative([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "HasAlpha")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool HasAlpha([NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt)
 		{
-			int ret = HasAlphaNative(fmt);
+			byte ret = HasAlphaNative(fmt);
 			return ret != 0;
 		}
 
@@ -1411,16 +1403,16 @@ namespace Hexa.NET.DirectXTex
 		/// Returns size_t(-1) to indicate an out-of-range error<br/>
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsCubemap")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsCubemap")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsCubemapNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
+		internal static partial byte IsCubemapNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
 
 		/// <summary>/// Returns size_t(-1) to indicate an out-of-range error<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsCubemap")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsCubemap([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
-			int ret = IsCubemapNative(metadata);
+			byte ret = IsCubemapNative(metadata);
 			return ret != 0;
 		}
 
@@ -1428,16 +1420,16 @@ namespace Hexa.NET.DirectXTex
 		/// Helper for miscFlags<br/>
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsPMAlpha")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsPMAlpha")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsPMAlphaNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
+		internal static partial byte IsPMAlphaNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
 
 		/// <summary>/// Helper for miscFlags<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsPMAlpha")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsPMAlpha([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
-			int ret = IsPMAlphaNative(metadata);
+			byte ret = IsPMAlphaNative(metadata);
 			return ret != 0;
 		}
 
@@ -1488,16 +1480,16 @@ namespace Hexa.NET.DirectXTex
 		/// Helpers for miscFlags2<br/>
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsVolumemap")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsVolumemap")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsVolumemapNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
+		internal static partial byte IsVolumemapNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
 
 		/// <summary>/// Helpers for miscFlags2<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsVolumemap")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsVolumemap([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
 		{
-			int ret = IsVolumemapNative(metadata);
+			byte ret = IsVolumemapNative(metadata);
 			return ret != 0;
 		}
 
@@ -2026,21 +2018,13 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "InitializeFromImage")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int InitializeFromImageNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags);
+		internal static partial int InitializeFromImageNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] byte allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeFromImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeFromImage([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static int InitializeFromImage([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = InitializeFromImageNative(img, srcImage, allow1D ? (int)1 : (int)0, flags);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeFromImage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeFromImage([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = InitializeFromImageNative(img, srcImage, allow1D, flags);
+			int ret = InitializeFromImageNative(img, srcImage, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
 		}
 
@@ -2051,80 +2035,42 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "InitializeArrayFromImages")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int InitializeArrayFromImagesNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags);
+		internal static partial int InitializeArrayFromImagesNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] byte allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (int)1 : (int)0, flags);
+			int ret = InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
-				int ret = InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (int)1 : (int)0, flags);
+				int ret = InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (byte)1 : (byte)0, flags);
 				return ret;
 			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (int)1 : (int)0, flags);
+			int ret = InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
-				int ret = InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (int)1 : (int)0, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = InitializeArrayFromImagesNative(img, images, nImages, allow1D, flags);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = InitializeArrayFromImagesNative(img, images, nImages, allow1D, flags);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "BOOL")] int allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D, flags);
+				int ret = InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (byte)1 : (byte)0, flags);
 				return ret;
 			}
 		}
@@ -2243,16 +2189,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "OverrideFormat")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "OverrideFormat")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int OverrideFormatNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "f")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int f);
+		internal static partial byte OverrideFormatNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "f")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int f);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "OverrideFormat")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool OverrideFormat([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "f")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int f)
 		{
-			int ret = OverrideFormatNative(img, f);
+			byte ret = OverrideFormatNative(img, f);
 			return ret != 0;
 		}
 
@@ -2418,16 +2364,16 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsAlphaAllOpaque")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		[LibraryImport(LibName, EntryPoint = "IsAlphaAllOpaque")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int IsAlphaAllOpaqueNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img);
+		internal static partial byte IsAlphaAllOpaqueNative([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsAlphaAllOpaque")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public static bool IsAlphaAllOpaque([NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img)
 		{
-			int ret = IsAlphaAllOpaqueNative(img);
+			byte ret = IsAlphaAllOpaqueNative(img);
 			return ret != 0;
 		}
 
@@ -4142,6 +4088,60 @@ namespace Hexa.NET.DirectXTex
 					Utils.Free(pStr0);
 				}
 				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+					return ret;
+				}
 			}
 		}
 	}

@@ -8,7 +8,7 @@
   "GenerateSizeOfStructs": false,
   "GenerateDelegates": true,
   "GenerateMetadata": true,
-  "BoolType": 1,
+  "BoolType": 0,
   "KnownConstantNames": {},
   "KnownEnumValueNames": { "Blob": "BlobRelease" },
   "KnownEnumPrefixes": {},
@@ -41,8 +41,7 @@
     "signed char": "sbyte",
     "char": "byte",
     "size_t": "nuint",
-    "BOOL": "Bool32",
-    "bool": "bool",
+
     "DXGI_FORMAT": "int",
     "D3D11_USAGE": "Usage",
     "D3D12_RESOURCE_FLAGS": "ResourceFlags",

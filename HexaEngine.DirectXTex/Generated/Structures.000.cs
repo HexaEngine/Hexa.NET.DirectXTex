@@ -169,18 +169,18 @@ namespace Hexa.NET.DirectXTex
 		}
 
 		/// <summary>/// Returns size_t(-1) to indicate an out-of-range error<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsCubemap")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public unsafe bool IsCubemap()
 		{
-			int ret = DirectXTex.IsCubemapNative(this);
+			byte ret = DirectXTex.IsCubemapNative(this);
 			return ret != 0;
 		}
 
 		/// <summary>/// Helper for miscFlags<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsPMAlpha")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public unsafe bool IsPMAlpha()
 		{
-			int ret = DirectXTex.IsPMAlphaNative(this);
+			byte ret = DirectXTex.IsPMAlphaNative(this);
 			return ret != 0;
 		}
 
@@ -203,10 +203,10 @@ namespace Hexa.NET.DirectXTex
 		}
 
 		/// <summary>/// Helpers for miscFlags2<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsVolumemap")]
-		[return: NativeName(NativeNameType.Type, "BOOL")]
+		[return: NativeName(NativeNameType.Type, "bool")]
 		public unsafe bool IsVolumemap()
 		{
-			int ret = DirectXTex.IsVolumemapNative(this);
+			byte ret = DirectXTex.IsVolumemapNative(this);
 			return ret != 0;
 		}
 

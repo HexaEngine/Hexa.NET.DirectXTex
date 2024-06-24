@@ -16,7 +16,7 @@
             generatorSettings.SystemIncludeFolders.Add("C:\\Dev\\vcpkg\\packages\\directxmath_x64-windows\\include\\directxmath");
 
             CsCodeGenerator generator = new(generatorSettings);
-            generator.Generate(headerFile, "../../../../HexaEngine.DirectXTex/Generated");
+            generator.Generate(headerFile, "../../../../Hexa.NET.DirectXTex/Generated");
 
             return 0;
         }

@@ -12,11 +12,11 @@
 		<EnableAotAnalyzer>true</EnableAotAnalyzer>
 		<IsAotCompatible>true</IsAotCompatible>
 		
-		<AssemblyVersion>1.9.8</AssemblyVersion>
+		<AssemblyVersion>2.0.4</AssemblyVersion>
 		<PackageId>Hexa.NET.DirectXTex</PackageId>
-		<PackageVersion>2.0.0</PackageVersion>
+		<PackageVersion>1.0.0</PackageVersion>
 		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
-		<Description>A .NET wrapper for the DirectXTex library.</Description>
+		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
 		<Authors>Juna Meinhold</Authors>
 		<Copyright>Copyright (c) 2023 Juna Meinhold</Copyright>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
@@ -28,6 +28,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="HexaGen.Runtime" Version="1.0.0" />
 		<PackageReference Include="HexaGen.Runtime.COM" Version="1.0.0" />
 		<PackageReference Include="Silk.NET.Direct2D" Version="2.17.1" />
 		<PackageReference Include="Silk.NET.Direct3D11" Version="2.17.1" />
@@ -57,9 +58,5 @@
 
 	<ItemGroup>
 	  <Folder Include="Generated\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\HexaGen.Runtime\HexaGen.Runtime.csproj" />
 	</ItemGroup>
 </Project>

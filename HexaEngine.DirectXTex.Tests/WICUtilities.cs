@@ -1,11 +1,11 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class WICUtilities
     {
         [Test]
         public void GetWICCodec()
         {
-            var ptr = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);
+            var ptr = DirectXTex.GetWICCodec(WICCodecs.CodecPng);
             if (ptr == null)
             {
                 Assert.Fail("Ptr is null");

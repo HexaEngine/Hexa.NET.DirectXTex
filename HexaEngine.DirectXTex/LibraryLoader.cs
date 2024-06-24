@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex
+﻿namespace Hexa.NET.DirectXTex
 {
     using System;
     using System.Reflection;
@@ -29,7 +29,7 @@
 
         public static string Extension { get; }
 
-        private static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+        private static nint DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -49,7 +49,7 @@
             }
         }
 
-        public static IntPtr LoadLocalLibrary(string libraryName)
+        public static nint LoadLocalLibrary(string libraryName)
         {
             if (!libraryName.EndsWith(Extension, StringComparison.OrdinalIgnoreCase))
             {
@@ -94,7 +94,7 @@
 
             static string GetNativeAssemblyPath(string osPlatform, string architecture, string libraryName)
             {
-                var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var assemblyLocation = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
 
                 if (assemblyLocation == null)
                 {
@@ -119,11 +119,11 @@
                 return libraryName;
             }
 
-            IntPtr handle;
+            nint handle;
 
             handle = NativeLibrary.Load(libraryPath);
 
-            if (handle == IntPtr.Zero)
+            if (handle == nint.Zero)
             {
                 throw new DllNotFoundException($"Unable to load library '{libraryName}'.");
             }

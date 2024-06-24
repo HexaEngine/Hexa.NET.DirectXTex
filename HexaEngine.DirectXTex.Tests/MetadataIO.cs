@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class MetadataIO
     {

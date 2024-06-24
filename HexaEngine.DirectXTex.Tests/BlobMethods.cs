@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class BlobMethods
     {
@@ -14,7 +14,8 @@
         {
             Blob blob = DirectXTex.CreateBlob();
             blob.Initialize(256);
-            Assert.That(blob.GetBufferSize(), Is.EqualTo((nuint)256));
+            Assert.That(blob.GetBufferSize(), Is.EqualTo((ulong)256));
+
             blob.Release();
         }
 

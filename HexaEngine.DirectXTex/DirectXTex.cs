@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex
+﻿namespace Hexa.NET.DirectXTex
 {
     public static unsafe partial class DirectXTex
     {

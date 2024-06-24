@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+		<EnableAotAnalyzer>true</EnableAotAnalyzer>
+		<IsAotCompatible>true</IsAotCompatible>
+		
+		<AssemblyVersion>1.9.8</AssemblyVersion>
+		<PackageVersion>2.0.0</PackageVersion>
+		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
+		<Description>A .NET wrapper for the DirectXTex library.</Description>
+		<Authors>Juna Meinhold</Authors>
+		<Copyright>Copyright (c) 2023 Juna Meinhold</Copyright>
+		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="HexaGen.Runtime.COM" Version="1.0.0" />
+		<PackageReference Include="Silk.NET.Direct2D" Version="2.17.1" />
+		<PackageReference Include="Silk.NET.Direct3D11" Version="2.17.1" />
+		<PackageReference Include="Silk.NET.Direct3D12" Version="2.17.1" />
+		<PackageReference Include="Silk.NET.DXGI" Version="2.17.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\native\linux-x64\libDirectXTex.so">
+			<Link>runtimes\linux-x64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/linux-x64/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+		<None Include="..\native\win-x64\DirectXTex.dll">
+			<Link>runtimes\win-x64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x64/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md" Pack="true" PackagePath="\" />
+		<None Update="LICENSE.txt" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Generated\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\HexaGen.Runtime\HexaGen.Runtime.csproj" />
+	</ItemGroup>
+</Project>

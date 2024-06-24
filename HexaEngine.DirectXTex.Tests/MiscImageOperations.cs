@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     using System.Numerics;
 
@@ -75,7 +75,7 @@
 
         private static Vector4 maxLum = Vector4.Zero;
 
-        private static void EvaluateImageFunc(Vector4* pixels, nuint width, nuint y)
+        private static void EvaluateImageFunc(Vector4* pixels, ulong width, ulong y)
         {
             for (nuint j = 0; j < width; ++j)
             {
@@ -107,26 +107,26 @@
             ScratchImage srcImage = DirectXTex.CreateScratchImage();
             srcImage.Initialize(metadataSrc, CPFlags.None);
 
-            EvaluateImageFunc evaluateImageFunc = new((nint)(delegate*<Vector4*, nuint, nuint, void>)&EvaluateImageFunc);
+            EvaluateImageFunc evaluateImageFunc = EvaluateImageFunc;
             DirectXTex.EvaluateImage(srcImage.GetImage(0, 0, 0), evaluateImageFunc);
         }
 
         public static bool NearEqual(Vector4 V1, Vector4 V2, Vector4 Epsilon)
         {
-            return ((Math.Abs(V1.X - V2.X) <= Epsilon.X) &&
-                     (Math.Abs(V1.Y - V2.Y) <= Epsilon.Y) &&
-                     (Math.Abs(V1.Z - V2.Z) <= Epsilon.Z));
+            return Math.Abs(V1.X - V2.X) <= Epsilon.X &&
+                     Math.Abs(V1.Y - V2.Y) <= Epsilon.Y &&
+                     Math.Abs(V1.Z - V2.Z) <= Epsilon.Z;
         }
 
         [Test]
         public void TransformImage()
         {
-            static void func(Vector4* outPixels, Vector4* inPixels, nuint width, nuint y)
+            static void func(Vector4* outPixels, Vector4* inPixels, ulong width, ulong y)
             {
                 Vector4 s_chromaKey = new(0.0f, 1.0f, 0.0f, 0.0f);
                 Vector4 s_tolerance = new(0.2f, 0.2f, 0.2f, 0.0f);
 
-                for (nuint j = 0; j < width; ++j)
+                for (ulong j = 0; j < width; ++j)
                 {
                     Vector4 value = inPixels[j];
 
@@ -156,7 +156,7 @@
 
             ScratchImage dstImage = DirectXTex.CreateScratchImage();
             dstImage.Initialize(metadataSrc, CPFlags.None);
-            TransformImageFunc transformImageFunc = new((nint)(delegate*<Vector4*, Vector4*, nuint, nuint, void>)&func);
+            TransformImageFunc transformImageFunc = func;
             DirectXTex.TransformImage(srcImage.GetImage(0, 0, 0), transformImageFunc, dstImage);
         }
     }

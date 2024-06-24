@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class DDSHelperFunctions
     {
@@ -19,7 +19,7 @@
             };
 
             byte[] data = new byte[8192];
-            nuint required;
+            ulong required;
             fixed (byte* ptr = data)
             {
                 DirectXTex.EncodeDDSHeader(metadata, DDSFlags.None, ptr, 8192, &required);

@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class ImageIO : IDisposable
     {
@@ -134,7 +134,7 @@
             {
                 DirectXTex.LoadFromWICMemory(srcPtr, (nuint)src.Length, WICFlags.None, &metadata, image, default);
             }
-            Guid guid = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);
+            Guid guid = DirectXTex.GetWICCodec(WICCodecs.CodecPng);
             DirectXTex.SaveToWICMemory2(image.GetImages(), image.GetImageCount(), WICFlags.None, guid, blob, null, default);
 
             Span<byte> dest = blob.AsBytes();
@@ -152,7 +152,7 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
 
             TexMetadata metadata;
-            Guid guid = DirectXTex.GetWICCodec(WICCodecs.WicCodecPng);
+            Guid guid = DirectXTex.GetWICCodec(WICCodecs.CodecPng);
             DirectXTex.LoadFromWICFile(WICFilename, WICFlags.None, &metadata, image, default);
             DirectXTex.SaveToWICFile2(image.GetImages(), image.GetImageCount(), 0, guid, path, null, default);
 

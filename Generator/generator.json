@@ -1,16 +1,26 @@
 {
-  "Namespace": "HexaEngine.DirectXTex",
+  "Namespace": "Hexa.NET.DirectXTex",
   "ApiName": "DirectXTex",
   "LibName": "DirectXTex",
+  "Usings": [ "Silk.NET.Direct2D", "Silk.NET.Direct3D11", "Silk.NET.Direct3D12", "System.Numerics" ],
+  "EnableExperimentalOptions": true,
+  "GenerateConstructorsForStructs": true,
   "GenerateSizeOfStructs": false,
+  "GenerateDelegates": true,
+  "GenerateMetadata": true,
+  "BoolType": 1,
   "KnownConstantNames": {},
-  "KnownEnumValueNames": { "": "" },
+  "KnownEnumValueNames": { "Blob": "BlobRelease" },
   "KnownEnumPrefixes": {},
-  "KnownStructMethods": { "TexMetadata": [ "ComputeIndex", "IsCubemap", "IsPMAlpha", "SetAlphaMode", "GetAlphaMode", "IsVolumemap" ] },
+  "KnownExtensionNames": {
+  },
+  "KnownMemberFunctions": { "TexMetadata": [ "ComputeIndex", "IsCubemap", "IsPMAlpha", "SetAlphaMode", "GetAlphaMode", "IsVolumemap" ] },
   "IgnoredParts": [ "bit" ],
   "PreserveCaps": [ "" ],
   "Keywords": [ "object", "event" ],
-  "NameMappings": {
+  "TypeMappings": {
+    "const wchar*": "string",
+    "wchar*": "string",
     "uint8_t": "byte",
     "uint16_t": "ushort",
     "uint32_t": "uint",
@@ -31,10 +41,9 @@
     "signed char": "sbyte",
     "char": "byte",
     "size_t": "nuint",
-    "BOOL": "bool",
+    "BOOL": "Bool32",
     "bool": "bool",
     "DXGI_FORMAT": "int",
-    "HRESULT": "int",
     "D3D11_USAGE": "Usage",
     "D3D12_RESOURCE_FLAGS": "ResourceFlags",
     "D3D12_RESOURCE_STATES": "ResourceStates",
@@ -54,6 +63,9 @@
     "CMSE_FLAGS": "CMSEFlags",
     "WICCodecs": "WICCodecs",
     "CREATETEX_FLAGS": "CreateTexFlags",
-    "FORMAT_TYPE": "FormatType"
+    "FORMAT_TYPE": "FormatType",
+    "IPropertyBag2": "void",
+    "IWICMetadataQueryReader": "void",
+    "XMVECTOR": "Vector4"
   }
 }

@@ -1,15 +1,15 @@
 #pragma once
 #pragma comment(lib, "d3d12.lib")
 
-#include <stdint.h>
-#include <DirectXMath.h>
-
 #ifdef _WIN32
 #include <d3d12.h>
 #include <d3d11_1.h>
 #include <dxgiformat.h>
 #include <wincodec.h>
 #endif
+
+#include <stdint.h>
+#include <DirectXMath.h>
 
 #if defined(_MSC_VER)
 //  Microsoft

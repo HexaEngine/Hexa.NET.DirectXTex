@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     using Silk.NET.DXGI;
 
@@ -9,7 +9,7 @@
         {
             if (!DirectXTex.IsValid((int)Format.FormatR16G16B16A16Uint))
                 Trace.Fail("Should be valid");
-            if (DirectXTex.IsValid((int)(Silk.NET.DXGI.Format)(-1561658)))
+            if (DirectXTex.IsValid((int)(Format)(-1561658)))
                 Trace.Fail("Should be invalid");
         }
 
@@ -133,14 +133,14 @@
         {
             uint width = 64;
             uint height = 64;
-            nuint rowPitch = 0;
-            nuint slicePitch = 0;
+            ulong rowPitch = 0;
+            ulong slicePitch = 0;
             HResult result = DirectXTex.ComputePitch((int)Format.FormatR8G8B8A8Uint, width, height, &rowPitch, &slicePitch, CPFlags.None);
             if (!result.IsSuccess)
                 result.Throw();
 
-            nuint rowPitch2 = width * 4;
-            nuint slicePitch2 = rowPitch2 * height;
+            ulong rowPitch2 = width * 4;
+            ulong slicePitch2 = rowPitch2 * height;
 
             Assert.That(rowPitch, Is.EqualTo(rowPitch2));
             Assert.That(slicePitch, Is.EqualTo(slicePitch2));
@@ -151,7 +151,7 @@
         {
             uint height = 64;
             var result = DirectXTex.ComputeScanlines((int)Format.FormatR8G8B8A8Uint, height);
-            nuint expected = 64;
+            ulong expected = 64;
             Assert.That(expected, Is.EqualTo(result));
         }
 

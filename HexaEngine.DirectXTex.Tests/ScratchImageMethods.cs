@@ -1,4 +1,4 @@
-namespace HexaEngine.DirectXTex.Tests
+namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class ScratchImageMethods
     {
@@ -28,7 +28,7 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize(metadata, CPFlags.None);
 
-            Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
+            Assert.That(image.GetMetadata(), Is.EqualTo(metadata));
 
             image.Release();
         }
@@ -52,7 +52,7 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize1D((int)Format.FormatR8G8B8A8Unorm, 64, 1, 4, CPFlags.None);
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -77,7 +77,7 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize2D((int)Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -102,7 +102,7 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize3D((int)Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -127,7 +127,7 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.InitializeCube((int)Format.FormatR8G8B8A8Unorm, 64, 32, 1, 2, CPFlags.None);
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -161,7 +161,7 @@ namespace HexaEngine.DirectXTex.Tests
             }
 
             metadata.Format = (int)Format.FormatB8G8R8A8Unorm;
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -186,7 +186,7 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize(metadata, CPFlags.None);
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -218,7 +218,7 @@ namespace HexaEngine.DirectXTex.Tests
                 img.Format != metadata.Format)
                 Trace.Fail("img doesn't match");
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -243,9 +243,9 @@ namespace HexaEngine.DirectXTex.Tests
 
             image.Initialize(metadata, CPFlags.None);
 
-            var imgs = DirectXTex.GetImages(image);
+            var imgs = image.GetImages();
 
-            for (int i = 0; i < (int)DirectXTex.GetImageCount(image); i++)
+            for (int i = 0; i < (int)image.GetImageCount(); i++)
             {
                 var img = imgs[i];
                 if (img.Width != metadata.Width &&
@@ -254,7 +254,7 @@ namespace HexaEngine.DirectXTex.Tests
                     Trace.Fail("img doesn't match");
             }
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -284,7 +284,7 @@ namespace HexaEngine.DirectXTex.Tests
             Span<byte> data = new(pixels, (int)count);
             data.Fill(1);
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();
@@ -313,7 +313,7 @@ namespace HexaEngine.DirectXTex.Tests
             if (!image.IsAlphaAllOpaque())
                 throw new();
 
-            var meta = DirectXTex.GetMetadata(image);
+            var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
             image.Release();

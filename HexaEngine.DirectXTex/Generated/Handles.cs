@@ -9,89 +9,19 @@
 
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using HexaGen.Runtime;
+using Silk.NET.Direct2D;
+using Silk.NET.Direct3D11;
+using Silk.NET.Direct3D12;
+using System.Numerics;
 
-namespace HexaEngine.DirectXTex
+namespace Hexa.NET.DirectXTex
 {
-	[DebuggerDisplay("{DebuggerDisplay,nq}")]
-	public readonly partial struct SetCustomProps : IEquatable<SetCustomProps>
-	{
-		public SetCustomProps(nint handle) { Handle = handle; }
-		public nint Handle { get; }
-		public bool IsNull => Handle == 0;
-		public static SetCustomProps Null => new SetCustomProps(0);
-		public static implicit operator SetCustomProps(nint handle) => new SetCustomProps(handle);
-		public static bool operator ==(SetCustomProps left, SetCustomProps right) => left.Handle == right.Handle;
-		public static bool operator !=(SetCustomProps left, SetCustomProps right) => left.Handle != right.Handle;
-		public static bool operator ==(SetCustomProps left, nint right) => left.Handle == right;
-		public static bool operator !=(SetCustomProps left, nint right) => left.Handle != right;
-		public bool Equals(SetCustomProps other) => Handle == other.Handle;
-		/// <inheritdoc/>
-		public override bool Equals(object obj) => obj is SetCustomProps handle && Equals(handle);
-		/// <inheritdoc/>
-		public override int GetHashCode() => Handle.GetHashCode();
-		private string DebuggerDisplay => string.Format("SetCustomProps [0x{0}]", Handle.ToString("X"));
-	}
-
-	[DebuggerDisplay("{DebuggerDisplay,nq}")]
-	public readonly partial struct GetMQR : IEquatable<GetMQR>
-	{
-		public GetMQR(nint handle) { Handle = handle; }
-		public nint Handle { get; }
-		public bool IsNull => Handle == 0;
-		public static GetMQR Null => new GetMQR(0);
-		public static implicit operator GetMQR(nint handle) => new GetMQR(handle);
-		public static bool operator ==(GetMQR left, GetMQR right) => left.Handle == right.Handle;
-		public static bool operator !=(GetMQR left, GetMQR right) => left.Handle != right.Handle;
-		public static bool operator ==(GetMQR left, nint right) => left.Handle == right;
-		public static bool operator !=(GetMQR left, nint right) => left.Handle != right;
-		public bool Equals(GetMQR other) => Handle == other.Handle;
-		/// <inheritdoc/>
-		public override bool Equals(object obj) => obj is GetMQR handle && Equals(handle);
-		/// <inheritdoc/>
-		public override int GetHashCode() => Handle.GetHashCode();
-		private string DebuggerDisplay => string.Format("GetMQR [0x{0}]", Handle.ToString("X"));
-	}
-
-	[DebuggerDisplay("{DebuggerDisplay,nq}")]
-	public readonly partial struct EvaluateImageFunc : IEquatable<EvaluateImageFunc>
-	{
-		public EvaluateImageFunc(nint handle) { Handle = handle; }
-		public nint Handle { get; }
-		public bool IsNull => Handle == 0;
-		public static EvaluateImageFunc Null => new EvaluateImageFunc(0);
-		public static implicit operator EvaluateImageFunc(nint handle) => new EvaluateImageFunc(handle);
-		public static bool operator ==(EvaluateImageFunc left, EvaluateImageFunc right) => left.Handle == right.Handle;
-		public static bool operator !=(EvaluateImageFunc left, EvaluateImageFunc right) => left.Handle != right.Handle;
-		public static bool operator ==(EvaluateImageFunc left, nint right) => left.Handle == right;
-		public static bool operator !=(EvaluateImageFunc left, nint right) => left.Handle != right;
-		public bool Equals(EvaluateImageFunc other) => Handle == other.Handle;
-		/// <inheritdoc/>
-		public override bool Equals(object obj) => obj is EvaluateImageFunc handle && Equals(handle);
-		/// <inheritdoc/>
-		public override int GetHashCode() => Handle.GetHashCode();
-		private string DebuggerDisplay => string.Format("EvaluateImageFunc [0x{0}]", Handle.ToString("X"));
-	}
-
-	[DebuggerDisplay("{DebuggerDisplay,nq}")]
-	public readonly partial struct TransformImageFunc : IEquatable<TransformImageFunc>
-	{
-		public TransformImageFunc(nint handle) { Handle = handle; }
-		public nint Handle { get; }
-		public bool IsNull => Handle == 0;
-		public static TransformImageFunc Null => new TransformImageFunc(0);
-		public static implicit operator TransformImageFunc(nint handle) => new TransformImageFunc(handle);
-		public static bool operator ==(TransformImageFunc left, TransformImageFunc right) => left.Handle == right.Handle;
-		public static bool operator !=(TransformImageFunc left, TransformImageFunc right) => left.Handle != right.Handle;
-		public static bool operator ==(TransformImageFunc left, nint right) => left.Handle == right;
-		public static bool operator !=(TransformImageFunc left, nint right) => left.Handle != right;
-		public bool Equals(TransformImageFunc other) => Handle == other.Handle;
-		/// <inheritdoc/>
-		public override bool Equals(object obj) => obj is TransformImageFunc handle && Equals(handle);
-		/// <inheritdoc/>
-		public override int GetHashCode() => Handle.GetHashCode();
-		private string DebuggerDisplay => string.Format("TransformImageFunc [0x{0}]", Handle.ToString("X"));
-	}
-
+	/// <summary>
+	/// To be documented.
+	/// </summary>
+	[NativeName(NativeNameType.Typedef, "ScratchImage")]
 	[DebuggerDisplay("{DebuggerDisplay,nq}")]
 	public readonly partial struct ScratchImage : IEquatable<ScratchImage>
 	{
@@ -112,6 +42,10 @@ namespace HexaEngine.DirectXTex
 		private string DebuggerDisplay => string.Format("ScratchImage [0x{0}]", Handle.ToString("X"));
 	}
 
+	/// <summary>
+	/// To be documented.
+	/// </summary>
+	[NativeName(NativeNameType.Typedef, "Blob")]
 	[DebuggerDisplay("{DebuggerDisplay,nq}")]
 	public readonly partial struct Blob : IEquatable<Blob>
 	{

@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     using Silk.NET.Direct3D11;
     using Silk.NET.DXGI;
@@ -6,6 +6,7 @@
     using System.Diagnostics;
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
+    using static System.Net.Mime.MediaTypeNames;
 
     public unsafe class Direct3D11Functions : IDisposable
     {
@@ -49,7 +50,7 @@
             D3DFeatureLevel level = 0;
             D3DFeatureLevel* levels = (D3DFeatureLevel*)Unsafe.AsPointer(ref levelsArr[0]);
 
-            D3D11.CreateDevice((IDXGIAdapter*)IDXGIAdapter.Handle, D3DDriverType.Unknown, IntPtr.Zero, (uint)flags, levels, (uint)levelsArr.Length, D3D11.SdkVersion, &tempDevice, &level, &tempContext).ThrowHResult();
+            D3D11.CreateDevice((IDXGIAdapter*)IDXGIAdapter.Handle, D3DDriverType.Unknown, nint.Zero, (uint)flags, levels, (uint)levelsArr.Length, D3D11.SdkVersion, &tempDevice, &level, &tempContext).ThrowHResult();
 
             tempDevice->QueryInterface(out Device);
             tempContext->QueryInterface(out DeviceContext);
@@ -149,10 +150,11 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
+
             ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTexture(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, &resource);
+            DirectXTex.CreateTexture(Device, image.GetImages(), image.GetImageCount(), metadata, &resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -176,7 +178,7 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceView(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, &srv);
+            DirectXTex.CreateShaderResourceView(Device, image.GetImages(), image.GetImageCount(), metadata, &srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -200,7 +202,7 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTextureEx(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
+            DirectXTex.CreateTextureEx(Device, image.GetImages(), image.GetImageCount(), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -224,7 +226,7 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceViewEx(Device, DirectXTex.GetImages(image), DirectXTex.GetImageCount(image), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
+            DirectXTex.CreateShaderResourceViewEx(Device, image.GetImages(), image.GetImageCount(), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -244,12 +246,12 @@
 
             TexMetadata metadata = DirectXTex.GetMetadata(image);
 
-            Assert.That(metadata.Height, Is.EqualTo((nuint)desc.Height));
-            Assert.That(metadata.Width, Is.EqualTo((nuint)desc.Width));
-            Assert.That(metadata.ArraySize, Is.EqualTo((nuint)desc.ArraySize));
+            Assert.That(metadata.Height, Is.EqualTo((ulong)desc.Height));
+            Assert.That(metadata.Width, Is.EqualTo((ulong)desc.Width));
+            Assert.That(metadata.ArraySize, Is.EqualTo((ulong)desc.ArraySize));
             Assert.That((Format)metadata.Format, Is.EqualTo(desc.Format));
-            Assert.That((int)metadata.MiscFlags, Is.EqualTo((int)desc.MiscFlags));
-            Assert.That(metadata.MipLevels, Is.EqualTo((nuint)desc.MipLevels));
+            Assert.That(metadata.MiscFlags, Is.EqualTo(desc.MiscFlags));
+            Assert.That(metadata.MipLevels, Is.EqualTo((ulong)desc.MipLevels));
 
             image.Release();
         }

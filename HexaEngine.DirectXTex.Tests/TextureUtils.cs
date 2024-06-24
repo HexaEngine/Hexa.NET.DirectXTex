@@ -1,4 +1,4 @@
-﻿namespace HexaEngine.DirectXTex.Tests
+﻿namespace Hexa.NET.DirectXTex.Tests
 {
     public unsafe class TextureUtils
     {
@@ -193,7 +193,7 @@
             DirectXTex.Initialize(image, metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), TexFilterFlags.Default, (nuint)4, image1);
+            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), TexFilterFlags.Default, 4, image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = DirectXTex.GetMetadata(image1);

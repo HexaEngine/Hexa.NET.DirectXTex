@@ -6,31 +6,23 @@
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
 		<EnableAotAnalyzer>true</EnableAotAnalyzer>
-		<IsAotCompatible>true</IsAotCompatible>		
-		<AssemblyVersion>2.0.4</AssemblyVersion>
+		<IsAotCompatible>true</IsAotCompatible>			
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<PackageId>Hexa.NET.DirectXTex</PackageId>
-		<PackageVersion>1.0.0.0</PackageVersion>
+		<AssemblyVersion>2.0.4</AssemblyVersion>
+		<PackageVersion>1.0.1</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
 		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
-		<NoPackageAnalysis>true</NoPackageAnalysis>
-		<GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-		<GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-		<GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-		<DevelopmentDependency>true</DevelopmentDependency>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

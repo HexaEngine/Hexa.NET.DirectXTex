@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<Configurations>Debug;Release;Standalone</Configurations>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CppAst" Version="0.15.0" />

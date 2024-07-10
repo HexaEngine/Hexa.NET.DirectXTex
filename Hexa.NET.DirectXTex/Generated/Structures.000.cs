@@ -12,10 +12,13 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using HexaGen.Runtime;
+using System.Numerics;
+
+#if !STANDALONE
 using Silk.NET.Direct2D;
 using Silk.NET.Direct3D11;
 using Silk.NET.Direct3D12;
-using System.Numerics;
+#endif
 
 namespace Hexa.NET.DirectXTex
 {
@@ -80,7 +83,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "format")]
 		[NativeName(NativeNameType.Type, "DXGI_FORMAT")]
-		public int Format;
+		public uint Format;
 
 		/// <summary>
 		/// To be documented.
@@ -90,7 +93,7 @@ namespace Hexa.NET.DirectXTex
 		public TexDimension Dimension;
 
 
-		/// <summary>/// To be documented./// </summary>		public unsafe TexMetadata(ulong width = default, ulong height = default, ulong depth = default, ulong arraySize = default, ulong mipLevels = default, uint miscFlags = default, uint miscFlags2 = default, int format = default, TexDimension dimension = default)
+		/// <summary>/// To be documented./// </summary>		public unsafe TexMetadata(ulong width = default, ulong height = default, ulong depth = default, ulong arraySize = default, ulong mipLevels = default, uint miscFlags = default, uint miscFlags2 = default, uint format = default, TexDimension dimension = default)
 		{
 			Width = width;
 			Height = height;
@@ -238,7 +241,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "format")]
 		[NativeName(NativeNameType.Type, "DXGI_FORMAT")]
-		public int Format;
+		public uint Format;
 
 		/// <summary>
 		/// To be documented.
@@ -262,7 +265,7 @@ namespace Hexa.NET.DirectXTex
 		public unsafe byte* Pixels;
 
 
-		/// <summary>/// To be documented./// </summary>		public unsafe Image(ulong width = default, ulong height = default, int format = default, ulong rowPitch = default, ulong slicePitch = default, byte* pixels = default)
+		/// <summary>/// To be documented./// </summary>		public unsafe Image(ulong width = default, ulong height = default, uint format = default, ulong rowPitch = default, ulong slicePitch = default, byte* pixels = default)
 		{
 			Width = width;
 			Height = height;

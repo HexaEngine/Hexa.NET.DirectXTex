@@ -9,13 +9,33 @@
 		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
 		<EnableAotAnalyzer>true</EnableAotAnalyzer>
-		<IsAotCompatible>true</IsAotCompatible>			
+		<IsAotCompatible>true</IsAotCompatible>
+		<Configurations>Debug;Release;Standalone</Configurations>		
 	</PropertyGroup>
 
-	<PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
+		<DefineConstants>$(DefineConstants);STANDALONE</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' != 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex</PackageId>
 		<AssemblyVersion>2.0.4</AssemblyVersion>
 		<PackageVersion>1.0.1</PackageVersion>
+		<Authors>Juna</Authors>
+		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
+		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
+		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
+		<PackageId>Hexa.NET.DirectXTex.Standalone</PackageId>
+		<AssemblyVersion>2.0.4</AssemblyVersion>
+		<PackageVersion>1.0.0</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
@@ -35,6 +55,9 @@
 	<ItemGroup>
 		<PackageReference Include="HexaGen.Runtime" Version="1.0.0" />
 		<PackageReference Include="HexaGen.Runtime.COM" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' != 'Standalone'">
 		<PackageReference Include="Silk.NET.Direct2D" Version="2.17.1" />
 		<PackageReference Include="Silk.NET.Direct3D11" Version="2.17.1" />
 		<PackageReference Include="Silk.NET.Direct3D12" Version="2.17.1" />

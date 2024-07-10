@@ -9,10 +9,13 @@
 
 using System;
 using HexaGen.Runtime;
+using System.Numerics;
+
+#if !STANDALONE
 using Silk.NET.Direct2D;
 using Silk.NET.Direct3D11;
 using Silk.NET.Direct3D12;
-using System.Numerics;
+#endif
 
 namespace Hexa.NET.DirectXTex
 {

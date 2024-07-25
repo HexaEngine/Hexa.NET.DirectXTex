@@ -89,4 +89,5 @@ jobs:
           DirectXTex/DirectXTex/build/Release/*.dll
           DirectXTex/DirectXTex/build/*.so
           DirectXTex/DirectXTex/build/*.dylib
+          bin/CMake/libDirectXTex.dylib
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

@@ -10,7 +10,8 @@
 		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
 		<EnableAotAnalyzer>true</EnableAotAnalyzer>
 		<IsAotCompatible>true</IsAotCompatible>
-		<Configurations>Debug;Release;Standalone</Configurations>		
+		<Configurations>Debug;Release;Standalone</Configurations>
+		<LangVersion>12</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
@@ -20,14 +21,14 @@
 	<PropertyGroup Condition="'$(Configuration)' != 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex</PackageId>
 		<AssemblyVersion>2.0.4</AssemblyVersion>
-		<PackageVersion>1.0.1</PackageVersion>
+		<PackageVersion>1.0.2</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
-		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
+		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Bindings Wrapper Native</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -35,14 +36,14 @@
 	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex.Standalone</PackageId>
 		<AssemblyVersion>2.0.4</AssemblyVersion>
-		<PackageVersion>1.0.0</PackageVersion>
+		<PackageVersion>1.0.1</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
-		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Android Bindings Wrapper Native</PackageTags>
+		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Bindings Wrapper Native</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -75,6 +76,30 @@
 			<Link>runtimes\win-x64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<PackagePath>runtimes/win-x64/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+		<None Include="..\native\win-x86\DirectXTex.dll">
+			<Link>runtimes\win-x86\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x86/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+		<None Include="..\native\win-arm64\DirectXTex.dll">
+			<Link>runtimes\win-arm64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-arm64/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+		<None Include="..\native\osx-x64\libDirectXTex.dylib">
+			<Link>runtimes\osx-x64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/osx-x64/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+		<None Include="..\native\osx-arm64\libDirectXTex.dylib">
+			<Link>runtimes\osx-arm64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/osx-arm64/native</PackagePath>
 			<Pack>true</Pack>
 		</None>
 	</ItemGroup>

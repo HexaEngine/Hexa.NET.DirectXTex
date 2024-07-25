@@ -8,16 +8,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
-            arch: x86_64
-          - os: ubuntu-latest
-            arch: arm64
-          - os: windows-latest
-            arch: x86_64
-          - os: windows-latest
-            arch: x86
-          - os: windows-latest
-            arch: arm64
+#          - os: ubuntu-latest
+#            arch: x86_64
+#          - os: ubuntu-latest
+#            arch: arm64
+#          - os: windows-latest
+#            arch: x86_64
+#          - os: windows-latest
+#            arch: x86
+#          - os: windows-latest
+#            arch: arm64
           - os: macos-latest
             arch: x86_64
           - os: macos-latest
@@ -60,14 +60,14 @@ jobs:
 
     - name: Configure DirectXTex with CMake for macOS ARM64
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
-      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake
       if: matrix.arch != 'arm64' || matrix.os != 'macos-latest'
-      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build DirectXTex
-      run: cmake --build DirectXTex/DirectXTex/build --config Release -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake --build DirectXTex/DirectXTex/build --config Release -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4.3.4

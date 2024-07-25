@@ -51,16 +51,16 @@ jobs:
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.sh
 
-    - name: Install OpenMP and DirectX 12 headers
+    - name: Install DirectX 12 headers and DirectXMath
       run: |
-        ./vcpkg/vcpkg install directx-headers
-        ./vcpkg/vcpkg install directxmath
+        ./vcpkg/vcpkg install directx-headers --allow-unsupported
+        ./vcpkg/vcpkg install directxmath --allow-unsupported
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
 
     - name: Configure DirectXTex with CMake for macOS ARM64
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
-      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake
       if: matrix.arch != 'arm64' || matrix.os != 'macos-latest'

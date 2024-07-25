@@ -1,0 +1,93 @@
+name: Build DirectXTex Libraries
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+#          - os: ubuntu-latest
+#            arch: x86_64
+#          - os: ubuntu-latest
+#            arch: arm64
+#          - os: windows-latest
+#            arch: x86_64
+#          - os: windows-latest
+#            arch: x86
+#          - os: windows-latest
+#            arch: arm64
+          - os: macos-latest
+            arch: x86_64
+          - os: macos-latest
+            arch: arm64
+    steps:
+    - uses: actions/checkout@v4.1.7
+      with:
+        repository: 'HexaEngine/Hexa.NET.DirectXTex'
+        path: 'DirectXTex'
+        submodules: true
+
+    - name: Install dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
+
+    - name: Install dependencies on macOS
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew update
+        brew install cmake
+
+    - name: Install dependencies on Windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+
+    - name: Install vcpkg
+      run: |
+        cd DirectXTex/DirectXTex
+        git clone https://github.com/microsoft/vcpkg.git
+        ./vcpkg/bootstrap-vcpkg.sh
+
+    - name: Install DirectX 12 headers and DirectXMath
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg install directx-headers --allow-unsupported
+        ./vcpkg/vcpkg install directxmath --allow-unsupported
+      env:
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+    - name: Configure DirectXTex with CMake for macOS ARM64
+      if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
+      run: |
+        cd DirectXTex/DirectXTex 
+        cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure DirectXTex with CMake for macOS
+      if: matrix.arch != 'arm64' && matrix.os == 'macos-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure DirectXTex with CMake
+      if: matrix.os != 'macos-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake
+
+    - name: Build DirectXTex
+      run: cmake --build DirectXTex/DirectXTex/build --config Release
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4.3.4
+      with:
+        name: ${{ matrix.os }}-${{ matrix.arch }}-artifacts 
+        path: |
+          DirectXTex/DirectXTex/build/Release/*.dll
+          DirectXTex/DirectXTex/build/*.so
+          DirectXTex/DirectXTex/build/*.dylib
+          DirectXTex/DirectXTex/build/bin/CMake/*.dylib
+        if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

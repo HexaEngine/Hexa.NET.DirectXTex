@@ -29,6 +29,9 @@ jobs:
         path: 'DirectXTex'
         submodules: true
 
+    - name: CD into working folder
+      run: cd Hexa.NET.DirectXTex/DirectXTex
+
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
       run: |
@@ -60,21 +63,25 @@ jobs:
 
     - name: Configure DirectXTex with CMake for macOS ARM64
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
-      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+      run: cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure DirectXTex with CMake for macOS
+      if: matrix.arch != 'arm64' && matrix.os == 'macos-latest'
+      run: cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake
-      if: matrix.arch != 'arm64' || matrix.os != 'macos-latest'
-      run: cmake -S DirectXTex/DirectXTex -B DirectXTex/DirectXTex/build -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
+      if: matrix.os != 'macos-latest'
+      run: cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build DirectXTex
-      run: cmake --build DirectXTex/DirectXTex/build --config Release -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake --build . --config Release
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4.3.4
       with:
         name: ${{ matrix.os }}-${{ matrix.arch }}-artifacts 
         path: |
-          DirectXTex/DirectXTex/build/Release/*.dll
-          DirectXTex/DirectXTex/build/*.so
-          DirectXTex/DirectXTex/build/*.dylib
+          ./build/Release/*.dll
+          ./build/*.so
+          ./build/*.dylib
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

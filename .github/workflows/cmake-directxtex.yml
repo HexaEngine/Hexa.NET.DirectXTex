@@ -29,9 +29,6 @@ jobs:
         path: 'DirectXTex'
         submodules: true
 
-    - name: CD into working folder
-      run: cd DirectXTex/DirectXTex
-
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
       run: |
@@ -51,6 +48,7 @@ jobs:
 
     - name: Install vcpkg
       run: |
+        cd DirectXTex/DirectXTex
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.sh
 
@@ -63,25 +61,33 @@ jobs:
 
     - name: Configure DirectXTex with CMake for macOS ARM64
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
-      run: cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+      run: |
+        cd DirectXTex/DirectXTex 
+        cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake for macOS
       if: matrix.arch != 'arm64' && matrix.os == 'macos-latest'
-      run: cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake
       if: matrix.os != 'macos-latest'
-      run: cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build DirectXTex
-      run: cmake --build . --config Release
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake --build . --config Release
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4.3.4
       with:
         name: ${{ matrix.os }}-${{ matrix.arch }}-artifacts 
         path: |
-          ./build/Release/*.dll
-          ./build/*.so
-          ./build/*.dylib
+          DirectXTex/DirectXTex/build/Release/*.dll
+          DirectXTex/DirectXTex/build/*.so
+          DirectXTex/DirectXTex/build/*.dylib
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

@@ -54,6 +54,7 @@ jobs:
 
     - name: Install DirectX 12 headers and DirectXMath
       run: |
+        cd DirectXTex/DirectXTex
         ./vcpkg/vcpkg install directx-headers --allow-unsupported
         ./vcpkg/vcpkg install directxmath --allow-unsupported
       env:

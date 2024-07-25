@@ -53,7 +53,6 @@ jobs:
 
     - name: Install OpenMP and DirectX 12 headers
       run: |
-        ./vcpkg/vcpkg install openmp
         ./vcpkg/vcpkg install directx-headers
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg

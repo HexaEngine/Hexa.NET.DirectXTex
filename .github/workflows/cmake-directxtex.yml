@@ -30,7 +30,7 @@ jobs:
         submodules: true
 
     - name: CD into working folder
-      run: cd Hexa.NET.DirectXTex/DirectXTex
+      run: cd DirectXTex/DirectXTex
 
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'

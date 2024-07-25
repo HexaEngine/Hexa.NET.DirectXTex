@@ -79,9 +79,7 @@ jobs:
         cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build DirectXTex
-      run: |
-        cd DirectXTex/DirectXTex
-        cmake --build . --config Release
+      run: cmake --build DirectXTex/DirectXTex/build --config Release
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4.3.4

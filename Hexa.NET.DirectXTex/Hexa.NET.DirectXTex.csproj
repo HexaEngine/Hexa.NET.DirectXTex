@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net7.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -55,7 +55,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="HexaGen.Runtime" Version="1.1.4" />
-		<PackageReference Include="HexaGen.Runtime.COM" Version="1.0.0" />
+		<PackageReference Include="HexaGen.Runtime.COM" Version="1.1.4" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'Standalone'">

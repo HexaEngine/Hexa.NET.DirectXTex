@@ -10,10 +10,6 @@
 
     public static class LibraryLoader
     {
-        static LibraryLoader()
-        {
-        }
-
         public static nint LoadLibrary()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -50,11 +46,6 @@
             }
 
             return ".so";
-        }
-
-        public static void SetImportResolver()
-        {
-            NativeLibrary.SetDllImportResolver(Assembly.GetExecutingAssembly(), DllImportResolver);
         }
 
         private static nint DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
@@ -149,11 +140,11 @@
                 return libraryName;
             }
 
-            nint handle;
+            IntPtr handle;
 
             handle = NativeLibrary.Load(libraryPath);
 
-            if (handle == nint.Zero)
+            if (handle == IntPtr.Zero)
             {
                 throw new DllNotFoundException($"Unable to load library '{libraryName}'.");
             }

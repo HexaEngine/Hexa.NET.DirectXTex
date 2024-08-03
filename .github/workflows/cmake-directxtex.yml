@@ -64,29 +64,27 @@ jobs:
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
 
-    - name: Install DirectX 12 headers and DirectXMath (Win x64)
+    - name: Install DirectX 12 headers and DirectXMath on Windows x64
       if: matrix.arch == 'x86_64' && matrix.os == 'windows-latest'
       run: |
         cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg.exe install directx-headers:x64-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install directxmath:x64-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install libpng:x64-windows
-        ./vcpkg/vcpkg.exe install libjpeg-turbo:x64-windows
-        ./vcpkg/vcpkg.exe install openexr:x64-windows
+        & .\vcpkg\vcpkg.exe install directx-headers:x64-windows --allow-unsupported
+        & .\vcpkg\vcpkg.exe install directxmath:x64-windows --allow-unsupported
+        & .\vcpkg\vcpkg.exe install libpng:x64-windows
+        & .\vcpkg\vcpkg.exe install libjpeg:x64-windows
+        & .\vcpkg\vcpkg.exe install openexr:x64-windows
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
 
-    - name: Install DirectX 12 headers and DirectXMath (Win x86)
+    - name: Install DirectX 12 headers and DirectXMath on Windows x86
       if: matrix.arch == 'x86' && matrix.os == 'windows-latest'
       run: |
         cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg.exe install directx-headers:x86-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install directxmath:x86-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install libpng:x86-windows
-        ./vcpkg/vcpkg.exe install libjpeg-turbo:x86-windows
-        ./vcpkg/vcpkg.exe install openexr:x86-windows
-      env:
-        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        & .\vcpkg\vcpkg.exe install directx-headers:x86-windows --allow-unsupported
+        & .\vcpkg\vcpkg.exe install directxmath:x86-windows --allow-unsupported
+        & .\vcpkg\vcpkg.exe install libpng:x86-windows
+        & .\vcpkg\vcpkg.exe install libjpeg:x86-windows
+        & .\vcpkg\vcpkg.exe install openexr:x86-windows
 
     - name: Configure DirectXTex with CMake for macOS ARM64
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'

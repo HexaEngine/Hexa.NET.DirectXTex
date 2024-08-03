@@ -30,8 +30,7 @@
   "PreserveCaps": [ "" ],
   "Keywords": [ "object", "event" ],
   "TypeMappings": {
-    "const wchar*": "string",
-    "wchar*": "string",
+    "wchar": "char",
     "uint8_t": "byte",
     "uint16_t": "ushort",
     "uint32_t": "uint",

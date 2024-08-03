@@ -85,14 +85,24 @@ jobs:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
 
     - name: Install DirectX 12 headers and DirectXMath on Windows x86
-      if: matrix.os == 'windows-latest' && matrix.arch != 'x86_64'
+      if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
       run: |
         cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg.exe install directx-headers --allow-unsupported
-        ./vcpkg/vcpkg.exe install directxmath --allow-unsupported
-        ./vcpkg/vcpkg.exe install libpng
-        ./vcpkg/vcpkg.exe install libjpeg
-        ./vcpkg/vcpkg.exe install openexr
+        ./vcpkg/vcpkg.exe install directx-headers:x86-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:x86-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:x86-windows
+        ./vcpkg/vcpkg.exe install libjpeg:x86-windows
+        ./vcpkg/vcpkg.exe install openexr:x86-windows
+            
+    - name: Install DirectX 12 headers and DirectXMath on Windows x86
+      if: matrix.os == 'windows-latest' && matrix.arch == 'arm64'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg.exe install directx-headers:arm64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:arm64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:arm64-windows
+        ./vcpkg/vcpkg.exe install libjpeg:arm64-windows
+        ./vcpkg/vcpkg.exe install openexr:arm64-windows
 
     - name: Configure DirectXTex with CMake for macOS ARM64
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'

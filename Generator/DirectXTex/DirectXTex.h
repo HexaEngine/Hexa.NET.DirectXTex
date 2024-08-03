@@ -816,6 +816,9 @@ namespace DirectX
 #else
 
 #include "DirectXTex/DirectXTex/DirectXTex.h"
+#include "DirectXTex/Auxiliary/DirectXTexPNG.h"
+#include "DirectXTex/Auxiliary/DirectXTexJPEG.h"
+#include "DirectXTex/Auxiliary/DirectXTexEXR.h"
 
 typedef struct
 {
@@ -937,6 +940,15 @@ extern "C"
 		_In_ DirectX::TGA_FLAGS flags,
 		_Out_ DirectX::TexMetadata& metadata) noexcept;
 
+	// PNG operations
+	API HRESULT GetMetadataFromPNGFile(const wchar_t* szfile, DirectX::TexMetadata& metadata) noexcept;
+
+	// JPEG operations
+	API HRESULT GetMetadataFromJPEGFile(const wchar_t* szfile, DirectX::TexMetadata& metadata) noexcept;
+
+	// EXR operations
+	API HRESULT GetMetadataFromEXRFile(const wchar_t* szfile, DirectX::TexMetadata& metadata) noexcept;
+
 #ifdef _WIN32
 	API HRESULT GetMetadataFromWICMemory(
 		_In_reads_bytes_(size) const void* pSource, _In_ size_t size,
@@ -1054,6 +1066,15 @@ extern "C"
 
 	API HRESULT SaveToTGAMemory(_In_ const DirectX::Image& image, _In_ DirectX::TGA_FLAGS flags, _Out_ BlobT* blob, _In_opt_ const DirectX::TexMetadata* metadata = nullptr) noexcept;
 	API HRESULT SaveToTGAFile(_In_ const DirectX::Image& image, _In_ DirectX::TGA_FLAGS flags, _In_z_ const wchar_t* szFile, _In_opt_ const DirectX::TexMetadata* metadata = nullptr) noexcept;
+
+	API HRESULT LoadFromPNGFile(const wchar_t* szfile, DirectX::TexMetadata* metadata, ScratchImageT* image) noexcept;
+	API HRESULT SaveToPNGFile(const DirectX::Image& image, const wchar_t* szfile) noexcept;
+
+	API HRESULT LoadFromJPEGFile(const wchar_t* szfile, DirectX::TexMetadata* metadata, ScratchImageT* image) noexcept;
+	API HRESULT SaveToJPEGFile(const DirectX::Image& image, const wchar_t* szfile) noexcept;
+
+	API HRESULT LoadFromEXRFile(const wchar_t* szfile, DirectX::TexMetadata* metadata, ScratchImageT* image) noexcept;
+	API HRESULT SaveToEXRFile(const DirectX::Image& image, const wchar_t* szfile) noexcept;
 
 	// WIC operations
 #ifdef _WIN32

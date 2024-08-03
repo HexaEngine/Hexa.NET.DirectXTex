@@ -4,7 +4,12 @@
     {
         static DirectXTex()
         {
-            LibraryLoader.SetImportResolver();
+            InitApi();
+        }
+
+        public static nint GetLibraryName()
+        {
+            return LibraryLoader.LoadLibrary();
         }
     }
 }

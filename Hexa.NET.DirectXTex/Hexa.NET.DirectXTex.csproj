@@ -54,7 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HexaGen.Runtime" Version="1.0.0" />
+		<PackageReference Include="HexaGen.Runtime" Version="1.1.4" />
 		<PackageReference Include="HexaGen.Runtime.COM" Version="1.0.0" />
 	</ItemGroup>
 

@@ -328,7 +328,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "pixels")]
-		[NativeName(NativeNameType.Type, "uint8_t*")]
+		[NativeName(NativeNameType.Type, "uint8_t *")]
 		public unsafe byte* Pixels;
 
 

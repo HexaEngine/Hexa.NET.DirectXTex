@@ -15,7 +15,6 @@
         public BaseGenerator(CsCodeGeneratorSettings settings)
         {
             this.settings = settings;
-            settings.TypeMappings.Add("HRESULT", "HResult");
         }
 
         public IReadOnlyList<LogMessage> Messages => messages;

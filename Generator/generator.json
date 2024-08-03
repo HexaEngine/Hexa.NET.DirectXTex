@@ -30,6 +30,7 @@
   "PreserveCaps": [ "" ],
   "Keywords": [ "object", "event" ],
   "TypeMappings": {
+    "HRESULT": "HResult",
     "wchar": "char",
     "uint8_t": "byte",
     "uint16_t": "ushort",

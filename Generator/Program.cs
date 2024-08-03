@@ -1,8 +1,6 @@
 ﻿namespace Generator
 {
-    using CppAst;
     using HexaGen;
-    using Microsoft.CodeAnalysis;
 
     internal class Program
     {

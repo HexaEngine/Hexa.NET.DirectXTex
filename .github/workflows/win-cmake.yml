@@ -1,4 +1,4 @@
-name: Build DirectXTex Libraries
+name: Build DirectXTex Libraries (Win)
 
 on: [workflow_dispatch]
 

@@ -12,17 +12,1973 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using HexaGen.Runtime;
 using System.Numerics;
-
-#if !STANDALONE
+using Silk.NET.DXGI;
 using Silk.NET.Direct2D;
 using Silk.NET.Direct3D11;
 using Silk.NET.Direct3D12;
-#endif
 
 namespace Hexa.NET.DirectXTex
 {
 	public unsafe partial class DirectXTex
 	{
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromHDRFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromHDRFileNative(pStr0, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToHDRMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToHDRMemory")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToHDRMemoryNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob)
+		{
+			int ret = SaveToHDRMemoryNative(image, blob);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToHDRMemoryNative((Image*)pimage, blob);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				int ret = SaveToHDRMemoryNative(image, (Blob*)pblob);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					int ret = SaveToHDRMemoryNative((Image*)pimage, (Blob*)pblob);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToHDRFile")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToHDRFileNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile)
+		{
+			int ret = SaveToHDRFileNative(image, szFile);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToHDRFileNative((Image*)pimage, szFile);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = SaveToHDRFileNative(image, (char*)pszFile);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = SaveToHDRFileNative(image, pStr0);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToHDRFileNative((Image*)pimage, (char*)pszFile);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToHDRFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToHDRFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				int ret = SaveToHDRFileNative((Image*)pimage, pStr0);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// TGA operations<br/>
+		/// </summary>
+		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "LoadFromTGAMemory")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int LoadFromTGAMemoryNative([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			int ret = LoadFromTGAMemoryNative(pSource, size, flags, metadata, image);
+			return ret;
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			int ret = LoadFromTGAMemoryNative(pSource, size, flags, metadata, image);
+			return ret;
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromTGAMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromTGAMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAMemoryNative(pSource, size, flags, metadata, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAMemoryNative(pSource, size, flags, metadata, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// TGA operations<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "LoadFromTGAFile")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int LoadFromTGAFileNative([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			int ret = LoadFromTGAFileNative(szFile, flags, metadata, image);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = LoadFromTGAFileNative((char*)pszFile, flags, metadata, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = LoadFromTGAFileNative(pStr0, flags, metadata, image);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromTGAFileNative(szFile, flags, (TexMetadata*)pmetadata, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = LoadFromTGAFileNative((char*)pszFile, flags, (TexMetadata*)pmetadata, image);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromTGAFileNative(pStr0, flags, (TexMetadata*)pmetadata, image);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAFileNative(szFile, flags, metadata, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAFileNative((char*)pszFile, flags, metadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAFileNative(pStr0, flags, metadata, (ScratchImage*)pimage);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAFileNative(szFile, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* pimage = &image)
+					{
+						int ret = LoadFromTGAFileNative((char*)pszFile, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAFileNative(pStr0, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToTGAMemory")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToTGAMemoryNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			int ret = SaveToTGAMemoryNative(image, flags, blob, metadata);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToTGAMemoryNative((Image*)pimage, flags, blob, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				int ret = SaveToTGAMemoryNative(image, flags, (Blob*)pblob, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					int ret = SaveToTGAMemoryNative((Image*)pimage, flags, (Blob*)pblob, metadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = SaveToTGAMemoryNative(image, flags, blob, (TexMetadata*)pmetadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAMemoryNative((Image*)pimage, flags, blob, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAMemoryNative(image, flags, (Blob*)pblob, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					fixed (TexMetadata* pmetadata = &metadata)
+					{
+						int ret = SaveToTGAMemoryNative((Image*)pimage, flags, (Blob*)pblob, (TexMetadata*)pmetadata);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToTGAFile")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToTGAFileNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			int ret = SaveToTGAFileNative(image, flags, szFile, metadata);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToTGAFileNative((Image*)pimage, flags, szFile, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = SaveToTGAFileNative(image, flags, (char*)pszFile, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = SaveToTGAFileNative(image, flags, pStr0, metadata);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToTGAFileNative((Image*)pimage, flags, (char*)pszFile, metadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				int ret = SaveToTGAFileNative((Image*)pimage, flags, pStr0, metadata);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = SaveToTGAFileNative(image, flags, szFile, (TexMetadata*)pmetadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAFileNative((Image*)pimage, flags, szFile, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAFileNative(image, flags, (char*)pszFile, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = SaveToTGAFileNative(image, flags, pStr0, (TexMetadata*)pmetadata);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					fixed (TexMetadata* pmetadata = &metadata)
+					{
+						int ret = SaveToTGAFileNative((Image*)pimage, flags, (char*)pszFile, (TexMetadata*)pmetadata);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TGA_FLAGS")] TGAFlags flags, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAFileNative((Image*)pimage, flags, pStr0, (TexMetadata*)pmetadata);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "LoadFromWICMemory")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int LoadFromWICMemoryNative([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			int ret = LoadFromWICMemoryNative(pSource, size, flags, metadata, image, getMQR);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			int ret = LoadFromWICMemoryNative(pSource, size, flags, metadata, image, getMQR);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromWICMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, image, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromWICMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, image, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromWICMemoryNative(pSource, size, flags, metadata, (ScratchImage*)pimage, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromWICMemoryNative(pSource, size, flags, metadata, (ScratchImage*)pimage, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromWICMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage, getMQR);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICMemory([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromWICMemoryNative(pSource, size, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage, getMQR);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "LoadFromWICFile")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int LoadFromWICFileNative([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			int ret = LoadFromWICFileNative(szFile, flags, metadata, image, getMQR);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = LoadFromWICFileNative((char*)pszFile, flags, metadata, image, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = LoadFromWICFileNative(pStr0, flags, metadata, image, getMQR);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromWICFileNative(szFile, flags, (TexMetadata*)pmetadata, image, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = LoadFromWICFileNative((char*)pszFile, flags, (TexMetadata*)pmetadata, image, getMQR);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = LoadFromWICFileNative(pStr0, flags, (TexMetadata*)pmetadata, image, getMQR);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromWICFileNative(szFile, flags, metadata, (ScratchImage*)pimage, getMQR);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromWICFileNative((char*)pszFile, flags, metadata, (ScratchImage*)pimage, getMQR);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromWICFileNative(pStr0, flags, metadata, (ScratchImage*)pimage, getMQR);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromWICFileNative(szFile, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage, getMQR);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* pimage = &image)
+					{
+						int ret = LoadFromWICFileNative((char*)pszFile, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage, getMQR);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromWICFile([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image, [NativeName(NativeNameType.Param, "getMQR")] [NativeName(NativeNameType.Type, "GetMQR")] GetMQR getMQR)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromWICFileNative(pStr0, flags, (TexMetadata*)pmetadata, (ScratchImage*)pimage, getMQR);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToWICMemory")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToWICMemoryNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			int ret = SaveToWICMemoryNative(image, flags, guidContainerFormat, blob, targetFormat, customProps);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToWICMemoryNative((Image*)pimage, flags, guidContainerFormat, blob, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				int ret = SaveToWICMemoryNative(image, flags, guidContainerFormat, (Blob*)pblob, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					int ret = SaveToWICMemoryNative((Image*)pimage, flags, guidContainerFormat, (Blob*)pblob, targetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Guid* ptargetFormat = &targetFormat)
+			{
+				int ret = SaveToWICMemoryNative(image, flags, guidContainerFormat, blob, (Guid*)ptargetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICMemoryNative((Image*)pimage, flags, guidContainerFormat, blob, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICMemoryNative(image, flags, guidContainerFormat, (Blob*)pblob, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					fixed (Guid* ptargetFormat = &targetFormat)
+					{
+						int ret = SaveToWICMemoryNative((Image*)pimage, flags, guidContainerFormat, (Blob*)pblob, (Guid*)ptargetFormat, customProps);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToWICMemory2")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToWICMemory2Native([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, blob, targetFormat, customProps);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, blob, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, blob, targetFormat, customProps);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, blob, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, (Blob*)pblob, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, (Blob*)pblob, targetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, (Blob*)pblob, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, (Blob*)pblob, targetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Guid* ptargetFormat = &targetFormat)
+			{
+				int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, blob, (Guid*)ptargetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, blob, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Guid* ptargetFormat = &targetFormat)
+			{
+				int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, blob, (Guid*)ptargetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, blob, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, (Blob*)pblob, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					fixed (Guid* ptargetFormat = &targetFormat)
+					{
+						int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, (Blob*)pblob, (Guid*)ptargetFormat, customProps);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICMemory2Native(images, nimages, flags, guidContainerFormat, (Blob*)pblob, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICMemory2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					fixed (Guid* ptargetFormat = &targetFormat)
+					{
+						int ret = SaveToWICMemory2Native((Image*)pimages, nimages, flags, guidContainerFormat, (Blob*)pblob, (Guid*)ptargetFormat, customProps);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToWICFile")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToWICFileNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			int ret = SaveToWICFileNative(image, flags, guidContainerFormat, szFile, targetFormat, customProps);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, szFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = SaveToWICFileNative(image, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = SaveToWICFileNative(image, flags, guidContainerFormat, pStr0, targetFormat, customProps);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, pStr0, targetFormat, customProps);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Guid* ptargetFormat = &targetFormat)
+			{
+				int ret = SaveToWICFileNative(image, flags, guidContainerFormat, szFile, (Guid*)ptargetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, szFile, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICFileNative(image, flags, guidContainerFormat, (char*)pszFile, (Guid*)ptargetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (Guid* ptargetFormat = &targetFormat)
+			{
+				int ret = SaveToWICFileNative(image, flags, guidContainerFormat, pStr0, (Guid*)ptargetFormat, customProps);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					fixed (Guid* ptargetFormat = &targetFormat)
+					{
+						int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, (char*)pszFile, (Guid*)ptargetFormat, customProps);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] ref Guid targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				fixed (Guid* ptargetFormat = &targetFormat)
+				{
+					int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, pStr0, (Guid*)ptargetFormat, customProps);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		[LibraryImport(LibName, EntryPoint = "SaveToWICFile2")]
+		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
+		internal static partial int SaveToWICFile2Native([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps);
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, szFile, targetFormat, customProps);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, szFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, szFile, targetFormat, customProps);
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, szFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
+			if (pStrSize0 >= Utils.MaxStackallocSize)
+			{
+				Utils.Free(pStr0);
+			}
+			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToWICFile2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "WIC_FLAGS")] WICFlags flags, [NativeName(NativeNameType.Param, "guidContainerFormat")] [NativeName(NativeNameType.Type, "GUID")] Guid guidContainerFormat, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "targetFormat")] [NativeName(NativeNameType.Type, "const GUID*")] Guid* targetFormat, [NativeName(NativeNameType.Param, "customProps")] [NativeName(NativeNameType.Type, "SetCustomProps")] SetCustomProps customProps)
+		{
+			fixed (Image* pimages = &images)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, (char*)pszFile, targetFormat, customProps);
+					return ret;
+				}
+			}
+		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToWICFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
@@ -309,11 +2265,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "LoadFromTGAMemory2")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int LoadFromTGAMemory2Native([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
+		internal static partial int LoadFromTGAMemory2Native([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
 
 		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = LoadFromTGAMemory2Native(pSource, size, metadata, image);
 			return ret;
@@ -321,7 +2277,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = LoadFromTGAMemory2Native(pSource, size, metadata, image);
 			return ret;
@@ -329,7 +2285,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -340,12 +2296,62 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
 				int ret = LoadFromTGAMemory2Native(pSource, size, (TexMetadata*)pmetadata, image);
 				return ret;
+			}
+		}
+
+		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAMemory2Native(pSource, size, metadata, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAMemory2Native(pSource, size, metadata, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAMemory2Native(pSource, size, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// Compatability helpers<br/>/// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAMemory2([NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "const void*")] void* pSource, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAMemory2Native(pSource, size, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					return ret;
+				}
 			}
 		}
 
@@ -356,11 +2362,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "LoadFromTGAFile2")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int LoadFromTGAFile2Native([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
+		internal static partial int LoadFromTGAFile2Native([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = LoadFromTGAFile2Native(szFile, metadata, image);
 			return ret;
@@ -368,7 +2374,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			fixed (char* pszFile = &szFile)
 			{
@@ -379,7 +2385,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			char* pStr0 = null;
 			int pStrSize0 = 0;
@@ -408,7 +2414,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -419,7 +2425,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			fixed (char* pszFile = &szFile)
 			{
@@ -433,7 +2439,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			char* pStr0 = null;
 			int pStrSize0 = 0;
@@ -463,6 +2469,129 @@ namespace Hexa.NET.DirectXTex
 			}
 		}
 
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAFile2Native(szFile, metadata, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAFile2Native((char*)pszFile, metadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = LoadFromTGAFile2Native(pStr0, metadata, (ScratchImage*)pimage);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAFile2Native(szFile, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (char* pszFile = &szFile)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* pimage = &image)
+					{
+						int ret = LoadFromTGAFile2Native((char*)pszFile, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "LoadFromTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int LoadFromTGAFile2([NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata*")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			char* pStr0 = null;
+			int pStrSize0 = 0;
+			if (szFile != null)
+			{
+				pStrSize0 = Utils.GetByteCountUTF16(szFile);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+				}
+				else
+				{
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					pStr0 = (char*)pStrStack0;
+				}
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				pStr0[pStrOffset0] = '\0';
+			}
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = LoadFromTGAFile2Native(pStr0, (TexMetadata*)pmetadata, (ScratchImage*)pimage);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
 		/// <summary>
 		/// To be documented.
 		/// </summary>
@@ -470,11 +2599,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "SaveToTGAMemory2")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int SaveToTGAMemory2Native([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "Blob")] Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata);
+		internal static partial int SaveToTGAMemory2Native([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "Blob")] Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
 		{
 			int ret = SaveToTGAMemory2Native(image, blob, metadata);
 			return ret;
@@ -482,12 +2611,93 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "Blob")] Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToTGAMemory2Native((Image*)pimage, blob, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				int ret = SaveToTGAMemory2Native(image, (Blob*)pblob, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					int ret = SaveToTGAMemory2Native((Image*)pimage, (Blob*)pblob, metadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
 				int ret = SaveToTGAMemory2Native(image, blob, (TexMetadata*)pmetadata);
 				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] Blob* blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAMemory2Native((Image*)pimage, blob, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Blob* pblob = &blob)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAMemory2Native(image, (Blob*)pblob, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAMemory2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAMemory2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "blob")] [NativeName(NativeNameType.Type, "BlobT*")] ref Blob blob, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (Blob* pblob = &blob)
+				{
+					fixed (TexMetadata* pmetadata = &metadata)
+					{
+						int ret = SaveToTGAMemory2Native((Image*)pimage, (Blob*)pblob, (TexMetadata*)pmetadata);
+						return ret;
+					}
+				}
 			}
 		}
 
@@ -498,11 +2708,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "SaveToTGAFile2")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int SaveToTGAFile2Native([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata);
+		internal static partial int SaveToTGAFile2Native([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
 		{
 			int ret = SaveToTGAFile2Native(image, szFile, metadata);
 			return ret;
@@ -510,7 +2720,18 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				int ret = SaveToTGAFile2Native((Image*)pimage, szFile, metadata);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
 		{
 			fixed (char* pszFile = &szFile)
 			{
@@ -521,7 +2742,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
 		{
 			char* pStr0 = null;
 			int pStrSize0 = 0;
@@ -550,7 +2771,53 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					int ret = SaveToTGAFile2Native((Image*)pimage, (char*)pszFile, metadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] TexMetadata* metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				int ret = SaveToTGAFile2Native((Image*)pimage, pStr0, metadata);
+				if (pStrSize0 >= Utils.MaxStackallocSize)
+				{
+					Utils.Free(pStr0);
+				}
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -561,7 +2828,21 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] char* szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAFile2Native((Image*)pimage, szFile, (TexMetadata*)pmetadata);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
 		{
 			fixed (char* pszFile = &szFile)
 			{
@@ -575,7 +2856,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
 		{
 			char* pStr0 = null;
 			int pStrSize0 = 0;
@@ -605,6 +2886,58 @@ namespace Hexa.NET.DirectXTex
 			}
 		}
 
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] ref char szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				fixed (char* pszFile = &szFile)
+				{
+					fixed (TexMetadata* pmetadata = &metadata)
+					{
+						int ret = SaveToTGAFile2Native((Image*)pimage, (char*)pszFile, (TexMetadata*)pmetadata);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SaveToTGAFile2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int SaveToTGAFile2([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "szFile")] [NativeName(NativeNameType.Type, "const wchar*")] string szFile, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata*")] ref TexMetadata metadata)
+		{
+			fixed (Image* pimage = &image)
+			{
+				char* pStr0 = null;
+				int pStrSize0 = 0;
+				if (szFile != null)
+				{
+					pStrSize0 = Utils.GetByteCountUTF16(szFile);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					}
+					else
+					{
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						pStr0 = (char*)pStrStack0;
+					}
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					pStr0[pStrOffset0] = '\0';
+				}
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = SaveToTGAFile2Native((Image*)pimage, pStr0, (TexMetadata*)pmetadata);
+					if (pStrSize0 >= Utils.MaxStackallocSize)
+					{
+						Utils.Free(pStr0);
+					}
+					return ret;
+				}
+			}
+		}
+
 		/// <summary>
 		/// To be documented.
 		/// </summary>
@@ -612,14 +2945,50 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "FlipRotate")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int FlipRotateNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
+		internal static partial int FlipRotateNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int FlipRotate([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int FlipRotate([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = FlipRotateNative(srcImage, flags, image);
 			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				int ret = FlipRotateNative((Image*)psrcImage, flags, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = FlipRotateNative(srcImage, flags, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = FlipRotateNative((Image*)psrcImage, flags, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
 		}
 
 		/// <summary>
@@ -629,11 +2998,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "FlipRotate2")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int FlipRotate2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
+		internal static partial int FlipRotate2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = FlipRotate2Native(srcImages, nimages, metadata, flags, result);
 			return ret;
@@ -641,7 +3010,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -652,7 +3021,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = FlipRotate2Native(srcImages, nimages, metadata, flags, result);
 			return ret;
@@ -660,12 +3029,174 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
 				int ret = FlipRotate2Native((Image*)psrcImages, nimages, metadata, flags, result);
 				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = FlipRotate2Native(srcImages, nimages, (TexMetadata*)pmetadata, flags, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = FlipRotate2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, flags, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = FlipRotate2Native(srcImages, nimages, (TexMetadata*)pmetadata, flags, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = FlipRotate2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, flags, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = FlipRotate2Native(srcImages, nimages, metadata, flags, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = FlipRotate2Native((Image*)psrcImages, nimages, metadata, flags, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = FlipRotate2Native(srcImages, nimages, metadata, flags, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = FlipRotate2Native((Image*)psrcImages, nimages, metadata, flags, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = FlipRotate2Native(srcImages, nimages, (TexMetadata*)pmetadata, flags, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = FlipRotate2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, flags, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = FlipRotate2Native(srcImages, nimages, (TexMetadata*)pmetadata, flags, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "FlipRotate2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int FlipRotate2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_FR_FLAGS")] TexFRFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = FlipRotate2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, flags, (ScratchImage*)presult);
+						return ret;
+					}
+				}
 			}
 		}
 
@@ -676,11 +3207,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "Resize")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ResizeNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
+		internal static partial int ResizeNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = ResizeNative(srcImage, width, height, filter, image);
 			return ret;
@@ -688,7 +3219,18 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				int ret = ResizeNative((Image*)psrcImage, width, height, filter, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = ResizeNative(srcImage, width, height, filter, image);
 			return ret;
@@ -696,7 +3238,18 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				int ret = ResizeNative((Image*)psrcImage, width, height, filter, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = ResizeNative(srcImage, width, height, filter, image);
 			return ret;
@@ -704,10 +3257,132 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				int ret = ResizeNative((Image*)psrcImage, width, height, filter, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = ResizeNative(srcImage, width, height, filter, image);
 			return ret;
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				int ret = ResizeNative((Image*)psrcImage, width, height, filter, image);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = ResizeNative(srcImage, width, height, filter, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = ResizeNative((Image*)psrcImage, width, height, filter, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = ResizeNative(srcImage, width, height, filter, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = ResizeNative((Image*)psrcImage, width, height, filter, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = ResizeNative(srcImage, width, height, filter, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = ResizeNative((Image*)psrcImage, width, height, filter, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (ScratchImage* pimage = &image)
+			{
+				int ret = ResizeNative(srcImage, width, height, filter, (ScratchImage*)pimage);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		{
+			fixed (Image* psrcImage = &srcImage)
+			{
+				fixed (ScratchImage* pimage = &image)
+				{
+					int ret = ResizeNative((Image*)psrcImage, width, height, filter, (ScratchImage*)pimage);
+					return ret;
+				}
+			}
 		}
 
 		/// <summary>
@@ -717,11 +3392,11 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "Resize2")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int Resize2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
+		internal static partial int Resize2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -729,7 +3404,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -740,7 +3415,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -748,7 +3423,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -759,7 +3434,57 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -767,7 +3492,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -778,7 +3503,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -786,7 +3511,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -797,7 +3522,57 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -805,7 +3580,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -816,7 +3591,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -824,7 +3599,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -835,7 +3610,57 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -843,7 +3668,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -854,7 +3679,7 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, result);
 			return ret;
@@ -862,12 +3687,510 @@ namespace Hexa.NET.DirectXTex
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
 				int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, result);
 				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, result);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (ScratchImage* presult = &result)
+			{
+				int ret = Resize2Native(srcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+				return ret;
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native((Image*)psrcImages, nimages, metadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (TexMetadata* pmetadata = &metadata)
+			{
+				fixed (ScratchImage* presult = &result)
+				{
+					int ret = Resize2Native(srcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Resize2")]
+		[return: NativeName(NativeNameType.Type, "HRESULT")]
+		public static int Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		{
+			fixed (Image* psrcImages = &srcImages)
+			{
+				fixed (TexMetadata* pmetadata = &metadata)
+				{
+					fixed (ScratchImage* presult = &result)
+					{
+						int ret = Resize2Native((Image*)psrcImages, nimages, (TexMetadata*)pmetadata, width, height, filter, (ScratchImage*)presult);
+						return ret;
+					}
+				}
 			}
 		}
 
@@ -878,2636 +4201,14 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[LibraryImport(LibName, EntryPoint = "Convert")]
 		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ConvertNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
+		internal static partial int ConvertNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image);
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Convert")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
+		public static int Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
 		{
 			int ret = ConvertNative(srcImage, format, filter, threshold, image);
 			return ret;
 		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Convert2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Convert2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int Convert2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Convert2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = Convert2Native(srcImages, nimages, metadata, format, filter, threshold, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Convert2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = Convert2Native((Image*)psrcImages, nimages, metadata, format, filter, threshold, result);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Convert2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = Convert2Native(srcImages, nimages, metadata, format, filter, threshold, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Convert2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = Convert2Native((Image*)psrcImages, nimages, metadata, format, filter, threshold, result);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// Convert the image to a new format<br/>
-		/// </summary>
-		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "ConvertToSinglePlane")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ConvertToSinglePlaneNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
-
-		/// <summary>/// Convert the image to a new format<br/>/// </summary>		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			int ret = ConvertToSinglePlaneNative(srcImage, image);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "ConvertToSinglePlane2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ConvertToSinglePlane2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			int ret = ConvertToSinglePlane2Native(srcImages, nimages, metadata, image);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ConvertToSinglePlane2Native((Image*)psrcImages, nimages, metadata, image);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			int ret = ConvertToSinglePlane2Native(srcImages, nimages, metadata, image);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ConvertToSinglePlane2Native((Image*)psrcImages, nimages, metadata, image);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// Converts the image from a planar format to an equivalent non-planar format<br/>
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "GenerateMipMaps")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int GenerateMipMapsNative([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] byte allow1D);
-
-		/// <summary>/// Converts the image from a planar format to an equivalent non-planar format<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
-		{
-			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (byte)1 : (byte)0);
-			return ret;
-		}
-
-		/// <summary>/// Converts the image from a planar format to an equivalent non-planar format<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image")] Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
-		{
-			int ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (byte)1 : (byte)0);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "GenerateMipMaps2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int GenerateMipMaps2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps2Native(srcImages, nimages, metadata, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps2Native((Image*)psrcImages, nimages, metadata, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps2Native(srcImages, nimages, metadata, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps2Native((Image*)psrcImages, nimages, metadata, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps2Native(srcImages, nimages, metadata, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps2Native((Image*)psrcImages, nimages, metadata, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps2Native(srcImages, nimages, metadata, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps2Native((Image*)psrcImages, nimages, metadata, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>
-		/// Defaults to Fant filtering which is equivalent to a box filter<br/>
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "GenerateMipMaps3D")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int GenerateMipMaps3DNative([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain);
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3DNative(baseImages, depth, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* pbaseImages = &baseImages)
-			{
-				int ret = GenerateMipMaps3DNative((Image*)pbaseImages, depth, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3DNative(baseImages, depth, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* pbaseImages = &baseImages)
-			{
-				int ret = GenerateMipMaps3DNative((Image*)pbaseImages, depth, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3DNative(baseImages, depth, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* pbaseImages = &baseImages)
-			{
-				int ret = GenerateMipMaps3DNative((Image*)pbaseImages, depth, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3DNative(baseImages, depth, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* pbaseImages = &baseImages)
-			{
-				int ret = GenerateMipMaps3DNative((Image*)pbaseImages, depth, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "GenerateMipMaps3D2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int GenerateMipMaps3D2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3D2Native(srcImages, nimages, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps3D2Native((Image*)psrcImages, nimages, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3D2Native(srcImages, nimages, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] ulong levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps3D2Native((Image*)psrcImages, nimages, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3D2Native(srcImages, nimages, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps3D2Native((Image*)psrcImages, nimages, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = GenerateMipMaps3D2Native(srcImages, nimages, filter, levels, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = GenerateMipMaps3D2Native((Image*)psrcImages, nimages, filter, levels, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>
-		/// Defaults to Fant filtering which is equivalent to a box filter<br/>
-		/// </summary>
-		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "ScaleMipMapsAlphaForCoverage")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ScaleMipMapsAlphaForCoverageNative([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain);
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = ScaleMipMapsAlphaForCoverageNative(srcImages, nimages, metadata, item, alphaReference, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ScaleMipMapsAlphaForCoverageNative((Image*)psrcImages, nimages, metadata, item, alphaReference, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = ScaleMipMapsAlphaForCoverageNative(srcImages, nimages, metadata, item, alphaReference, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ScaleMipMapsAlphaForCoverageNative((Image*)psrcImages, nimages, metadata, item, alphaReference, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = ScaleMipMapsAlphaForCoverageNative(srcImages, nimages, metadata, item, alphaReference, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ScaleMipMapsAlphaForCoverageNative((Image*)psrcImages, nimages, metadata, item, alphaReference, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			int ret = ScaleMipMapsAlphaForCoverageNative(srcImages, nimages, metadata, item, alphaReference, mipChain);
-			return ret;
-		}
-
-		/// <summary>/// levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)<br/>/// Defaults to Fant filtering which is equivalent to a box filter<br/>/// </summary>		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage mipChain)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ScaleMipMapsAlphaForCoverageNative((Image*)psrcImages, nimages, metadata, item, alphaReference, mipChain);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "PremultiplyAlpha")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int PremultiplyAlphaNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			int ret = PremultiplyAlphaNative(srcImage, flags, image);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "PremultiplyAlpha2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int PremultiplyAlpha2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = PremultiplyAlpha2Native(srcImages, nimages, metadata, flags, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = PremultiplyAlpha2Native((Image*)psrcImages, nimages, metadata, flags, result);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = PremultiplyAlpha2Native(srcImages, nimages, metadata, flags, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = PremultiplyAlpha2Native((Image*)psrcImages, nimages, metadata, flags, result);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Compress")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Compress")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CompressNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImage);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImage)
-		{
-			int ret = CompressNative(srcImage, format, compress, threshold, cImage);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Compress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Compress2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int Compress2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			int ret = Compress2Native(srcImages, nimages, metadata, format, compress, threshold, cImages);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = Compress2Native((Image*)psrcImages, nimages, metadata, format, compress, threshold, cImages);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			int ret = Compress2Native(srcImages, nimages, metadata, format, compress, threshold, cImages);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = Compress2Native((Image*)psrcImages, nimages, metadata, format, compress, threshold, cImages);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Compress3")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Compress3")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int Compress3Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress3")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			int ret = Compress3Native(pDevice, srcImage, format, compress, alphaWeight, image);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress3")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = Compress3Native((ID3D11Device*)ppDevice, srcImage, format, compress, alphaWeight, image);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Compress4")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int Compress4Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			int ret = Compress4Native(pDevice, srcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = Compress4Native((ID3D11Device*)ppDevice, srcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = Compress4Native(pDevice, (Image*)psrcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = Compress4Native((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			int ret = Compress4Native(pDevice, srcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = Compress4Native((ID3D11Device*)ppDevice, srcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = Compress4Native(pDevice, (Image*)psrcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Compress4")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage cImages)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = Compress4Native((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, format, compress, alphaWeight, cImages);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Decompress")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Decompress")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int DecompressNative([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image")] Image cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Decompress")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image")] Image cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage image)
-		{
-			int ret = DecompressNative(cImage, format, image);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Decompress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "Decompress2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int Decompress2Native([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage images);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Decompress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage images)
-		{
-			int ret = Decompress2Native(cImages, nimages, metadata, format, images);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Decompress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage images)
-		{
-			fixed (Image* pcImages = &cImages)
-			{
-				int ret = Decompress2Native((Image*)pcImages, nimages, metadata, format, images);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Decompress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage images)
-		{
-			int ret = Decompress2Native(cImages, nimages, metadata, format, images);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "Decompress2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage images)
-		{
-			fixed (Image* pcImages = &cImages)
-			{
-				int ret = Decompress2Native((Image*)pcImages, nimages, metadata, format, images);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "ComputeNormalMap")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ComputeNormalMapNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMap);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMap)
-		{
-			int ret = ComputeNormalMapNative(srcImage, flags, amplitude, format, normalMap);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "ComputeNormalMap2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ComputeNormalMap2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMaps);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMaps)
-		{
-			int ret = ComputeNormalMap2Native(srcImages, nimages, metadata, flags, amplitude, format, normalMaps);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMaps)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ComputeNormalMap2Native((Image*)psrcImages, nimages, metadata, flags, amplitude, format, normalMaps);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMaps)
-		{
-			int ret = ComputeNormalMap2Native(srcImages, nimages, metadata, flags, amplitude, format, normalMaps);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] uint format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage normalMaps)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = ComputeNormalMap2Native((Image*)psrcImages, nimages, metadata, flags, amplitude, format, normalMaps);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CopyRectangle")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CopyRectangle")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CopyRectangleNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect")] Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image")] Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] ulong xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] ulong yOffset);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CopyRectangle")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect")] Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image")] Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] ulong xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] ulong yOffset)
-		{
-			int ret = CopyRectangleNative(srcImage, srcRect, dstImage, filter, xOffset, yOffset);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CopyRectangle")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect")] Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image")] Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] ulong yOffset)
-		{
-			int ret = CopyRectangleNative(srcImage, srcRect, dstImage, filter, xOffset, yOffset);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CopyRectangle")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect")] Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image")] Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] ulong xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
-		{
-			int ret = CopyRectangleNative(srcImage, srcRect, dstImage, filter, xOffset, yOffset);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CopyRectangle")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image")] Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect")] Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image")] Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
-		{
-			int ret = CopyRectangleNative(srcImage, srcRect, dstImage, filter, xOffset, yOffset);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "ComputeMSE")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "ComputeMSE")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int ComputeMSENative([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image")] Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image")] Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float*")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeMSE")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image")] Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image")] Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float*")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
-		{
-			int ret = ComputeMSENative(image1, image2, mse, mseV, flags);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeMSE")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image")] Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image")] Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float*")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
-		{
-			fixed (float* pmse = &mse)
-			{
-				int ret = ComputeMSENative(image1, image2, (float*)pmse, mseV, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeMSE")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image")] Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image")] Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float*")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
-		{
-			fixed (float* pmseV = &mseV)
-			{
-				int ret = ComputeMSENative(image1, image2, mse, (float*)pmseV, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeMSE")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image")] Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image")] Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float*")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
-		{
-			fixed (float* pmse = &mse)
-			{
-				fixed (float* pmseV = &mseV)
-				{
-					int ret = ComputeMSENative(image1, image2, (float*)pmse, (float*)pmseV, flags);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "EvaluateImage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "EvaluateImage")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int EvaluateImageNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EvaluateImage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EvaluateImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
-		{
-			int ret = EvaluateImageNative(image, pixelFunc);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "EvaluateImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "EvaluateImage2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int EvaluateImage2Native([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EvaluateImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
-		{
-			int ret = EvaluateImage2Native(images, nimages, metadata, pixelFunc);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EvaluateImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = EvaluateImage2Native((Image*)pimages, nimages, metadata, pixelFunc);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EvaluateImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
-		{
-			int ret = EvaluateImage2Native(images, nimages, metadata, pixelFunc);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EvaluateImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = EvaluateImage2Native((Image*)pimages, nimages, metadata, pixelFunc);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "TransformImage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "TransformImage")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int TransformImageNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "TransformImage")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image")] Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = TransformImageNative(image, pixelFunc, result);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "TransformImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "TransformImage2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int TransformImage2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "TransformImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = TransformImage2Native(srcImages, nimages, metadata, pixelFunc, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "TransformImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = TransformImage2Native((Image*)psrcImages, nimages, metadata, pixelFunc, result);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "TransformImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = TransformImage2Native(srcImages, nimages, metadata, pixelFunc, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "TransformImage2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = TransformImage2Native((Image*)psrcImages, nimages, metadata, pixelFunc, result);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetWICCodec")]
-		[return: NativeName(NativeNameType.Type, "GUID")]
-		[LibraryImport(LibName, EntryPoint = "GetWICCodec")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial Guid GetWICCodecNative([NativeName(NativeNameType.Param, "codec")] [NativeName(NativeNameType.Type, "WICCodecs")] WICCodecs codec);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GetWICCodec")]
-		[return: NativeName(NativeNameType.Type, "GUID")]
-		public static Guid GetWICCodec([NativeName(NativeNameType.Param, "codec")] [NativeName(NativeNameType.Type, "WICCodecs")] WICCodecs codec)
-		{
-			Guid ret = GetWICCodecNative(codec);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
-		[LibraryImport(LibName, EntryPoint = "GetWICFactory")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial IWICImagingFactory* GetWICFactoryNative([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool*")] byte* iswic2);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
-		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool*")] byte* iswic2)
-		{
-			IWICImagingFactory* ret = GetWICFactoryNative(iswic2);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "GetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
-		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool*")] ref byte iswic2)
-		{
-			fixed (byte* piswic2 = &iswic2)
-			{
-				IWICImagingFactory* ret = GetWICFactoryNative((byte*)piswic2);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "SetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "void")]
-		[LibraryImport(LibName, EntryPoint = "SetWICFactory")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial void SetWICFactoryNative([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory*")] IWICImagingFactory* pWiC);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "void")]
-		public static void SetWICFactory([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory*")] IWICImagingFactory* pWiC)
-		{
-			SetWICFactoryNative(pWiC);
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "void")]
-		public static void SetWICFactory([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory*")] ref IWICImagingFactory pWiC)
-		{
-			fixed (IWICImagingFactory* ppWiC = &pWiC)
-			{
-				SetWICFactoryNative((IWICImagingFactory*)ppWiC);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "EncodeDDSHeader")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int EncodeDDSHeaderNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] ulong maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t*")] ulong* required);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] ulong maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t*")] ulong* required)
-		{
-			int ret = EncodeDDSHeaderNative(metadata, flags, pDestination, maxsize, required);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t*")] ulong* required)
-		{
-			int ret = EncodeDDSHeaderNative(metadata, flags, pDestination, maxsize, required);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] ulong maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint required)
-		{
-			fixed (nuint* prequired = &required)
-			{
-				int ret = EncodeDDSHeaderNative(metadata, flags, pDestination, maxsize, (ulong*)prequired);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint required)
-		{
-			fixed (nuint* prequired = &required)
-			{
-				int ret = EncodeDDSHeaderNative(metadata, flags, pDestination, maxsize, (ulong*)prequired);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
-		[return: NativeName(NativeNameType.Type, "bool")]
-		[LibraryImport(LibName, EntryPoint = "IsSupportedTexture")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial byte IsSupportedTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
-		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
-		{
-			byte ret = IsSupportedTextureNative(pDevice, metadata);
-			return ret != 0;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
-		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				byte ret = IsSupportedTextureNative((ID3D11Device*)ppDevice, metadata);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateTexture")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			int ret = CreateTextureNative(pDevice, srcImages, nimages, metadata, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateTextureNative(pDevice, (Image*)psrcImages, nimages, metadata, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateTextureNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, ppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			int ret = CreateTextureNative(pDevice, srcImages, nimages, metadata, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateTextureNative(pDevice, (Image*)psrcImages, nimages, metadata, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateTextureNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, ppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureNative(pDevice, srcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureNative(pDevice, (Image*)psrcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11Resource** pppResource = &ppResource)
-					{
-						int ret = CreateTextureNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureNative(pDevice, srcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureNative(pDevice, (Image*)psrcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11Resource** pppResource = &ppResource)
-					{
-						int ret = CreateTextureNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, (ID3D11Resource**)pppResource);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateShaderResourceView")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateShaderResourceViewNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			int ret = CreateShaderResourceViewNative(pDevice, srcImages, nimages, metadata, ppSRV);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateShaderResourceViewNative(pDevice, (Image*)psrcImages, nimages, metadata, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, ppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			int ret = CreateShaderResourceViewNative(pDevice, srcImages, nimages, metadata, ppSRV);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateShaderResourceViewNative(pDevice, (Image*)psrcImages, nimages, metadata, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, ppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-			{
-				int ret = CreateShaderResourceViewNative(pDevice, srcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewNative(pDevice, (Image*)psrcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-					{
-						int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-			{
-				int ret = CreateShaderResourceViewNative(pDevice, srcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewNative(pDevice, (Image*)psrcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-					{
-						int ret = CreateShaderResourceViewNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, (ID3D11ShaderResourceView**)pppSRV);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateTextureEx")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateTextureExNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			int ret = CreateTextureExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateTextureExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateTextureExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			int ret = CreateTextureExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateTextureExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateTextureExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11Resource** pppResource = &ppResource)
-					{
-						int ret = CreateTextureExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11Resource** pppResource = &ppResource)
-					{
-						int ret = CreateTextureExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateTextureEx2")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateTextureEx2Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			int ret = CreateTextureEx2Native(pDevice, img, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureEx2Native((ID3D11Device*)ppDevice, img, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureEx2Native(pDevice, img, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureEx2Native((ID3D11Device*)ppDevice, img, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateShaderResourceViewEx")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateShaderResourceViewExNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			int ret = CreateShaderResourceViewExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateShaderResourceViewExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			int ret = CreateShaderResourceViewExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = CreateShaderResourceViewExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-			{
-				int ret = CreateShaderResourceViewExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-					{
-						int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-			{
-				int ret = CreateShaderResourceViewExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-				{
-					int ret = CreateShaderResourceViewExNative(pDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
-					{
-						int ret = CreateShaderResourceViewExNative((ID3D11Device*)ppDevice, (Image*)psrcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, (ID3D11ShaderResourceView**)pppSRV);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CaptureTexture")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CaptureTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			int ret = CaptureTextureNative(pDevice, pContext, pSource, result);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				int ret = CaptureTextureNative((ID3D11Device*)ppDevice, pContext, pSource, result);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11DeviceContext* ppContext = &pContext)
-			{
-				int ret = CaptureTextureNative(pDevice, (ID3D11DeviceContext*)ppContext, pSource, result);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11DeviceContext* ppContext = &pContext)
-				{
-					int ret = CaptureTextureNative((ID3D11Device*)ppDevice, (ID3D11DeviceContext*)ppContext, pSource, result);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11Resource* ppSource = &pSource)
-			{
-				int ret = CaptureTextureNative(pDevice, pContext, (ID3D11Resource*)ppSource, result);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11Resource* ppSource = &pSource)
-				{
-					int ret = CaptureTextureNative((ID3D11Device*)ppDevice, pContext, (ID3D11Resource*)ppSource, result);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11DeviceContext* ppContext = &pContext)
-			{
-				fixed (ID3D11Resource* ppSource = &pSource)
-				{
-					int ret = CaptureTextureNative(pDevice, (ID3D11DeviceContext*)ppContext, (ID3D11Resource*)ppSource, result);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTexture")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result)
-		{
-			fixed (ID3D11Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D11DeviceContext* ppContext = &pContext)
-				{
-					fixed (ID3D11Resource* ppSource = &pSource)
-					{
-						int ret = CaptureTextureNative((ID3D11Device*)ppDevice, (ID3D11DeviceContext*)ppContext, (ID3D11Resource*)ppSource, result);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "bool")]
-		[LibraryImport(LibName, EntryPoint = "IsSupportedTextureD3D12")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial byte IsSupportedTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
-		{
-			byte ret = IsSupportedTextureD3D12Native(pDevice, metadata);
-			return ret != 0;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				byte ret = IsSupportedTextureD3D12Native((ID3D12Device*)ppDevice, metadata);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateTextureD3D12")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
-		{
-			int ret = CreateTextureD3D12Native(pDevice, metadata, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureD3D12Native((ID3D12Device*)ppDevice, metadata, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
-		{
-			fixed (ID3D12Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureD3D12Native(pDevice, metadata, (ID3D12Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D12Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureD3D12Native((ID3D12Device*)ppDevice, metadata, (ID3D12Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CreateTextureExD3D12")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CreateTextureExD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] uint resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] uint resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
-		{
-			int ret = CreateTextureExD3D12Native(pDevice, metadata, resFlags, createFlags, ppResource);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] uint resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				int ret = CreateTextureExD3D12Native((ID3D12Device*)ppDevice, metadata, resFlags, createFlags, ppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] uint resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
-		{
-			fixed (ID3D12Resource** pppResource = &ppResource)
-			{
-				int ret = CreateTextureExD3D12Native(pDevice, metadata, resFlags, createFlags, (ID3D12Resource**)pppResource);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] uint resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (ID3D12Resource** pppResource = &ppResource)
-				{
-					int ret = CreateTextureExD3D12Native((ID3D12Device*)ppDevice, metadata, resFlags, createFlags, (ID3D12Resource**)pppResource);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "PrepareUpload")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int PrepareUploadNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			int ret = PrepareUploadNative(pDevice, srcImages, nimages, metadata, subresources, nSubresources);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				int ret = PrepareUploadNative((ID3D12Device*)ppDevice, srcImages, nimages, metadata, subresources, nSubresources);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = PrepareUploadNative(pDevice, (Image*)psrcImages, nimages, metadata, subresources, nSubresources);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = PrepareUploadNative((ID3D12Device*)ppDevice, (Image*)psrcImages, nimages, metadata, subresources, nSubresources);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			int ret = PrepareUploadNative(pDevice, srcImages, nimages, metadata, subresources, nSubresources);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				int ret = PrepareUploadNative((ID3D12Device*)ppDevice, srcImages, nimages, metadata, subresources, nSubresources);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				int ret = PrepareUploadNative(pDevice, (Image*)psrcImages, nimages, metadata, subresources, nSubresources);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ulong* nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					int ret = PrepareUploadNative((ID3D12Device*)ppDevice, (Image*)psrcImages, nimages, metadata, subresources, nSubresources);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (nuint* pnSubresources = &nSubresources)
-			{
-				int ret = PrepareUploadNative(pDevice, srcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (nuint* pnSubresources = &nSubresources)
-				{
-					int ret = PrepareUploadNative((ID3D12Device*)ppDevice, srcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (nuint* pnSubresources = &nSubresources)
-				{
-					int ret = PrepareUploadNative(pDevice, (Image*)psrcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] ulong nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (nuint* pnSubresources = &nSubresources)
-					{
-						int ret = PrepareUploadNative((ID3D12Device*)ppDevice, (Image*)psrcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (nuint* pnSubresources = &nSubresources)
-			{
-				int ret = PrepareUploadNative(pDevice, srcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (nuint* pnSubresources = &nSubresources)
-				{
-					int ret = PrepareUploadNative((ID3D12Device*)ppDevice, srcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (Image* psrcImages = &srcImages)
-			{
-				fixed (nuint* pnSubresources = &nSubresources)
-				{
-					int ret = PrepareUploadNative(pDevice, (Image*)psrcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "PrepareUpload")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int PrepareUpload([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata")] TexMetadata metadata, [NativeName(NativeNameType.Param, "subresources")] [NativeName(NativeNameType.Type, "void**")] void** subresources, [NativeName(NativeNameType.Param, "nSubresources")] [NativeName(NativeNameType.Type, "size_t*")] ref nuint nSubresources)
-		{
-			fixed (ID3D12Device* ppDevice = &pDevice)
-			{
-				fixed (Image* psrcImages = &srcImages)
-				{
-					fixed (nuint* pnSubresources = &nSubresources)
-					{
-						int ret = PrepareUploadNative((ID3D12Device*)ppDevice, (Image*)psrcImages, nimages, metadata, subresources, (ulong*)pnSubresources);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		[LibraryImport(LibName, EntryPoint = "CaptureTextureD3D12")]
-		[UnmanagedCallConv(CallConvs = new Type[] {typeof(System.Runtime.CompilerServices.CallConvCdecl)})]
-		internal static partial int CaptureTextureD3D12Native([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] byte isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint afterState);
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint afterState)
-		{
-			int ret = CaptureTextureD3D12Native(pCommandQueue, pSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
-			return ret;
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ID3D12Resource* pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint afterState)
-		{
-			fixed (ID3D12CommandQueue* ppCommandQueue = &pCommandQueue)
-			{
-				int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, pSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ID3D12CommandQueue* pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint afterState)
-		{
-			fixed (ID3D12Resource* ppSource = &pSource)
-			{
-				int ret = CaptureTextureD3D12Native(pCommandQueue, (ID3D12Resource*)ppSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
-				return ret;
-			}
-		}
-
-		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "CaptureTextureD3D12")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int CaptureTextureD3D12([NativeName(NativeNameType.Param, "pCommandQueue")] [NativeName(NativeNameType.Type, "ID3D12CommandQueue*")] ref ID3D12CommandQueue pCommandQueue, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D12Resource*")] ref ID3D12Resource pSource, [NativeName(NativeNameType.Param, "isCubeMap")] [NativeName(NativeNameType.Type, "bool")] bool isCubeMap, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImage")] ScratchImage result, [NativeName(NativeNameType.Param, "beforeState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint beforeState, [NativeName(NativeNameType.Param, "afterState")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_STATES")] uint afterState)
-		{
-			fixed (ID3D12CommandQueue* ppCommandQueue = &pCommandQueue)
-			{
-				fixed (ID3D12Resource* ppSource = &pSource)
-				{
-					int ret = CaptureTextureD3D12Native((ID3D12CommandQueue*)ppCommandQueue, (ID3D12Resource*)ppSource, isCubeMap ? (byte)1 : (byte)0, result, beforeState, afterState);
-					return ret;
-				}
-			}
-		}
-
 	}
 }

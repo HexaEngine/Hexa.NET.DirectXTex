@@ -17,6 +17,7 @@
 
             CsCodeGenerator generator = new(generatorSettings);
             generator.Generate(headerFile, "../../../../Hexa.NET.DirectXTex/Generated");
+            generator.DisplayMessages();
 
             return 0;
         }

@@ -1,5 +1,7 @@
 ﻿namespace Hexa.NET.DirectXTex.Tests
 {
+    using Silk.NET.Core.Win32Extras;
+
     public unsafe class TextureUtils
     {
         [Test]
@@ -19,10 +21,11 @@
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.FlipRotate2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), TexFRFlags.Rotate90, image1);
+            var meta = image.GetMetadata();
+            DirectXTex.FlipRotate2(image.GetImages(), image.GetImageCount(), ref meta, TexFRFlags.Rotate90, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             Assert.That(image1.GetMetadata(), Is.EqualTo(metadata));
@@ -61,10 +64,11 @@
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.Resize2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), 1024, 1024, TexFilterFlags.Default, image1);
+            var meta = image.GetMetadata();
+            DirectXTex.Resize2(image.GetImages(), image.GetImageCount(), ref meta, 1024, 1024, TexFilterFlags.Default, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = image1.GetMetadata();
@@ -104,10 +108,11 @@
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.Convert2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), (int)Format.FormatR16G16B16A16Unorm, TexFilterFlags.Default, 0.5f, image1);
+            var meta = image.GetMetadata();
+            DirectXTex.Convert2(image.GetImages(), image.GetImageCount(), ref meta, (int)Format.FormatR16G16B16A16Unorm, TexFilterFlags.Default, 0.5f, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = image1.GetMetadata();
@@ -147,10 +152,11 @@
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.ConvertToSinglePlane2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), image1);
+            var meta = image.GetMetadata();
+            DirectXTex.ConvertToSinglePlane2(image.GetImages(), image.GetImageCount(), ref meta, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = image1.GetMetadata();
@@ -190,10 +196,11 @@
                 MiscFlags2 = 0,
             };
 
-            DirectXTex.Initialize(image, metadata, CPFlags.None);
+            DirectXTex.Initialize(image, ref metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), TexFilterFlags.Default, 4, image1);
+            var meta = image.GetMetadata();
+            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), ref meta, TexFilterFlags.Default, 4, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = DirectXTex.GetMetadata(image1);
@@ -233,10 +240,10 @@
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
-            DirectXTex.GenerateMipMaps3D2(image.GetImages(), image.GetImageCount(), TexFilterFlags.Default, 4, image1);
+            DirectXTex.GenerateMipMaps3D2(image.GetImages(), image.GetImageCount(), TexFilterFlags.Default, 4, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = image1.GetMetadata();
@@ -263,15 +270,16 @@
             };
 
             ScratchImage mipChain = DirectXTex.CreateScratchImage();
-            mipChain.Initialize(metadata, CPFlags.None);
+            mipChain.Initialize(ref metadata, CPFlags.None);
 
             var info = mipChain.GetMetadata();
             ScratchImage coverageMipChain = DirectXTex.CreateScratchImage();
-            coverageMipChain.Initialize(info, CPFlags.None);
+            coverageMipChain.Initialize(ref info, CPFlags.None);
 
             for (nuint item = 0; item < info.ArraySize; ++item)
             {
-                DirectXTex.ScaleMipMapsAlphaForCoverage(mipChain.GetImages(), mipChain.GetImageCount(), mipChain.GetMetadata(), item, 0.5f, coverageMipChain);
+                var meta = mipChain.GetMetadata();
+                DirectXTex.ScaleMipMapsAlphaForCoverage(mipChain.GetImages(), mipChain.GetImageCount(), ref meta, item, 0.5f, ref coverageMipChain);
             }
             coverageMipChain.Release();
             mipChain.Release();
@@ -294,10 +302,11 @@
             };
 
             ScratchImage srcImage = DirectXTex.CreateScratchImage();
-            srcImage.Initialize(metadata, CPFlags.None);
+            srcImage.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage destImage = DirectXTex.CreateScratchImage();
-            DirectXTex.PremultiplyAlpha2(srcImage.GetImages(), srcImage.GetImageCount(), srcImage.GetMetadata(), TexPMAlphaFlags.Default, destImage);
+            var meta = srcImage.GetMetadata();
+            DirectXTex.PremultiplyAlpha2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, TexPMAlphaFlags.Default, ref destImage);
 
             srcImage.Release();
             destImage.Release();
@@ -320,11 +329,12 @@
             };
 
             ScratchImage srcImage = DirectXTex.CreateScratchImage();
-            srcImage.Initialize(metadata, CPFlags.None);
+            srcImage.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage destImage = DirectXTex.CreateScratchImage();
             DirectXTex.BitsPerPixel((int)Format.FormatBC7Unorm);
-            DirectXTex.Compress2(srcImage.GetImages(), srcImage.GetImageCount(), srcImage.GetMetadata(), (int)Format.FormatBC7Unorm, TexCompressFlags.Bc7Quick | TexCompressFlags.Parallel, 0.5f, destImage);
+            var meta = srcImage.GetMetadata();
+            DirectXTex.Compress2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, (int)Format.FormatBC7Unorm, TexCompressFlags.Bc7Quick | TexCompressFlags.Parallel, 0.5f, ref destImage);
 
             srcImage.Release();
             destImage.Release();
@@ -347,10 +357,11 @@
             };
 
             ScratchImage srcImage = DirectXTex.CreateScratchImage();
-            srcImage.Initialize(metadata, CPFlags.None);
+            srcImage.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage destImage = DirectXTex.CreateScratchImage();
-            DirectXTex.Decompress2(srcImage.GetImages(), srcImage.GetImageCount(), srcImage.GetMetadata(), (int)Format.FormatR8G8B8A8Unorm, destImage);
+            var meta = srcImage.GetMetadata();
+            DirectXTex.Decompress2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, (int)Format.FormatR8G8B8A8Unorm, ref destImage);
 
             srcImage.Release();
             destImage.Release();

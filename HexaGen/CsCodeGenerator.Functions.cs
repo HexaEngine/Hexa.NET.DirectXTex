@@ -32,6 +32,11 @@
 
         protected virtual bool FilterFunctionIgnored(GenContext context, CppFunction cppFunction)
         {
+            if (!cppFunction.IsPublicExport())
+            {
+                return true;
+            }
+
             if (cppFunction.Flags == CppFunctionFlags.Inline)
             {
                 return true;

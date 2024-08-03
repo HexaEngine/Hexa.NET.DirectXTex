@@ -22,7 +22,7 @@
             ulong required;
             fixed (byte* ptr = data)
             {
-                DirectXTex.EncodeDDSHeader(metadata, DDSFlags.None, ptr, 8192, &required);
+                DirectXTex.EncodeDDSHeader(ref metadata, DDSFlags.None, ptr, 8192, &required);
             }
         }
     }

@@ -104,6 +104,6 @@ jobs:
         path: |
           DirectXTex/DirectXTex/build/bin/Release/*.dll
           DirectXTex/DirectXTex/build/lib/*.so
-          DirectXTex/DirectXTex/build/bin/Release/*.dylib
+          DirectXTex/DirectXTex/build/lib/*.dylib
           DirectXTex/DirectXTex/build/bin/CMake/*.dylib
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

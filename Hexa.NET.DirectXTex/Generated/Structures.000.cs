@@ -13,15 +13,46 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using HexaGen.Runtime;
 using System.Numerics;
-
-#if !STANDALONE
+using Silk.NET.DXGI;
 using Silk.NET.Direct2D;
 using Silk.NET.Direct3D11;
 using Silk.NET.Direct3D12;
-#endif
 
 namespace Hexa.NET.DirectXTex
 {
+	/// <summary>
+	/// To be documented.
+	/// </summary>
+	[NativeName(NativeNameType.StructOrClass, "IWICImagingFactory")]
+	[StructLayout(LayoutKind.Sequential)]
+	public partial struct IWICImagingFactory
+	{
+
+
+	}
+
+	/// <summary>
+	/// To be documented.
+	/// </summary>
+	[NativeName(NativeNameType.StructOrClass, "ScratchImage")]
+	[StructLayout(LayoutKind.Sequential)]
+	public partial struct ScratchImage
+	{
+
+
+	}
+
+	/// <summary>
+	/// To be documented.
+	/// </summary>
+	[NativeName(NativeNameType.StructOrClass, "Blob")]
+	[StructLayout(LayoutKind.Sequential)]
+	public partial struct Blob
+	{
+
+
+	}
+
 	/// <summary>
 	/// To be documented.
 	/// </summary>
@@ -83,7 +114,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "format")]
 		[NativeName(NativeNameType.Type, "DXGI_FORMAT")]
-		public uint Format;
+		public int Format;
 
 		/// <summary>
 		/// To be documented.
@@ -93,7 +124,7 @@ namespace Hexa.NET.DirectXTex
 		public TexDimension Dimension;
 
 
-		/// <summary>/// To be documented./// </summary>		public unsafe TexMetadata(ulong width = default, ulong height = default, ulong depth = default, ulong arraySize = default, ulong mipLevels = default, uint miscFlags = default, uint miscFlags2 = default, uint format = default, TexDimension dimension = default)
+		/// <summary>/// To be documented./// </summary>		public unsafe TexMetadata(ulong width = default, ulong height = default, ulong depth = default, ulong arraySize = default, ulong mipLevels = default, uint miscFlags = default, uint miscFlags2 = default, int format = default, TexDimension dimension = default)
 		{
 			Width = width;
 			Height = height;
@@ -111,80 +142,110 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "ComputeIndex")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
 		public unsafe ulong ComputeIndex([NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
 		{
-			ulong ret = DirectXTex.ComputeIndexNative(this, mip, item, slice);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				ulong ret = DirectXTex.ComputeIndexNative(@this, mip, item, slice);
+				return ret;
+			}
 		}
 
 		/// <summary>/// Returns size_t(-1) to indicate an out-of-range error<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsCubemap")]
 		[return: NativeName(NativeNameType.Type, "bool")]
 		public unsafe bool IsCubemap()
 		{
-			byte ret = DirectXTex.IsCubemapNative(this);
-			return ret != 0;
+			fixed (TexMetadata* @this = &this)
+			{
+				byte ret = DirectXTex.IsCubemapNative(@this);
+				return ret != 0;
+			}
 		}
 
 		/// <summary>/// Helper for miscFlags<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsPMAlpha")]
 		[return: NativeName(NativeNameType.Type, "bool")]
 		public unsafe bool IsPMAlpha()
 		{
-			byte ret = DirectXTex.IsPMAlphaNative(this);
-			return ret != 0;
+			fixed (TexMetadata* @this = &this)
+			{
+				byte ret = DirectXTex.IsPMAlphaNative(@this);
+				return ret != 0;
+			}
 		}
 
 		/// <summary>/// To be documented./// </summary>		[NativeName(NativeNameType.Func, "SetAlphaMode")]
@@ -201,16 +262,22 @@ namespace Hexa.NET.DirectXTex
 		[return: NativeName(NativeNameType.Type, "TEX_ALPHA_MODE")]
 		public unsafe TexAlphaMode GetAlphaMode()
 		{
-			TexAlphaMode ret = DirectXTex.GetAlphaModeNative(this);
-			return ret;
+			fixed (TexMetadata* @this = &this)
+			{
+				TexAlphaMode ret = DirectXTex.GetAlphaModeNative(@this);
+				return ret;
+			}
 		}
 
 		/// <summary>/// Helpers for miscFlags2<br/>/// </summary>		[NativeName(NativeNameType.Func, "IsVolumemap")]
 		[return: NativeName(NativeNameType.Type, "bool")]
 		public unsafe bool IsVolumemap()
 		{
-			byte ret = DirectXTex.IsVolumemapNative(this);
-			return ret != 0;
+			fixed (TexMetadata* @this = &this)
+			{
+				byte ret = DirectXTex.IsVolumemapNative(@this);
+				return ret != 0;
+			}
 		}
 
 	}
@@ -241,7 +308,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "format")]
 		[NativeName(NativeNameType.Type, "DXGI_FORMAT")]
-		public uint Format;
+		public int Format;
 
 		/// <summary>
 		/// To be documented.
@@ -261,11 +328,11 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "pixels")]
-		[NativeName(NativeNameType.Type, "uint8_t*")]
+		[NativeName(NativeNameType.Type, "uint8_t *")]
 		public unsafe byte* Pixels;
 
 
-		/// <summary>/// To be documented./// </summary>		public unsafe Image(ulong width = default, ulong height = default, uint format = default, ulong rowPitch = default, ulong slicePitch = default, byte* pixels = default)
+		/// <summary>/// To be documented./// </summary>		public unsafe Image(ulong width = default, ulong height = default, int format = default, ulong rowPitch = default, ulong slicePitch = default, byte* pixels = default)
 		{
 			Width = width;
 			Height = height;
@@ -274,28 +341,6 @@ namespace Hexa.NET.DirectXTex
 			SlicePitch = slicePitch;
 			Pixels = pixels;
 		}
-
-
-	}
-
-	/// <summary>
-	/// To be documented.
-	/// </summary>
-	[NativeName(NativeNameType.StructOrClass, "ScratchImageT")]
-	[StructLayout(LayoutKind.Sequential)]
-	public partial struct ScratchImage
-	{
-
-
-	}
-
-	/// <summary>
-	/// To be documented.
-	/// </summary>
-	[NativeName(NativeNameType.StructOrClass, "BlobT")]
-	[StructLayout(LayoutKind.Sequential)]
-	public partial struct Blob
-	{
 
 
 	}

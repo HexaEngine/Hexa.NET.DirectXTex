@@ -1,5 +1,7 @@
 ﻿namespace Hexa.NET.DirectXTex.Tests
 {
+    using Silk.NET.Core;
+
     public unsafe class ImageIO : IDisposable
     {
         private const string DDSFilename = "assets/textures/test.dds";
@@ -19,10 +21,11 @@
             TexMetadata metadata;
             fixed (byte* srcPtr = src)
             {
-                DirectXTex.LoadFromDDSMemory(srcPtr, (nuint)src.Length, DDSFlags.None, &metadata, image);
+                DirectXTex.LoadFromDDSMemory(srcPtr, (nuint)src.Length, DDSFlags.None, &metadata, ref image);
             }
 
-            DirectXTex.SaveToDDSMemory2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DDSFlags.None, blob);
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToDDSMemory2(image.GetImages(), image.GetImageCount(), ref metadata, DDSFlags.None, ref blob);
 
             Span<byte> dest = blob.AsBytes();
             Assert.True(src.SequenceEqual(dest));
@@ -39,8 +42,10 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
 
-            DirectXTex.LoadFromDDSFile(DDSFilename, DDSFlags.None, &metadata, image);
-            DirectXTex.SaveToDDSFile2(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DDSFlags.None, path);
+            DirectXTex.LoadFromDDSFile(DDSFilename, DDSFlags.None, &metadata, ref image);
+
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToDDSFile2(image.GetImages(), image.GetImageCount(), ref metadata, DDSFlags.None, path);
 
             Span<byte> src = LoadTexture(DDSFilename);
             Span<byte> dest = LoadTexture(path);
@@ -59,10 +64,10 @@
 
             fixed (byte* srcPtr = src)
             {
-                DirectXTex.LoadFromHDRMemory(srcPtr, (nuint)src.Length, &metadata, image);
+                DirectXTex.LoadFromHDRMemory(srcPtr, (nuint)src.Length, &metadata, ref image);
             }
-
-            DirectXTex.SaveToHDRMemory(image.GetImages()[0], blob);
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToHDRMemory(image.GetImages(), ref blob);
 
             Span<byte> dest = blob.AsBytes();
             Assert.True(src.SequenceEqual(dest));
@@ -79,8 +84,10 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
 
-            DirectXTex.LoadFromHDRFile(HDRFilename, &metadata, image);
-            DirectXTex.SaveToHDRFile(image.GetImages()[0], path);
+            DirectXTex.LoadFromHDRFile(HDRFilename, &metadata, ref image);
+
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToHDRFile(image.GetImages(), path);
 
             Span<byte> src = LoadTexture(HDRFilename);
             Span<byte> dest = LoadTexture(path);
@@ -99,9 +106,11 @@
 
             fixed (byte* srcPtr = src)
             {
-                DirectXTex.LoadFromTGAMemory(srcPtr, (nuint)src.Length, TGAFlags.None, &metadata, image);
+                DirectXTex.LoadFromTGAMemory(srcPtr, (nuint)src.Length, TGAFlags.None, &metadata, ref image);
             }
-            DirectXTex.SaveToTGAMemory(image.GetImages()[0], TGAFlags.None, blob, &metadata);
+
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToTGAMemory(image.GetImages(), TGAFlags.None, ref blob, &metadata);
 
             blob.Release();
             image.Release();
@@ -115,9 +124,11 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata;
 
-            DirectXTex.LoadFromTGAFile(TGAFilename, TGAFlags.None, &metadata, image);
+            DirectXTex.LoadFromTGAFile(TGAFilename, TGAFlags.None, &metadata, ref image);
             TexMetadata metadata1 = image.GetMetadata();
-            DirectXTex.SaveToTGAFile(image.GetImages()[0], 0, path, &metadata1);
+
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToTGAFile(image.GetImages(), 0, path, &metadata1);
 
             image.Release();
         }
@@ -132,10 +143,10 @@
 
             fixed (byte* srcPtr = src)
             {
-                DirectXTex.LoadFromWICMemory(srcPtr, (nuint)src.Length, WICFlags.None, &metadata, image, default);
+                DirectXTex.LoadFromWICMemory(srcPtr, (nuint)src.Length, WICFlags.None, &metadata, ref image, default);
             }
             Guid guid = DirectXTex.GetWICCodec(WICCodecs.CodecPng);
-            DirectXTex.SaveToWICMemory2(image.GetImages(), image.GetImageCount(), WICFlags.None, guid, blob, null, default);
+            DirectXTex.SaveToWICMemory2(image.GetImages(), image.GetImageCount(), WICFlags.None, guid, ref blob, null, default);
 
             Span<byte> dest = blob.AsBytes();
             Assert.True(src.SequenceEqual(dest));
@@ -153,7 +164,7 @@
 
             TexMetadata metadata;
             Guid guid = DirectXTex.GetWICCodec(WICCodecs.CodecPng);
-            DirectXTex.LoadFromWICFile(WICFilename, WICFlags.None, &metadata, image, default);
+            DirectXTex.LoadFromWICFile(WICFilename, WICFlags.None, &metadata, ref image, default);
             DirectXTex.SaveToWICFile2(image.GetImages(), image.GetImageCount(), 0, guid, path, null, default);
 
             Span<byte> src = LoadTexture(WICFilename);

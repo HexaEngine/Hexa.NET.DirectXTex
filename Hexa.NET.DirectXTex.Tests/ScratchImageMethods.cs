@@ -26,7 +26,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             Assert.That(image.GetMetadata(), Is.EqualTo(metadata));
 
@@ -151,7 +151,7 @@ namespace Hexa.NET.DirectXTex.Tests
             };
 
             {
-                image.Initialize(metadata, CPFlags.None);
+                image.Initialize(ref metadata, CPFlags.None);
             }
 
             {
@@ -184,7 +184,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
@@ -209,13 +209,13 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             var img = image.GetImage(0, 0, 0);
 
-            if (img.Width != metadata.Width &&
-                img.Height != metadata.Height &&
-                img.Format != metadata.Format)
+            if (img->Width != metadata.Width &&
+                img->Height != metadata.Height &&
+                img->Format != metadata.Format)
                 Trace.Fail("img doesn't match");
 
             var meta = image.GetMetadata();
@@ -241,7 +241,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             var imgs = image.GetImages();
 
@@ -277,7 +277,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             var pixels = image.GetPixels();
             var count = image.GetPixelsSize();
@@ -307,7 +307,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize(metadata, CPFlags.None);
+            image.Initialize(ref metadata, CPFlags.None);
 
             // Result should be true because the format contains no alpha information.
             if (!image.IsAlphaAllOpaque())

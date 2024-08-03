@@ -35,4 +35,22 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Hexa.NET.DirectXTex\Hexa.NET.DirectXTex.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="DirectXTex.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="DirectXTex.pdb">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="jpeg62.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="libpng16d.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="zlibd1.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

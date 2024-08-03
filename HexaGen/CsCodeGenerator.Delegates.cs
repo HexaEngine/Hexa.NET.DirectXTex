@@ -1,6 +1,7 @@
 ﻿namespace HexaGen
 {
     using CppAst;
+    using HexaGen.Core;
     using System.IO;
 
     public partial class CsCodeGenerator
@@ -120,17 +121,47 @@
             }
         }
 
-        protected virtual void WriteDelegate<T>(GenContext context, T field, CppFunctionType functionType, bool isReadOnly = false) where T : class, ICppDeclaration, ICppMember
+        private void WriteDelegate<T>(GenContext context, T field, CppFunctionType functionType, bool isReadOnly = false) where T : class, ICppDeclaration, ICppMember
         {
             if (FilterDelegate(context, field))
+            {
                 return;
+            }
 
             var writer = context.Writer;
-            string csFieldName = settings.GetDelegateName(field.Name);
+            string csFieldName = settings.GetFieldName(field.Name);
             string fieldPrefix = isReadOnly ? "readonly " : string.Empty;
-            string signature = settings.GetParameterSignature(functionType.Parameters, false, settings.GenerateMetadata);
+
+            writer.WriteLine("#if NET5_0_OR_GREATER");
+            WriteFinal(writer, field, functionType, csFieldName, fieldPrefix);
+            writer.WriteLine("#else");
+            WriteFinal(writer, field, functionType, csFieldName, fieldPrefix, compatibility: true);
+            writer.WriteLine("#endif");
+            writer.WriteLine();
+        }
+
+        private void WriteFinal<T>(ICodeWriter writer, T field, CppFunctionType functionType, string csFieldName, string fieldPrefix, bool compatibility = false) where T : class, ICppDeclaration, ICppMember
+        {
+            string signature = settings.GetParameterSignature(functionType.Parameters, canUseOut: false, delegateType: true, compatibility: compatibility);
             string returnCsName = settings.GetCsTypeName(functionType.ReturnType, false);
             returnCsName = returnCsName.Replace("bool", settings.GetBoolType());
+
+            if (functionType.ReturnType is CppTypedef typedef && typedef.ElementType.IsDelegate(out var cppFunction) && !returnCsName.Contains('*'))
+            {
+                if (cppFunction.Parameters.Count == 0)
+                {
+                    returnCsName = $"delegate*<{settings.GetCsTypeName(cppFunction.ReturnType)}>";
+                }
+                else
+                {
+                    returnCsName = $"delegate*<{settings.GetNamelessParameterSignature(cppFunction.Parameters, canUseOut: false, delegateType: true, compatibility)}, {settings.GetCsTypeName(cppFunction.ReturnType)}>";
+                }
+            }
+
+            if (compatibility && returnCsName.Contains('*'))
+            {
+                returnCsName = "nint";
+            }
 
             if (settings.TryGetDelegateMapping(csFieldName, out var mapping))
             {
@@ -139,13 +170,8 @@
             }
 
             string header = $"{returnCsName} {csFieldName}({signature})";
-            LogInfo("defined delegate " + header);
+
             settings.WriteCsSummary(field.Comment, writer);
-            if (settings.GenerateMetadata)
-            {
-                writer.WriteLine($"[NativeName(NativeNameType.Delegate, \"{field.Name}\")]");
-                writer.WriteLine($"[return: NativeName(NativeNameType.Type, \"{functionType.ReturnType.GetDisplayName()}\")]");
-            }
             writer.WriteLine($"[UnmanagedFunctionPointer(CallingConvention.{functionType.CallingConvention.GetCallingConvention()})]");
             writer.WriteLine($"public unsafe {fieldPrefix}delegate {header};");
             writer.WriteLine();

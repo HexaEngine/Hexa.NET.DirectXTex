@@ -132,7 +132,7 @@
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            Assert.True(DirectXTex.IsSupportedTexture(Device, metadata));
+            Assert.True(DirectXTex.IsSupportedTexture(Device, ref metadata));
         }
 
         [Test]
@@ -152,9 +152,9 @@
             };
 
             ScratchImage image = DirectXTex.CreateScratchImage();
-            DirectXTex.Initialize(image, metadata, CPFlags.None);
+            DirectXTex.Initialize(image, ref metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTexture(Device, image.GetImages(), image.GetImageCount(), metadata, &resource);
+            DirectXTex.CreateTexture(Device, image.GetImages(), image.GetImageCount(), ref metadata, &resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -176,9 +176,9 @@
                 MiscFlags2 = 0,
             };
             ScratchImage image = DirectXTex.CreateScratchImage();
-            DirectXTex.Initialize(image, metadata, CPFlags.None);
+            DirectXTex.Initialize(image, ref metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceView(Device, image.GetImages(), image.GetImageCount(), metadata, &srv);
+            DirectXTex.CreateShaderResourceView(Device, image.GetImages(), image.GetImageCount(), ref metadata, &srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -200,9 +200,9 @@
                 MiscFlags2 = 0,
             };
             ScratchImage image = DirectXTex.CreateScratchImage();
-            DirectXTex.Initialize(image, metadata, CPFlags.None);
+            DirectXTex.Initialize(image, ref metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTextureEx(Device, image.GetImages(), image.GetImageCount(), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
+            DirectXTex.CreateTextureEx(Device, image.GetImages(), image.GetImageCount(), ref metadata, (int)Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -224,9 +224,9 @@
                 MiscFlags2 = 0,
             };
             ScratchImage image = DirectXTex.CreateScratchImage();
-            DirectXTex.Initialize(image, metadata, CPFlags.None);
+            DirectXTex.Initialize(image, ref metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceViewEx(Device, image.GetImages(), image.GetImageCount(), metadata, Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
+            DirectXTex.CreateShaderResourceViewEx(Device, image.GetImages(), image.GetImageCount(), ref metadata, (int)Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, &srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -240,7 +240,7 @@
             Device.CreateTexture2D(&desc, (SubresourceData*)null, (ID3D11Texture2D**)&resource);
 
             ScratchImage image = DirectXTex.CreateScratchImage();
-            DirectXTex.CaptureTexture(Device, DeviceContext, resource, image);
+            DirectXTex.CaptureTexture(Device, DeviceContext, resource, ref image);
 
             resource->Release();
 

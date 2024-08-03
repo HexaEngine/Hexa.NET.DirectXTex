@@ -4,30 +4,58 @@
     using System.Reflection;
     using System.Runtime.InteropServices;
 
+#if !NET5_0_OR_GREATER
+    using HexaGen.Runtime;
+#endif
+
     public static class LibraryLoader
     {
         static LibraryLoader()
         {
+        }
+
+        public static nint LoadLibrary()
+        {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Extension = ".dll";
+                return LoadLocalLibrary("DirectXTex");
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return LoadLocalLibrary("libDirectXTex");
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                Extension = ".dylib";
+                return LoadLocalLibrary("libDirectXTex");
             }
             else
             {
-                Extension = ".so";
+                return LoadLocalLibrary("libDirectXTex");
             }
+        }
+
+        public static string GetExtension()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return ".dll";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return ".dylib";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return ".so";
+            }
+
+            return ".so";
         }
 
         public static void SetImportResolver()
         {
             NativeLibrary.SetDllImportResolver(Assembly.GetExecutingAssembly(), DllImportResolver);
         }
-
-        public static string Extension { get; }
 
         private static nint DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
         {
@@ -51,9 +79,11 @@
 
         public static nint LoadLocalLibrary(string libraryName)
         {
-            if (!libraryName.EndsWith(Extension, StringComparison.OrdinalIgnoreCase))
+            var extension = GetExtension();
+
+            if (!libraryName.EndsWith(extension, StringComparison.OrdinalIgnoreCase))
             {
-                libraryName += Extension;
+                libraryName += extension;
             }
 
             var osPlatform = GetOSPlatform();

@@ -27,26 +27,10 @@
                 AutoSquashTypedef = true,
             };
 
-            for (int i = 0; i < settings.AdditionalArguments.Count; i++)
-            {
-                options.AdditionalArguments.Add(settings.AdditionalArguments[i]);
-            }
-
-            for (int i = 0; i < settings.IncludeFolders.Count; i++)
-            {
-                options.IncludeFolders.Add(settings.IncludeFolders[i]);
-            }
-
-            for (int i = 0; i < settings.SystemIncludeFolders.Count; i++)
-            {
-                options.SystemIncludeFolders.Add(settings.SystemIncludeFolders[i]);
-            }
-
-            for (int i = 0; i < settings.Defines.Count; i++)
-            {
-                options.Defines.Add(settings.Defines[i]);
-            }
-
+            options.AdditionalArguments.AddRange(settings.AdditionalArguments);
+            options.IncludeFolders.AddRange(settings.IncludeFolders);
+            options.SystemIncludeFolders.AddRange(settings.SystemIncludeFolders);
+            options.Defines.AddRange(settings.Defines);
             options.ConfigureForWindowsMsvc(CppTargetCpu.X86_64);
             options.AdditionalArguments.Add("-std=c++17");
 
@@ -97,58 +81,40 @@
                 return;
             }
 
-            List<Task> tasks = new();
-
             if (settings.GenerateEnums)
             {
-                Task taskEnums = new(() => GenerateEnums(compilation, outputPath));
-                tasks.Add(taskEnums);
-                taskEnums.Start();
+                GenerateEnums(compilation, outputPath);
             }
 
             if (settings.GenerateConstants)
             {
-                Task taskConstants = new(() => GenerateConstants(compilation, outputPath));
-                tasks.Add(taskConstants);
-                taskConstants.Start();
+                GenerateConstants(compilation, outputPath);
             }
 
             if (settings.GenerateHandles)
             {
-                Task taskHandles = new(() => GenerateHandles(compilation, outputPath));
-                tasks.Add(taskHandles);
-                taskHandles.RunSynchronously();
+                GenerateHandles(compilation, outputPath);
             }
 
             if (settings.GenerateTypes)
             {
-                Task taskTypes = new(() => GenerateTypes(compilation, outputPath));
-                tasks.Add(taskTypes);
-                taskTypes.RunSynchronously();
+                GenerateTypes(compilation, outputPath);
             }
 
             if (settings.GenerateFunctions)
             {
-                Task taskFuncs = new(() => GenerateFunctions(compilation, outputPath));
-                tasks.Add(taskFuncs);
-                taskFuncs.Start();
+                GenerateFunctions(compilation, outputPath);
             }
 
             if (settings.GenerateExtensions)
             {
-                Task taskExtensions = new(() => GenerateExtensions(compilation, outputPath));
-                tasks.Add(taskExtensions);
-                taskExtensions.Start();
+                GenerateExtensions(compilation, outputPath);
             }
 
             if (settings.GenerateDelegates)
             {
-                Task taskDelegates = new(() => GenerateDelegates(compilation, outputPath));
-                tasks.Add(taskDelegates);
-                taskDelegates.Start();
+                GenerateDelegates(compilation, outputPath);
             }
-
-            Task.WaitAll(tasks.ToArray());
         }
 
         public virtual void Reset()

@@ -14,6 +14,13 @@
     using System.Text.Json.Serialization;
     using System.Xml.Linq;
 
+    public enum ImportType
+    {
+        DllImport,
+        LibraryImport,
+        VTable
+    }
+
     public partial class CsCodeGeneratorSettings : IGeneratorSettings
     {
         public static CsCodeGeneratorSettings Default { get; } = new CsCodeGeneratorSettings()
@@ -268,10 +275,13 @@
         /// </summary>
         public bool GeneratePlaceholderComments { get; set; } = true;
 
-        /// <summary>
-        /// This causes the code generator to use <see cref="System.Runtime.InteropServices.LibraryImportAttribute"/> instead of <see cref="System.Runtime.InteropServices.DllImportAttribute"/>
-        /// </summary>
-        public bool UseLibraryImport { get; set; } = true;
+        public bool UseDllImport => ImportType == ImportType.DllImport;
+
+        public bool UseLibraryImport => ImportType == ImportType.LibraryImport;
+
+        public bool UseVTable => ImportType == ImportType.VTable;
+
+        public ImportType ImportType { get; set; } = ImportType.VTable;
 
         /// <summary>
         /// The generator will generate [NativeName] attributes.
@@ -840,7 +850,7 @@
 
             if (type is CppUnexposedType unexposedType)
             {
-                throw new();
+                throw new($"Stepped on unexposed type '{unexposedType}'");
             }
 
             return string.Empty;
@@ -1442,7 +1452,7 @@
             return GetCsWrappedPointerTypeNameInternal(pointerType.ElementType, true);
         }
 
-        public string GetParameterSignature(IList<CppParameter> parameters, bool canUseOut, bool attributes = true, bool names = true)
+        public string GetParameterSignature(IList<CppParameter> parameters, bool canUseOut, bool attributes = true, bool names = true, bool delegateType = false, bool compatibility = false)
         {
             StringBuilder argumentBuilder = new();
             int index = 0;
@@ -1452,6 +1462,35 @@
                 CppParameter cppParameter = parameters[i];
                 var paramCsTypeName = GetCsTypeName(cppParameter.Type, false);
                 var paramCsName = GetParameterName(i, cppParameter.Name);
+
+                CppType ptrType = cppParameter.Type;
+                int depth = 0;
+                if (cppParameter.Type.IsPointer(ref depth, out var pointerType))
+                {
+                    ptrType = pointerType;
+                }
+
+                if (cppParameter.Type is CppQualifiedType qualifiedType)
+                {
+                    ptrType = qualifiedType.ElementType;
+                }
+
+                if (delegateType && ptrType is CppTypedef typedef && typedef.ElementType.IsDelegate(out var cppFunction))
+                {
+                    if (cppFunction.Parameters.Count == 0)
+                    {
+                        paramCsTypeName = $"delegate*<{GetCsTypeName(cppFunction.ReturnType)}>";
+                    }
+                    else
+                    {
+                        paramCsTypeName = $"delegate*<{GetNamelessParameterSignature(cppFunction.Parameters, false, delegateType)}, {GetCsTypeName(cppFunction.ReturnType)}>";
+                    }
+
+                    while (depth-- > 0)
+                    {
+                        paramCsTypeName += "*";
+                    }
+                }
 
                 if (attributes)
                 {
@@ -1468,6 +1507,11 @@
                 {
                     argumentBuilder.Append("out ");
                     paramCsTypeName = GetCsTypeName(cppTypeDeclaration, false);
+                }
+
+                if (compatibility && paramCsTypeName.Contains('*'))
+                {
+                    paramCsTypeName = "nint";
                 }
 
                 argumentBuilder.Append(paramCsTypeName);
@@ -1488,7 +1532,7 @@
             return argumentBuilder.ToString();
         }
 
-        public string GetNamelessParameterSignature(IList<CppParameter> parameters, bool canUseOut)
+        public string GetNamelessParameterSignature(IList<CppParameter> parameters, bool canUseOut, bool delegateType = false, bool compatibility = false)
         {
             var argumentBuilder = new StringBuilder();
             int index = 0;
@@ -1498,10 +1542,49 @@
                 string direction = string.Empty;
                 var paramCsTypeName = GetCsTypeName(cppParameter.Type, false);
 
+                CppType ptrType = cppParameter.Type;
+                int depth = 0;
+                if (cppParameter.Type.IsPointer(ref depth, out var pointerType))
+                {
+                    ptrType = pointerType;
+                }
+
+                if (cppParameter.Type is CppQualifiedType qualifiedType)
+                {
+                    ptrType = qualifiedType.ElementType;
+                }
+
+                if (delegateType && ptrType is CppTypedef typedef && typedef.ElementType.IsDelegate(out var cppFunction))
+                {
+                    if (cppFunction.Parameters.Count == 0)
+                    {
+                        paramCsTypeName = $"delegate*<{GetCsTypeName(cppFunction.ReturnType)}>";
+                    }
+                    else
+                    {
+                        paramCsTypeName = $"delegate*<{GetNamelessParameterSignature(cppFunction.Parameters, false, delegateType)}, {GetCsTypeName(cppFunction.ReturnType)}>";
+                    }
+
+                    while (depth-- > 0)
+                    {
+                        paramCsTypeName += "*";
+                    }
+                }
+
+                if (paramCsTypeName == "bool")
+                {
+                    paramCsTypeName = "byte";
+                }
+
                 if (canUseOut && cppParameter.Type.CanBeUsedAsOutput(out CppTypeDeclaration? cppTypeDeclaration))
                 {
                     argumentBuilder.Append("out ");
                     paramCsTypeName = GetCsTypeName(cppTypeDeclaration, false);
+                }
+
+                if (compatibility && paramCsTypeName.Contains('*'))
+                {
+                    paramCsTypeName = "nint";
                 }
 
                 argumentBuilder.Append(paramCsTypeName);

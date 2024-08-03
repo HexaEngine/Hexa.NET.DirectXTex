@@ -9,16 +9,19 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = default;
 
-            string inputPath = "assets/textures/test.dds";
-            DirectXTex.LoadFromDDSFile(inputPath, DDSFlags.None, ref metadata, image);
+            string inputPath = "assets/textures/test.png";
+            DirectXTex.LoadFromPNGFile(inputPath, ref metadata, ref image).ThrowIf();
 
             ScratchImage mipChain = DirectXTex.CreateScratchImage();
+
             int mipLevels = 4;
-            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), metadata, TexFilterFlags.Default, (ulong)mipLevels, mipChain);
+            DirectXTex.GenerateMipMaps2(image.GetImages(), 1, ref metadata, TexFilterFlags.ForceNonWic, (ulong)mipLevels, ref mipChain).ThrowIf();
             image.Release();
 
+            metadata = mipChain.GetMetadata();
+
             string outputPath = "test.dds";
-            DirectXTex.SaveToDDSFile2(mipChain.GetImages(), mipChain.GetImageCount(), mipChain.GetMetadata(), DDSFlags.None, outputPath);
+            DirectXTex.SaveToDDSFile2(mipChain.GetImages(), mipChain.GetImageCount(), ref metadata, DDSFlags.None, outputPath).ThrowIf();
 
             mipChain.Release();
         }

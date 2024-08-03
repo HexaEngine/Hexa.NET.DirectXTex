@@ -59,7 +59,7 @@ jobs:
         ./vcpkg/vcpkg install directx-headers --allow-unsupported
         ./vcpkg/vcpkg install directxmath --allow-unsupported
         ./vcpkg/vcpkg install libpng
-        ./vcpkg/vcpkg install libjpeg
+        ./vcpkg/vcpkg install libjpeg-turbo
         ./vcpkg/vcpkg install openexr
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
@@ -71,7 +71,7 @@ jobs:
         ./vcpkg/vcpkg install directx-headers:x64-windows --allow-unsupported
         ./vcpkg/vcpkg install directxmath:x64-windows --allow-unsupported
         ./vcpkg/vcpkg install libpng:x64-windows
-        ./vcpkg/vcpkg install libjpeg:x64-windows
+        ./vcpkg/vcpkg install libjpeg-turbo:x64-windows
         ./vcpkg/vcpkg install openexr:x64-windows
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg

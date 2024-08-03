@@ -53,7 +53,7 @@ jobs:
         ./vcpkg/bootstrap-vcpkg.sh
 
     - name: Install DirectX 12 headers and DirectXMath
-      if: matrix.os != 'windows-latest' || matrix.arch != 'x86_64'
+      if: matrix.os != 'windows-latest'
       run: |
         cd DirectXTex/DirectXTex
         ./vcpkg/vcpkg install directx-headers --allow-unsupported
@@ -68,11 +68,23 @@ jobs:
       if: matrix.arch == 'x86_64' && matrix.os == 'windows-latest'
       run: |
         cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg install directx-headers:x64-windows --allow-unsupported
-        ./vcpkg/vcpkg install directxmath:x64-windows --allow-unsupported
-        ./vcpkg/vcpkg install libpng:x64-windows
-        ./vcpkg/vcpkg install libjpeg-turbo:x64-windows
-        ./vcpkg/vcpkg install openexr:x64-windows
+        ./vcpkg/vcpkg.exe install directx-headers:x64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:x64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:x64-windows
+        ./vcpkg/vcpkg.exe install libjpeg-turbo:x64-windows
+        ./vcpkg/vcpkg.exe install openexr:x64-windows
+      env:
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+    - name: Install DirectX 12 headers and DirectXMath (Win x86)
+      if: matrix.arch == 'x86' && matrix.os == 'windows-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg.exe install directx-headers:x86-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:x86-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:x86-windows
+        ./vcpkg/vcpkg.exe install libjpeg-turbo:x86-windows
+        ./vcpkg/vcpkg.exe install openexr:x86-windows
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
 

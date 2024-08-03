@@ -4,7 +4,6 @@
 cmake_minimum_required(VERSION 3.20)
 
 set(DIRECTXTEX_VERSION 2.0.4)
-set(CMAKE_TOOLCHAIN_FILE "C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
 project(DirectXTex
   VERSION ${DIRECTXTEX_VERSION}
@@ -60,11 +59,7 @@ set(LIBRARY_SOURCES
     DirectXTex/DirectXTex/DirectXTexPMAlpha.cpp
     DirectXTex/DirectXTex/DirectXTexResize.cpp
     DirectXTex/DirectXTex/DirectXTexTGA.cpp
-    DirectXTex/DirectXTex/DirectXTexUtil.cpp
-    DirectXTex/DirectXTex/BCDirectCompute.h
-    DirectXTex/DirectXTex/BCDirectCompute.cpp
-    DirectXTex/DirectXTex/DirectXTexCompressGPU.cpp
-    DirectXTex/DirectXTex/DirectXTexD3D11.cpp)
+    DirectXTex/DirectXTex/DirectXTexUtil.cpp)
 
 if(WIN32)
    list(APPEND LIBRARY_SOURCES

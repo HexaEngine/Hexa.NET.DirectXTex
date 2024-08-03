@@ -10,10 +10,10 @@ jobs:
         include:
           - os: windows-latest
             arch: x86_64
-          - os: windows-latest
-            arch: x86
-          - os: windows-latest
-            arch: arm64
+#          - os: windows-latest
+#            arch: x86
+ #         - os: windows-latest
+ #           arch: arm64
     steps:
     - uses: actions/checkout@v4.1.7
       with:
@@ -112,7 +112,7 @@ jobs:
       if: matrix.os != 'macos-latest'
       run: |
         cd DirectXTex/DirectXTex
-        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/DirectXTex/DirectXTex/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build DirectXTex
       run: cmake --build DirectXTex/DirectXTex/build --config Release

@@ -549,14 +549,14 @@
                     writer.WriteLine($"pStrSize{i} = Utils.GetByteCountUTF16({name});");
                     using (writer.PushBlock($"if (pStrSize{i} >= Utils.MaxStackallocSize)"))
                     {
-                        writer.WriteLine($"pStr{i} = Utils.Alloc<char>(pStrSize{i} + 1);");
+                        writer.WriteLine($"pStr{i} = (char*)Utils.Alloc<byte>(pStrSize{i} + 2);");
                     }
                     using (writer.PushBlock("else"))
                     {
-                        writer.WriteLine($"byte* pStrStack{i} = stackalloc byte[pStrSize{i} + 1];");
+                        writer.WriteLine($"byte* pStrStack{i} = stackalloc byte[pStrSize{i} + 2];");
                         writer.WriteLine($"pStr{i} = (char*)pStrStack{i};");
                     }
-                    writer.WriteLine($"int pStrOffset{i} = Utils.EncodeStringUTF16({name}, pStr{i}, pStrSize{i});");
+                    writer.WriteLine($"int pStrOffset{i} = Utils.EncodeStringUTF16({name}, pStr{i}, pStrSize{i}) / 2;");
                     writer.WriteLine($"pStr{i}[pStrOffset{i}] = '\\0';");
                 }
             }
@@ -597,14 +597,14 @@
                     writer.WriteLine($"pStrSize{i} = Utils.GetByteCountUTF16({name});");
                     using (writer.PushBlock($"if (pStrSize{i} >= Utils.MaxStackallocSize)"))
                     {
-                        writer.WriteLine($"pStr{i} = Utils.Alloc<char>(pStrSize{i} + 1);");
+                        writer.WriteLine($"pStr{i} = (char*)Utils.Alloc<byte>(pStrSize{i} + 2);");
                     }
                     using (writer.PushBlock("else"))
                     {
-                        writer.WriteLine($"byte* pStrStack{i} = stackalloc byte[pStrSize{i} + 1];");
+                        writer.WriteLine($"byte* pStrStack{i} = stackalloc byte[pStrSize{i} + 2];");
                         writer.WriteLine($"pStr{i} = (char*)pStrStack{i};");
                     }
-                    writer.WriteLine($"int pStrOffset{i} = Utils.EncodeStringUTF16({name}, pStr{i}, pStrSize{i});");
+                    writer.WriteLine($"int pStrOffset{i} = Utils.EncodeStringUTF16({name}, pStr{i}, pStrSize{i}) / 2;");
                     writer.WriteLine($"pStr{i}[pStrOffset{i}] = '\\0';");
                 }
             }

@@ -21,13 +21,13 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             TexMetadata metadata = default;
 
-            string inputPath = "assets/textures/test.png";
-            DirectXTex.LoadFromWICFile(inputPath, WICFlags.None, ref metadata, ref image, null).ThrowIfFailed();
+            string inputPath = "assets/textures/test.dds";
+            DirectXTex.LoadFromDDSFile(inputPath, DDSFlags.None, ref metadata, ref image).ThrowIfFailed();
 
             ScratchImage mipChain = DirectXTex.CreateScratchImage();
 
             int mipLevels = 4;
-            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), ref metadata, TexFilterFlags.ForceNonWic, (ulong)mipLevels, ref mipChain).ThrowIfFailed();
+            DirectXTex.GenerateMipMaps2(image.GetImages(), 1, ref metadata, TexFilterFlags.ForceNonWic, (ulong)mipLevels, ref mipChain).ThrowIfFailed();
             image.Release();
 
             metadata = mipChain.GetMetadata();

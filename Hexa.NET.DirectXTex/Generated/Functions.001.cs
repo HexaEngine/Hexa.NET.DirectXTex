@@ -33,14 +33,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -160,14 +160,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = SaveToHDRFileNative(image, pStr0);
@@ -205,14 +205,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				int ret = SaveToHDRFileNative((Image*)pimage, pStr0);
@@ -360,14 +360,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = LoadFromTGAFileNative(pStr0, flags, metadata, image);
@@ -414,14 +414,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -471,14 +471,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (ScratchImage* pimage = &image)
@@ -534,14 +534,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -717,14 +717,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = SaveToTGAFileNative(image, flags, pStr0, metadata);
@@ -762,14 +762,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				int ret = SaveToTGAFileNative((Image*)pimage, flags, pStr0, metadata);
@@ -831,14 +831,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -882,14 +882,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				fixed (TexMetadata* pmetadata = &metadata)
@@ -1040,14 +1040,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = LoadFromWICFileNative(pStr0, flags, metadata, image, getMQR);
@@ -1094,14 +1094,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -1151,14 +1151,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (ScratchImage* pimage = &image)
@@ -1214,14 +1214,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -1606,14 +1606,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = SaveToWICFileNative(image, flags, guidContainerFormat, pStr0, targetFormat, customProps);
@@ -1651,14 +1651,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				int ret = SaveToWICFileNative((Image*)pimage, flags, guidContainerFormat, pStr0, targetFormat, customProps);
@@ -1720,14 +1720,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (Guid* ptargetFormat = &targetFormat)
@@ -1771,14 +1771,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				fixed (Guid* ptargetFormat = &targetFormat)
@@ -1862,14 +1862,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
@@ -1907,14 +1907,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
@@ -1948,14 +1948,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = SaveToWICFile2Native(images, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
@@ -1993,14 +1993,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				int ret = SaveToWICFile2Native((Image*)pimages, nimages, flags, guidContainerFormat, pStr0, targetFormat, customProps);
@@ -2087,14 +2087,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (Guid* ptargetFormat = &targetFormat)
@@ -2138,14 +2138,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				fixed (Guid* ptargetFormat = &targetFormat)
@@ -2185,14 +2185,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (Guid* ptargetFormat = &targetFormat)
@@ -2236,14 +2236,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				fixed (Guid* ptargetFormat = &targetFormat)
@@ -2394,14 +2394,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = LoadFromTGAFile2Native(pStr0, metadata, image);
@@ -2448,14 +2448,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -2505,14 +2505,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (ScratchImage* pimage = &image)
@@ -2568,14 +2568,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -2751,14 +2751,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			int ret = SaveToTGAFile2Native(image, pStr0, metadata);
@@ -2796,14 +2796,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				int ret = SaveToTGAFile2Native((Image*)pimage, pStr0, metadata);
@@ -2865,14 +2865,14 @@ namespace Hexa.NET.DirectXTex
 				pStrSize0 = Utils.GetByteCountUTF16(szFile);
 				if (pStrSize0 >= Utils.MaxStackallocSize)
 				{
-					pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+					pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 				}
 				else
 				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+					byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 					pStr0 = (char*)pStrStack0;
 				}
-				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+				int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 				pStr0[pStrOffset0] = '\0';
 			}
 			fixed (TexMetadata* pmetadata = &metadata)
@@ -2916,14 +2916,14 @@ namespace Hexa.NET.DirectXTex
 					pStrSize0 = Utils.GetByteCountUTF16(szFile);
 					if (pStrSize0 >= Utils.MaxStackallocSize)
 					{
-						pStr0 = Utils.Alloc<char>(pStrSize0 + 1);
+						pStr0 = (char*)Utils.Alloc<byte>(pStrSize0 + 2);
 					}
 					else
 					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
+						byte* pStrStack0 = stackalloc byte[pStrSize0 + 2];
 						pStr0 = (char*)pStrStack0;
 					}
-					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0);
+					int pStrOffset0 = Utils.EncodeStringUTF16(szFile, pStr0, pStrSize0) / 2;
 					pStr0[pStrOffset0] = '\0';
 				}
 				fixed (TexMetadata* pmetadata = &metadata)

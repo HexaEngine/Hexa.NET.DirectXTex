@@ -245,12 +245,6 @@ if(DEFINED XBOX_CONSOLE_TARGET)
     endif()
 endif()
 
-# Add the necessary compiler options for Linux
-if(UNIX AND NOT APPLE)
-    target_compile_options(${PROJECT_NAME} PRIVATE -fshort-wchar)
-    add_definitions(-DUNICODE)
-endif()
-
 if(directxmath_FOUND)
   foreach(t IN LISTS TOOL_EXES)
     target_link_libraries(${t} Microsoft::DirectXMath)

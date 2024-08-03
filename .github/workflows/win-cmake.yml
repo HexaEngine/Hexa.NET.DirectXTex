@@ -1,0 +1,129 @@
+name: Build DirectXTex Libraries
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            arch: x86_64
+          - os: windows-latest
+            arch: x86
+          - os: windows-latest
+            arch: arm64
+    steps:
+    - uses: actions/checkout@v4.1.7
+      with:
+        repository: 'HexaEngine/Hexa.NET.DirectXTex'
+        path: 'DirectXTex'
+        submodules: true
+
+    - name: Install dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
+
+    - name: Install dependencies on macOS
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew update
+        brew install cmake
+
+    - name: Install dependencies on Windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+
+    - name: Install vcpkg (Other)
+      if: matrix.os != 'windows-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        git clone https://github.com/microsoft/vcpkg.git
+        ./vcpkg/bootstrap-vcpkg.sh
+
+    - name: Install vcpkg (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        git clone https://github.com/microsoft/vcpkg.git
+        ./vcpkg/bootstrap-vcpkg.bat
+
+    - name: Install DirectX 12 headers and DirectXMath
+      if: matrix.os != 'windows-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg install directx-headers --allow-unsupported
+        ./vcpkg/vcpkg install directxmath --allow-unsupported
+        ./vcpkg/vcpkg install libpng
+        ./vcpkg/vcpkg install libjpeg-turbo
+        ./vcpkg/vcpkg install openexr
+      env:
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+    - name: Install DirectX 12 headers and DirectXMath on Windows x64
+      if: matrix.arch == 'x86_64' && matrix.os == 'windows-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg.exe install directx-headers:x64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:x64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:x64-windows
+        ./vcpkg/vcpkg.exe install libjpeg:x64-windows
+        ./vcpkg/vcpkg.exe install openexr:x64-windows
+      env:
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+    - name: Install DirectX 12 headers and DirectXMath on Windows x86
+      if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg.exe install directx-headers:x86-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:x86-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:x86-windows
+        ./vcpkg/vcpkg.exe install libjpeg:x86-windows
+        ./vcpkg/vcpkg.exe install openexr:x86-windows
+            
+    - name: Install DirectX 12 headers and DirectXMath on Windows x86
+      if: matrix.os == 'windows-latest' && matrix.arch == 'arm64'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg.exe install directx-headers:arm64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install directxmath:arm64-windows --allow-unsupported
+        ./vcpkg/vcpkg.exe install libpng:arm64-windows
+        ./vcpkg/vcpkg.exe install libjpeg:arm64-windows
+        ./vcpkg/vcpkg.exe install openexr:arm64-windows
+
+    - name: Configure DirectXTex with CMake for macOS ARM64
+      if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
+      run: |
+        cd DirectXTex/DirectXTex 
+        cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure DirectXTex with CMake for macOS
+      if: matrix.arch != 'arm64' && matrix.os == 'macos-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure DirectXTex with CMake
+      if: matrix.os != 'macos-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+
+    - name: Build DirectXTex
+      run: cmake --build DirectXTex/DirectXTex/build --config Release
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4.3.4
+      with:
+        name: ${{ matrix.os }}-${{ matrix.arch }}-artifacts 
+        path: |
+          DirectXTex/DirectXTex/build/bin/Release/*.dll
+          DirectXTex/DirectXTex/build/lib/*.so
+          DirectXTex/DirectXTex/build/lib/*.dylib
+          DirectXTex/DirectXTex/build/bin/CMake/*.dylib
+        if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

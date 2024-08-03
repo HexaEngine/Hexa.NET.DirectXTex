@@ -8,16 +8,16 @@ jobs:
     strategy:
       matrix:
         include:
-#          - os: ubuntu-latest
-#            arch: x86_64
-#          - os: ubuntu-latest
-#            arch: arm64
-#          - os: windows-latest
-#            arch: x86_64
-#          - os: windows-latest
-#            arch: x86
-#          - os: windows-latest
-#            arch: arm64
+          - os: ubuntu-latest
+            arch: x86_64
+          - os: ubuntu-latest
+            arch: arm64
+          - os: windows-latest
+            arch: x86_64
+          - os: windows-latest
+            arch: x86
+          - os: windows-latest
+            arch: arm64
           - os: macos-latest
             arch: x86_64
           - os: macos-latest
@@ -53,10 +53,26 @@ jobs:
         ./vcpkg/bootstrap-vcpkg.sh
 
     - name: Install DirectX 12 headers and DirectXMath
+      if: matrix.arch != 'x86_64' && matrix.os != 'windows-latest'
       run: |
         cd DirectXTex/DirectXTex
         ./vcpkg/vcpkg install directx-headers --allow-unsupported
         ./vcpkg/vcpkg install directxmath --allow-unsupported
+        ./vcpkg/vcpkg install libpng
+        ./vcpkg/vcpkg install libjpeg
+        ./vcpkg/vcpkg install openexr
+      env:
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+    - name: Install DirectX 12 headers and DirectXMath (Win x64)
+      if: matrix.arch == 'x86_64' && matrix.os == 'windows-latest'
+      run: |
+        cd DirectXTex/DirectXTex
+        ./vcpkg/vcpkg install directx-headers:x64-windows --allow-unsupported
+        ./vcpkg/vcpkg install directxmath:x64-windows --allow-unsupported
+        ./vcpkg/vcpkg install libpng:x64-windows
+        ./vcpkg/vcpkg install libjpeg:x64-windows
+        ./vcpkg/vcpkg install openexr:x64-windows
       env:
         VCPKG_ROOT: ${{ github.workspace }}/vcpkg
 
@@ -86,8 +102,8 @@ jobs:
       with:
         name: ${{ matrix.os }}-${{ matrix.arch }}-artifacts 
         path: |
-          DirectXTex/DirectXTex/build/Release/*.dll
-          DirectXTex/DirectXTex/build/*.so
-          DirectXTex/DirectXTex/build/*.dylib
+          DirectXTex/DirectXTex/build/bin/Release/*.dll
+          DirectXTex/DirectXTex/build/lib/*.so
+          DirectXTex/DirectXTex/build/bin/Release/*.dylib
           DirectXTex/DirectXTex/build/bin/CMake/*.dylib
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

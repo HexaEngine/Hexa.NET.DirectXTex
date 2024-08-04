@@ -33,11 +33,11 @@ Install-Package Hexa.NET.DirectXTex
 ```
 Or add it to your .csproj file:
 ```xml
-<PackageReference Include="Hexa.NET.DirectXTex" Version="1.0.2" />
+<PackageReference Include="Hexa.NET.DirectXTex" Version="2.0.0" />
 ```
 A standalone version is also available (without depending on Silk)
 ```xml
-<PackageReference Include="Hexa.NET.DirectXTex.Standalone" Version="1.0.1" />
+<PackageReference Include="Hexa.NET.DirectXTex.Standalone" Version="2.0.0" />
 ```
 
 ## Usage

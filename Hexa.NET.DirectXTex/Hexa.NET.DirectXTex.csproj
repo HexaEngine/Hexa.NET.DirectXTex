@@ -21,7 +21,7 @@
 	<PropertyGroup Condition="'$(Configuration)' != 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex</PackageId>
 		<AssemblyVersion>2.0.4</AssemblyVersion>
-		<PackageVersion>1.0.2</PackageVersion>
+		<PackageVersion>2.0.0</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
@@ -36,7 +36,7 @@
 	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex.Standalone</PackageId>
 		<AssemblyVersion>2.0.4</AssemblyVersion>
-		<PackageVersion>1.0.1</PackageVersion>
+		<PackageVersion>2.0.0</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
@@ -70,6 +70,12 @@
 			<Link>runtimes\linux-x64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<PackagePath>runtimes/linux-x64/native</PackagePath>
+			<Pack>true</Pack>
+		</None>
+		<None Include="..\native\linux-arm64\libDirectXTex.so">
+			<Link>runtimes\linux-arm64\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/linux-arm64/native</PackagePath>
 			<Pack>true</Pack>
 		</None>
 		<None Include="..\native\win-x64\DirectXTex.dll">

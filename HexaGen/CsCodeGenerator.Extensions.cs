@@ -76,7 +76,7 @@
             string filePath = Path.Combine(outputPath, "Extensions.cs");
 
             // Generate Extensions
-            using var writer = new CsCodeWriter(filePath, settings.Namespace, SetupExtensionUsings());
+            using var writer = new CsCodeWriter(filePath, settings.Namespace, SetupExtensionUsings(), settings.HeaderInjectorCallback);
             GenContext context = new(compilation, filePath, writer);
 
             using (writer.PushBlock($"public static unsafe class Extensions"))

@@ -14,13 +14,6 @@
     using System.Text.Json.Serialization;
     using System.Xml.Linq;
 
-    public enum ImportType
-    {
-        DllImport,
-        LibraryImport,
-        VTable
-    }
-
     public partial class CsCodeGeneratorSettings : IGeneratorSettings
     {
         public static CsCodeGeneratorSettings Default { get; } = new CsCodeGeneratorSettings()
@@ -572,6 +565,8 @@
         /// List of the additional arguments passed directly to the C++ Clang compiler. (Default: Empty)
         /// </summary>
         public List<string> AdditionalArguments { get; set; } = new();
+
+        public HeaderInjectorCallback? HeaderInjectorCallback { get; set; }
 
         public void Save(string path)
         {

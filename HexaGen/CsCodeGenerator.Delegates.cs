@@ -54,7 +54,7 @@
             string filePath = Path.Combine(outputPath, "Delegates.cs");
 
             // Generate Delegates
-            using var writer = new CsCodeWriter(filePath, settings.Namespace, SetupDelegateUsings());
+            using var writer = new CsCodeWriter(filePath, settings.Namespace, SetupDelegateUsings(), settings.HeaderInjectorCallback);
 
             GenContext context = new(compilation, filePath, writer);
 

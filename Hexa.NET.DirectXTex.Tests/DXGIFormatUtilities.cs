@@ -135,7 +135,7 @@
             uint height = 64;
             ulong rowPitch = 0;
             ulong slicePitch = 0;
-            HResult result = DirectXTex.ComputePitch((int)Format.FormatR8G8B8A8Uint, width, height, &rowPitch, &slicePitch, CPFlags.None);
+            var result = DirectXTex.ComputePitch((int)Format.FormatR8G8B8A8Uint, width, height, &rowPitch, &slicePitch, CPFlags.None);
             if (!result.IsSuccess)
                 result.Throw();
 

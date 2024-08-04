@@ -61,7 +61,7 @@
             string filePath = Path.Combine(outputPath, "Structures.cs");
 
             // Generate Structures
-            using var writer = new CsSplitCodeWriter(filePath, settings.Namespace, SetupTypeUsings());
+            using var writer = new CsSplitCodeWriter(filePath, settings.Namespace, SetupTypeUsings(), settings.HeaderInjectorCallback);
             GenContext context = new(compilation, filePath, writer);
 
             // Print All classes, structs

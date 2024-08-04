@@ -12,6 +12,7 @@
         private StreamWriter _writer;
         private readonly StringBuilder sb = new();
         private bool capture = true;
+        private readonly HeaderInjectorCallback? injectorCallback;
         private readonly int baseIndentLevel;
         private int linesWritten;
         private int splitCount;
@@ -30,7 +31,7 @@
 
         public int SplitCount => splitCount;
 
-        public CsSplitCodeWriter(string fileName, string @namespace, IList<string> usings, int baseIndentLevel = 2)
+        public CsSplitCodeWriter(string fileName, string @namespace, IList<string> usings, HeaderInjectorCallback? injectorCallback, int baseIndentLevel = 2)
         {
             this.baseIndentLevel = baseIndentLevel;
             _indentStrings = new string[10];
@@ -45,6 +46,7 @@
             _writer = File.CreateText(Path.Combine(path, $"{name}.{splitCount:D3}{extension}"));
 
             FileName = fileName;
+            this.injectorCallback = injectorCallback;
             Namespaces = usings.ToArray();
 
             WriteLineInternal("// ------------------------------------------------------------------------------");
@@ -62,23 +64,28 @@
                 WriteLineInternal($"using {ns};");
             }
 
+        
             if (Namespaces.Length > 0)
             {
                 WriteLineInternal();
             }
+
+            injectorCallback?.Invoke(this, sb);
+
+            _writer.WriteLine(sb);
 
             BeginBlock($"namespace {@namespace}");
         }
 
         private void WriteLineInternal(string line)
         {
-            _writer.WriteLine(line);
+           
             sb.AppendLine(line);
         }
 
         private void WriteLineInternal()
         {
-            _writer.WriteLine();
+          
             sb.AppendLine();
         }
 

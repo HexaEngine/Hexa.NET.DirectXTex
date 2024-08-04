@@ -2,7 +2,7 @@
   "Namespace": "Hexa.NET.DirectXTex",
   "ApiName": "DirectXTex",
   "LibName": "DirectXTex",
-  "Usings": [ "System.Numerics", "Silk.NET.DXGI", "Silk.NET.Direct2D", "Silk.NET.Direct3D11", "Silk.NET.Direct3D12" ],
+  "Usings": [ "System.Numerics" ],
   "EnableExperimentalOptions": true,
   "GenerateConstructorsForStructs": true,
   "GenerateSizeOfStructs": false,
@@ -26,6 +26,14 @@
     "GetLocation",
     "GetMetadataByName",
     "GetEnumerator"
+  ],
+  "IgnoredTypes": [
+    "IWICImagingFactory",
+    "IWICMetadataQueryReader"
+  ],
+  "IgnoredTypedefs": [
+    "IWICImagingFactory",
+    "IWICMetadataQueryReader"
   ],
   "PreserveCaps": [ "" ],
   "Keywords": [ "object", "event" ],

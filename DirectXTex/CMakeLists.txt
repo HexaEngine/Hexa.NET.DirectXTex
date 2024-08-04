@@ -2,8 +2,13 @@
 # Licensed under the MIT License.
 
 cmake_minimum_required(VERSION 3.20)
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
 
 set(DIRECTXTEX_VERSION 2.0.4)
+set(VCPKG_TARGET_TRIPLET arm64-windows-static)
+set(VCPKG_BUILD_TYPE release)
+set(CMAKE_TOOLCHAIN_FILE "C:\\dev\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake")
 
 project(DirectXTex
   VERSION ${DIRECTXTEX_VERSION}
@@ -61,11 +66,21 @@ set(LIBRARY_SOURCES
     DirectXTex/DirectXTex/DirectXTexTGA.cpp
     DirectXTex/DirectXTex/DirectXTexUtil.cpp)
 
+
+
 if(WIN32)
    list(APPEND LIBRARY_SOURCES
        DirectXTex/DirectXTex/DirectXTexFlipRotate.cpp
        DirectXTex/DirectXTex/DirectXTexWIC.cpp)
 endif()
+
+if(BUILD_DX11 AND WIN32)
+    list(APPEND LIBRARY_SOURCES
+        DirectXTex/DirectXTex/BCDirectCompute.h
+        DirectXTex/DirectXTex/BCDirectCompute.cpp
+        DirectXTex/DirectXTex/DirectXTexCompressGPU.cpp
+        DirectXTex/DirectXTex/DirectXTexD3D11.cpp)
+ endif()
 
 if(BUILD_DX12)
    list(APPEND LIBRARY_SOURCES DirectXTex/DirectXTex/DirectXTexD3D12.cpp)
@@ -192,7 +207,7 @@ endif()
 
 # Compiler and linker settings
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE /Wall /GR- /Zc:__cplusplus)
+    target_compile_options(${PROJECT_NAME} PRIVATE /Wall /GR- /Zc:__cplusplus /MT)
     if(NO_WCHAR_T)
       message(STATUS "Using non-native wchar_t as unsigned short")
       target_compile_options(${PROJECT_NAME} PRIVATE "/Zc:wchar_t-")

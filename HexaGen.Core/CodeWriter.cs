@@ -1,6 +1,9 @@
 ﻿namespace HexaGen
 {
     using HexaGen.Core;
+    using System.Text;
+
+    public delegate void HeaderInjectorCallback(ICodeWriter codeWriter, StringBuilder builder);
 
     public sealed class CodeWriter : ICodeWriter, IDisposable
     {

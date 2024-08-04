@@ -68,7 +68,7 @@
         {
             string filePath = Path.Combine(outputPath, "Enumerations.cs");
 
-            using var writer = new CsCodeWriter(filePath, settings.Namespace, SetupEnumUsings());
+            using var writer = new CsCodeWriter(filePath, settings.Namespace, SetupEnumUsings(), settings.HeaderInjectorCallback);
             GenContext context = new(compilation, filePath, writer);
 
             for (int i = 0; i < compilation.Enums.Count; i++)

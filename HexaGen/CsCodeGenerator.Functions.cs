@@ -91,7 +91,7 @@
             DefinedVariationsFunctions.Clear();
 
             // Generate Functions
-            using var writer = new CsSplitCodeWriter(filePath, settings.Namespace, SetupFunctionUsings());
+            using var writer = new CsSplitCodeWriter(filePath, settings.Namespace, SetupFunctionUsings(), settings.HeaderInjectorCallback);
             GenContext context = new(compilation, filePath, writer);
 
             VTableBuilder vTableBuilder = new();
@@ -247,7 +247,7 @@
             {
                 var initString = vTableBuilder.Finish(out var count);
                 string filePathVT = Path.Combine(outputPath, "Functions.VT.cs");
-                using var writerVt = new CsCodeWriter(filePathVT, settings.Namespace, SetupFunctionUsings());
+                using var writerVt = new CsCodeWriter(filePathVT, settings.Namespace, SetupFunctionUsings(), settings.HeaderInjectorCallback);
                 using (writerVt.PushBlock($"public unsafe partial class {settings.ApiName}"))
                 {
                     writerVt.WriteLine("internal static VTable vt;");

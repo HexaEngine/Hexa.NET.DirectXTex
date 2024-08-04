@@ -10,11 +10,13 @@
 using System;
 using HexaGen.Runtime;
 using System.Numerics;
+
+#if !STANDALONE
 using Silk.NET.DXGI;
 using Silk.NET.Direct2D;
 using Silk.NET.Direct3D11;
 using Silk.NET.Direct3D12;
-
+#endif
 namespace Hexa.NET.DirectXTex
 {
 	/// <summary>	/// To be documented.	/// </summary>	[NativeName(NativeNameType.Enum, "FORMAT_TYPE")]

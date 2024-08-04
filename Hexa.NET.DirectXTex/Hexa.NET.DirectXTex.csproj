@@ -28,7 +28,7 @@
 		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
-		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Bindings Wrapper Native</PackageTags>
+		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Linux Bindings Wrapper Native</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -43,7 +43,7 @@
 		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
-		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Bindings Wrapper Native</PackageTags>
+		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Linux Bindings Wrapper Native</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

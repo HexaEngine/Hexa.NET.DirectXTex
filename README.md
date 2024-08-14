@@ -58,11 +58,12 @@ Here's a quick example of how to use Hexa.NET.DirectXTex to load a texture, gene
 
             ScratchImage mipChain = DirectXTex.CreateScratchImage();
             int mipLevels = 4;
-            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), metadata, TexFilterFlags.Default, (ulong)mipLevels, mipChain);
+            DirectXTex.GenerateMipMaps2(image.GetImages(), image.GetImageCount(), ref metadata, TexFilterFlags.Default, (ulong)mipLevels, ref mipChain);
             image.Release();
 
             string outputPath = "test.dds";
-            DirectXTex.SaveToDDSFile2(mipChain.GetImages(), mipChain.GetImageCount(), mipChain.GetMetadata(), DDSFlags.None, outputPath);
+            TexMetadata mipChainMetadata = mipChain.GetMetadata();
+            DirectXTex.SaveToDDSFile2(mipChain.GetImages(), mipChain.GetImageCount(), ref mipChainMetadata, DDSFlags.None, outputPath);
 
             mipChain.Release();
         }

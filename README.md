@@ -23,6 +23,7 @@ DirectXTex is a comprehensive library for handling texture processing in DirectX
 - Mipmap generation and management.
 - Format conversion and resizing.
 - Powerful image processing capabilities.
+- Supporting .NET 8.0 and .netstandard 2.0/2.1
 
 ## Installation
 

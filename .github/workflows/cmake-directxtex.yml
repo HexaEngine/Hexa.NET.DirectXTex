@@ -10,18 +10,32 @@ jobs:
         include:
           - os: ubuntu-latest
             arch: x86_64
+            cmake-arch: x64
+            vcpkg-triplet: x64-linux
           - os: ubuntu-latest
             arch: arm64
+            cmake-arch: aarch64
+            vcpkg-triplet: arm64-linux
           - os: windows-latest
             arch: x86_64
+            cmake-arch: x64
+            vcpkg-triplet: x64-windows-static
           - os: windows-latest
             arch: x86
+            cmake-arch: win32
+            vcpkg-triplet: x86-windows-static
           - os: windows-latest
             arch: arm64
+            cmake-arch: arm64
+            vcpkg-triplet: arm64-windows-static
           - os: macos-latest
             arch: x86_64
+            cmake-arch: x86_64
+            vcpkg-triplet: x64-osx
           - os: macos-latest
             arch: arm64
+            cmake-arch: arm64
+            vcpkg-triplet: arm64-osx
     steps:
     - uses: actions/checkout@v4.1.7
       with:
@@ -35,103 +49,69 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential cmake
 
-    - name: Install dependencies on macOS
-      if: matrix.os == 'macos-latest'
+    - name: Install Cross-Compilation Tools for ARM64
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
       run: |
-        brew update
-        brew install cmake
-
-    - name: Install dependencies on Windows
-      if: matrix.os == 'windows-latest'
-      run: |
-        choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
-
+        sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+        
     - name: Install vcpkg (Other)
       if: matrix.os != 'windows-latest'
       run: |
-        cd DirectXTex/DirectXTex
+        cd DirectXTex
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.sh
+        ./vcpkg/vcpkg install directx-headers --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install directxmath --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install libpng --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install libjpeg-turbo --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install openexr --triplet ${{ matrix.vcpkg-triplet }}
 
     - name: Install vcpkg (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        cd DirectXTex/DirectXTex
+        cd DirectXTex
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.bat
+        ./vcpkg/vcpkg.exe install directx-headers --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install directxmath --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install libpng --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install libjpeg --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install openexr --triplet ${{ matrix.vcpkg-triplet }}
 
-    - name: Install DirectX 12 headers and DirectXMath
-      if: matrix.os != 'windows-latest'
+    - name: Configure cimgui with CMake for ARM64 on Linux
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
       run: |
-        cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg install directx-headers --allow-unsupported
-        ./vcpkg/vcpkg install directxmath --allow-unsupported
-        ./vcpkg/vcpkg install libpng
-        ./vcpkg/vcpkg install libjpeg-turbo
-        ./vcpkg/vcpkg install openexr
-      env:
-        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        cd DirectXTex
+        cmake -S ./ -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
-    - name: Install DirectX 12 headers and DirectXMath on Windows x64
-      if: matrix.arch == 'x86_64' && matrix.os == 'windows-latest'
+    - name: Configure cimgui with CMake on Linux (x86_64)
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
       run: |
-        cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg.exe install directx-headers:x64-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install directxmath:x64-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install libpng:x64-windows
-        ./vcpkg/vcpkg.exe install libjpeg:x64-windows
-        ./vcpkg/vcpkg.exe install openexr:x64-windows
-      env:
-        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        cd DirectXTex
+        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
-    - name: Install DirectX 12 headers and DirectXMath on Windows x86
-      if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
-      run: |
-        cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg.exe install directx-headers:x86-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install directxmath:x86-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install libpng:x86-windows
-        ./vcpkg/vcpkg.exe install libjpeg:x86-windows
-        ./vcpkg/vcpkg.exe install openexr:x86-windows
-            
-    - name: Install DirectX 12 headers and DirectXMath on Windows x86
-      if: matrix.os == 'windows-latest' && matrix.arch == 'arm64'
-      run: |
-        cd DirectXTex/DirectXTex
-        ./vcpkg/vcpkg.exe install directx-headers:arm64-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install directxmath:arm64-windows --allow-unsupported
-        ./vcpkg/vcpkg.exe install libpng:arm64-windows
-        ./vcpkg/vcpkg.exe install libjpeg:arm64-windows
-        ./vcpkg/vcpkg.exe install openexr:arm64-windows
+    - name: Configure cimgui with CMake for macOS
+      if: matrix.os == 'macos-latest'
+      run: | 
+        cd DirectXTex
+        cmake -S ./ -B ./build -DCMAKE_OSX_ARCHITECTURES=${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF 
 
-    - name: Configure DirectXTex with CMake for macOS ARM64
-      if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
-      run: |
-        cd DirectXTex/DirectXTex 
-        cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DENABLE_DX12=OFF -DENABLE_DX11=OFF
-
-    - name: Configure DirectXTex with CMake for macOS
-      if: matrix.arch != 'arm64' && matrix.os == 'macos-latest'
-      run: |
-        cd DirectXTex/DirectXTex
-        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DENABLE_DX12=OFF -DENABLE_DX11=OFF
-
-    - name: Configure DirectXTex with CMake
-      if: matrix.os != 'macos-latest'
-      run: |
-        cd DirectXTex/DirectXTex
-        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake"
+    - name: Configure cimgui with CMake for Windows
+      if: matrix.os == 'windows-latest'
+      run: | 
+        cd DirectXTex
+        cmake -S ./ -B ./build -A ${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_LIBJPEG_SUPPORT=OFF -DENABLE_LIBPNG_SUPPORT=OFF
 
     - name: Build DirectXTex
-      run: cmake --build DirectXTex/DirectXTex/build --config Release
+      run: cmake --build DirectXTex/build --config Release
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4.3.4
       with:
-        name: ${{ matrix.os }}-${{ matrix.arch }}-artifacts 
+        name: DirectXTex-${{ matrix.os }}-${{ matrix.arch }}-artifacts 
         path: |
-          DirectXTex/DirectXTex/build/bin/Release/*.dll
-          DirectXTex/DirectXTex/build/lib/*.so
-          DirectXTex/DirectXTex/build/lib/*.dylib
-          DirectXTex/DirectXTex/build/bin/CMake/*.dylib
+          DirectXTex/build/bin/Release/*.dll
+          DirectXTex/build/lib/*.so
+          DirectXTex/build/lib/*.dylib
+          DirectXTex/build/bin/CMake/*.dylib
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

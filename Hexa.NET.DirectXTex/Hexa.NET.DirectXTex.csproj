@@ -54,7 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HexaGen.Runtime" Version="1.1.4" />
+		<PackageReference Include="HexaGen.Runtime" Version="1.1.13" />
 		<PackageReference Include="HexaGen.Runtime.COM" Version="1.1.4" />
 	</ItemGroup>
 
@@ -108,11 +108,5 @@
 			<PackagePath>runtimes/osx-arm64/native</PackagePath>
 			<Pack>true</Pack>
 		</None>
-	</ItemGroup>
-
-
-
-	<ItemGroup>
-	  <Folder Include="Generated\" />
 	</ItemGroup>
 </Project>

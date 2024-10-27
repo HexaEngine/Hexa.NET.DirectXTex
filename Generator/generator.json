@@ -3,6 +3,7 @@
   "ApiName": "DirectXTex",
   "LibName": "DirectXTex",
   "Usings": [ "System.Numerics" ],
+  "ImportType": "FunctionTable",
   "EnableExperimentalOptions": true,
   "GenerateConstructorsForStructs": true,
   "GenerateSizeOfStructs": false,
@@ -38,7 +39,6 @@
   "PreserveCaps": [ "" ],
   "Keywords": [ "object", "event" ],
   "TypeMappings": {
-    "HRESULT": "HResult",
     "wchar": "char",
     "uint8_t": "byte",
     "uint16_t": "ushort",

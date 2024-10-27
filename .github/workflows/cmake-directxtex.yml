@@ -108,19 +108,19 @@ jobs:
       if: matrix.arch == 'arm64' && matrix.os == 'macos-latest'
       run: |
         cd DirectXTex/DirectXTex 
-        cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+        cmake -S . -B ./build -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake for macOS
       if: matrix.arch != 'arm64' && matrix.os == 'macos-latest'
       run: |
         cd DirectXTex/DirectXTex
-        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure DirectXTex with CMake
       if: matrix.os != 'macos-latest'
       run: |
         cd DirectXTex/DirectXTex
-        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake"
 
     - name: Build DirectXTex
       run: cmake --build DirectXTex/DirectXTex/build --config Release

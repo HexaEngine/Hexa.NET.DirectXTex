@@ -75,7 +75,7 @@ jobs:
         ./vcpkg/vcpkg.exe install directx-headers --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
         ./vcpkg/vcpkg.exe install directxmath --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
         ./vcpkg/vcpkg.exe install libpng --triplet ${{ matrix.vcpkg-triplet }}
-        ./vcpkg/vcpkg.exe install libjpeg --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install libjpeg-turbo --triplet ${{ matrix.vcpkg-triplet }}
         ./vcpkg/vcpkg.exe install openexr --triplet ${{ matrix.vcpkg-triplet }}
 
     - name: Configure cimgui with CMake for ARM64 on Linux

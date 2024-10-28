@@ -75,14 +75,14 @@ jobs:
         ./vcpkg/vcpkg.exe install directx-headers --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
         ./vcpkg/vcpkg.exe install directxmath --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
         ./vcpkg/vcpkg.exe install libpng --triplet ${{ matrix.vcpkg-triplet }}
-        ./vcpkg/vcpkg.exe install libjpeg --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install libjpeg-turbo --triplet ${{ matrix.vcpkg-triplet }}
         ./vcpkg/vcpkg.exe install openexr --triplet ${{ matrix.vcpkg-triplet }}
 
     - name: Configure cimgui with CMake for ARM64 on Linux
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
       run: |
         cd DirectXTex
-        cmake -S ./ -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+        cmake -S ./ -B ./build -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF
 
     - name: Configure cimgui with CMake on Linux (x86_64)
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
@@ -100,7 +100,7 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: | 
         cd DirectXTex
-        cmake -S ./ -B ./build -A ${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_LIBJPEG_SUPPORT=OFF -DENABLE_LIBPNG_SUPPORT=OFF
+        cmake -S ./ -B ./build -A ${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }}
 
     - name: Build DirectXTex
       run: cmake --build DirectXTex/build --config Release

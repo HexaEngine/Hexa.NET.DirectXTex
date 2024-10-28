@@ -2,8 +2,12 @@
 # Licensed under the MIT License.
 
 cmake_minimum_required(VERSION 3.20)
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+if(MSVC)
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+else()
+    # Add any Linux-specific flags here if necessary
+endif()
 
 set(DIRECTXTEX_VERSION 2.0.4)
 

@@ -31,6 +31,11 @@
 		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Linux Bindings Wrapper Native</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
@@ -46,6 +51,11 @@
 		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Linux Bindings Wrapper Native</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>

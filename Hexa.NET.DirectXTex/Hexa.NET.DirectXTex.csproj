@@ -35,8 +35,8 @@
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex.Standalone</PackageId>
-		<AssemblyVersion>2.0.4</AssemblyVersion>
-		<PackageVersion>2.0.0</PackageVersion>
+		<AssemblyVersion>2.0.5</AssemblyVersion>
+		<PackageVersion>2.0.1</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>

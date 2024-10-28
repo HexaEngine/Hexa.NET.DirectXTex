@@ -56,9 +56,11 @@ jobs:
         cd DirectXTex
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.sh
+        ./vcpkg/vcpkg install directxmath --allow-unsupported --triplet=arm64-android
         ./vcpkg/vcpkg install libpng --triplet=arm64-android
         ./vcpkg/vcpkg install libjpeg-turbo --triplet=arm64-android
-        ./vcpkg/vcpkg install openexr --triplet=arm64-android      
+        ./vcpkg/vcpkg install openexr --triplet=arm64-android     
+        ./vcpkg/vcpkg install directxmath --allow-unsupported -triplet=x64-android
         ./vcpkg/vcpkg install libpng --triplet=x64-android
         ./vcpkg/vcpkg install libjpeg-turbo --triplet=x64-android
         ./vcpkg/vcpkg install openexr --triplet=x64-android

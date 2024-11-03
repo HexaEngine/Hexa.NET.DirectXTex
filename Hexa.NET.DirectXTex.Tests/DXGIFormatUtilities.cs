@@ -133,11 +133,9 @@
         {
             uint width = 64;
             uint height = 64;
-            ulong rowPitch = 0;
-            ulong slicePitch = 0;
-            var result = DirectXTex.ComputePitch((int)Format.FormatR8G8B8A8Uint, width, height, &rowPitch, &slicePitch, CPFlags.None);
-            if (!result.IsSuccess)
-                result.Throw();
+            nuint rowPitch = 0;
+            nuint slicePitch = 0;
+            DirectXTex.ComputePitch((int)Format.FormatR8G8B8A8Uint, width, height, &rowPitch, &slicePitch, CPFlags.None).ThrowIf();
 
             ulong rowPitch2 = width * 4;
             ulong slicePitch2 = rowPitch2 * height;
@@ -179,7 +177,7 @@
         [Test]
         public void MakeTypelessFLOAT()
         {
-            var result = DirectXTex.MakeTypelessFLOA((int)Format.FormatR32G32B32A32Typeless);
+            var result = DirectXTex.MakeTypelessFLOAT((int)Format.FormatR32G32B32A32Typeless);
             Assert.That((Format)result, Is.EqualTo(Format.FormatR32G32B32A32Float));
         }
     }

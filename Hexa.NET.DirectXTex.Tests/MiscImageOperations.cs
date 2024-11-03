@@ -75,7 +75,7 @@
 
         private static Vector4 maxLum = Vector4.Zero;
 
-        private static void EvaluateImageFunc(Vector4* pixels, ulong width, ulong y)
+        private static void EvaluateImageFunc(Vector4* pixels, nuint width, nuint y)
         {
             for (nuint j = 0; j < width; ++j)
             {
@@ -121,7 +121,7 @@
         [Test]
         public void TransformImage()
         {
-            static void func(Vector4* outPixels, Vector4* inPixels, ulong width, ulong y)
+            static void func(Vector4* outPixels, Vector4* inPixels, nuint width, nuint y)
             {
                 Vector4 s_chromaKey = new(0.0f, 1.0f, 0.0f, 0.0f);
                 Vector4 s_tolerance = new(0.2f, 0.2f, 0.2f, 0.0f);

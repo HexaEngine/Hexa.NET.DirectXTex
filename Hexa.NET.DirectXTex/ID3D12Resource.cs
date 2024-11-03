@@ -1,6 +1,5 @@
 ﻿namespace Hexa.NET.DirectXTex
 {
-#if STANDALONE
     using System;
     using System.Runtime.InteropServices;
 
@@ -155,5 +154,4 @@
             return new(lpVtbl);
         }
     }
-#endif
 }

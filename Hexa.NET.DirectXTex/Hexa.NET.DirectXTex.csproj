@@ -6,22 +6,16 @@
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
+		<LangVersion>12</LangVersion>
+
 		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
 		<EnableAotAnalyzer>true</EnableAotAnalyzer>
 		<IsAotCompatible>true</IsAotCompatible>
-		<Configurations>Debug;Release;Standalone</Configurations>
-		<LangVersion>12</LangVersion>
-	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
-		<DefineConstants>$(DefineConstants);STANDALONE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)' != 'Standalone'">
 		<PackageId>Hexa.NET.DirectXTex</PackageId>
 		<AssemblyVersion>2.0.5</AssemblyVersion>
-		<PackageVersion>2.0.1</PackageVersion>
+		<PackageVersion>2.0.2</PackageVersion>
 		<Authors>Juna</Authors>
 		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
 		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
@@ -35,27 +29,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)' == 'Standalone'">
-		<PackageId>Hexa.NET.DirectXTex.Standalone</PackageId>
-		<AssemblyVersion>2.0.5</AssemblyVersion>
-		<PackageVersion>2.0.1</PackageVersion>
-		<Authors>Juna</Authors>
-		<AssemblyName>Hexa.NET.DirectXTex</AssemblyName>
-		<PackageProjectUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/HexaEngine/Hexa.NET.DirectXTex</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<Description>A .NET wrapper for the DirectXTex library (2.0.4, June 2024).</Description>
-		<PackageTags>DirectXTex D3D11 D3D12 WIC Hexa HexaGen Source Generator C# .NET DotNet Sharp Windows macOS Linux Bindings Wrapper Native</PackageTags>
-		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NoWarn>$(NoWarn);1591</NoWarn>
-
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>		
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -65,14 +39,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="HexaGen.Runtime" Version="1.1.13" />
-		<PackageReference Include="HexaGen.Runtime.COM" Version="1.1.4" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)' != 'Standalone'">
-		<PackageReference Include="Silk.NET.Direct2D" Version="2.17.1" />
-		<PackageReference Include="Silk.NET.Direct3D11" Version="2.17.1" />
-		<PackageReference Include="Silk.NET.Direct3D12" Version="2.17.1" />
-		<PackageReference Include="Silk.NET.DXGI" Version="2.17.1" />
+		<PackageReference Include="HexaGen.Runtime.COM" Version="1.1.6" />
 	</ItemGroup>
 
 	<ItemGroup>

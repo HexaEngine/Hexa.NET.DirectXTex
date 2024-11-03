@@ -16,6 +16,10 @@
 		<PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
 		<PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
 		<PackageReference Include="coverlet.collector" Version="3.2.0" />
+		<PackageReference Include="Silk.NET.Direct2D" Version="2.17.1" />
+		<PackageReference Include="Silk.NET.Direct3D11" Version="2.17.1" />
+		<PackageReference Include="Silk.NET.Direct3D12" Version="2.17.1" />
+		<PackageReference Include="Silk.NET.DXGI" Version="2.17.1" />
 	</ItemGroup>
 
 	<ItemGroup>

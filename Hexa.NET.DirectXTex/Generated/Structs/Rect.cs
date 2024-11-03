@@ -13,12 +13,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using HexaGen.Runtime;
 using System.Numerics;
-#if !STANDALONE
-using Silk.NET.DXGI;
-using Silk.NET.Direct2D;
-using Silk.NET.Direct3D11;
-using Silk.NET.Direct3D12;
-#endif
 
 namespace Hexa.NET.DirectXTex
 {
@@ -34,34 +28,34 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "x")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong X;
+		public nuint X;
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "y")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong Y;
+		public nuint Y;
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "w")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong W;
+		public nuint W;
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "h")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong H;
+		public nuint H;
 
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe Rect(ulong x = default, ulong y = default, ulong w = default, ulong h = default)
+		public unsafe Rect(nuint x = default, nuint y = default, nuint w = default, nuint h = default)
 		{
 			X = x;
 			Y = y;

@@ -19,7 +19,7 @@
             };
 
             byte[] data = new byte[8192];
-            ulong required;
+            nuint required;
             fixed (byte* ptr = data)
             {
                 DirectXTex.EncodeDDSHeader(ref metadata, DDSFlags.None, ptr, 8192, &required);

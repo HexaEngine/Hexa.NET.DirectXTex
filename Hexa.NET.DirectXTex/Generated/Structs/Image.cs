@@ -13,12 +13,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using HexaGen.Runtime;
 using System.Numerics;
-#if !STANDALONE
-using Silk.NET.DXGI;
-using Silk.NET.Direct2D;
-using Silk.NET.Direct3D11;
-using Silk.NET.Direct3D12;
-#endif
 
 namespace Hexa.NET.DirectXTex
 {
@@ -34,14 +28,14 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "width")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong Width;
+		public nuint Width;
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "height")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong Height;
+		public nuint Height;
 
 		/// <summary>
 		/// To be documented.
@@ -55,14 +49,14 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Field, "rowPitch")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong RowPitch;
+		public nuint RowPitch;
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Field, "slicePitch")]
 		[NativeName(NativeNameType.Type, "size_t")]
-		public ulong SlicePitch;
+		public nuint SlicePitch;
 
 		/// <summary>
 		/// To be documented.
@@ -75,7 +69,7 @@ namespace Hexa.NET.DirectXTex
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe Image(ulong width = default, ulong height = default, int format = default, ulong rowPitch = default, ulong slicePitch = default, byte* pixels = default)
+		public unsafe Image(nuint width = default, nuint height = default, int format = default, nuint rowPitch = default, nuint slicePitch = default, byte* pixels = default)
 		{
 			Width = width;
 			Height = height;

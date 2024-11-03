@@ -22,9 +22,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.InitializeNative(img, mdata, flags);
+			HResult ret = DirectXTex.InitializeNative(img, mdata, flags);
 			return ret;
 		}
 
@@ -33,11 +33,11 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (TexMetadata* pmdata = &mdata)
 			{
-				int ret = DirectXTex.InitializeNative(img, (TexMetadata*)pmdata, flags);
+				HResult ret = DirectXTex.InitializeNative(img, (TexMetadata*)pmdata, flags);
 				return ret;
 			}
 		}
@@ -47,86 +47,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize1D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] ulong length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] nuint length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] nuint length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] ulong length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] nuint length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] ulong length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] nuint length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] ulong length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize1D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize1D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "length")] [NativeName(NativeNameType.Type, "size_t")] nuint length, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
+			HResult ret = DirectXTex.Initialize1DNative(img, fmt, length, arraySize, mipLevels, flags);
 			return ret;
 		}
 
@@ -135,174 +58,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize2D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] ulong arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize2D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize2D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "arraySize")] [NativeName(NativeNameType.Type, "size_t")] nuint arraySize, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
+			HResult ret = DirectXTex.Initialize2DNative(img, fmt, width, height, arraySize, mipLevels, flags);
 			return ret;
 		}
 
@@ -311,174 +69,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize3D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3D")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3D(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
+			HResult ret = DirectXTex.Initialize3DNative(img, fmt, width, height, depth, mipLevels, flags);
 			return ret;
 		}
 
@@ -487,174 +80,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeCube")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] ulong mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] ulong nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] ulong height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] ulong width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCube")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCube(this ScratchImage img, [NativeName(NativeNameType.Param, "fmt")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int fmt, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "nCubes")] [NativeName(NativeNameType.Type, "size_t")] nuint nCubes, [NativeName(NativeNameType.Param, "mipLevels")] [NativeName(NativeNameType.Type, "size_t")] nuint mipLevels, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
+			HResult ret = DirectXTex.InitializeCubeNative(img, fmt, width, height, nCubes, mipLevels, flags);
 			return ret;
 		}
 
@@ -663,9 +91,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeFromImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeFromImage(this ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeFromImage(this ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.InitializeFromImageNative(img, srcImage, allow1D ? (byte)1 : (byte)0, flags);
+			HResult ret = DirectXTex.InitializeFromImageNative(img, srcImage, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
 		}
 
@@ -674,9 +102,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (byte)1 : (byte)0, flags);
+			HResult ret = DirectXTex.InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
 		}
 
@@ -685,36 +113,11 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
-				int ret = DirectXTex.InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (byte)1 : (byte)0, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (byte)1 : (byte)0, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = DirectXTex.InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (byte)1 : (byte)0, flags);
+				HResult ret = DirectXTex.InitializeArrayFromImagesNative(img, (Image*)pimages, nImages, allow1D ? (byte)1 : (byte)0, flags);
 				return ret;
 			}
 		}
@@ -724,9 +127,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeCubeFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.InitializeCubeFromImagesNative(img, images, nImages, flags);
+			HResult ret = DirectXTex.InitializeCubeFromImagesNative(img, images, nImages, flags);
 			return ret;
 		}
 
@@ -735,36 +138,11 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeCubeFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] ulong nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
-				int ret = DirectXTex.InitializeCubeFromImagesNative(img, (Image*)pimages, nImages, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCubeFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.InitializeCubeFromImagesNative(img, images, nImages, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "InitializeCubeFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = DirectXTex.InitializeCubeFromImagesNative(img, (Image*)pimages, nImages, flags);
+				HResult ret = DirectXTex.InitializeCubeFromImagesNative(img, (Image*)pimages, nImages, flags);
 				return ret;
 			}
 		}
@@ -774,9 +152,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize3DFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
-			int ret = DirectXTex.Initialize3DFromImagesNative(img, images, depth, flags);
+			HResult ret = DirectXTex.Initialize3DFromImagesNative(img, images, depth, flags);
 			return ret;
 		}
 
@@ -785,36 +163,11 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize3DFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] ulong depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
-				int ret = DirectXTex.Initialize3DFromImagesNative(img, (Image*)pimages, depth, flags);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3DFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			int ret = DirectXTex.Initialize3DFromImagesNative(img, images, depth, flags);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "Initialize3DFromImages")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
-		{
-			fixed (Image* pimages = &images)
-			{
-				int ret = DirectXTex.Initialize3DFromImagesNative(img, (Image*)pimages, depth, flags);
+				HResult ret = DirectXTex.Initialize3DFromImagesNative(img, (Image*)pimages, depth, flags);
 				return ret;
 			}
 		}
@@ -856,83 +209,6 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetImage")]
 		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] ulong slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] ulong item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
-		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] ulong mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
-		{
-			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
 		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
 		{
 			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
@@ -955,9 +231,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetImageCount")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
-		public static ulong GetImageCount(this ScratchImage img)
+		public static nuint GetImageCount(this ScratchImage img)
 		{
-			ulong ret = DirectXTex.GetImageCountNative(img);
+			nuint ret = DirectXTex.GetImageCountNative(img);
 			return ret;
 		}
 
@@ -975,11 +251,22 @@ namespace Hexa.NET.DirectXTex
 		/// <summary>
 		/// To be documented.
 		/// </summary>
+		[NativeName(NativeNameType.Func, "GetPixels")]
+		[return: NativeName(NativeNameType.Type, "uint8_t*")]
+		public static string GetPixelsS(this ScratchImage img)
+		{
+			string ret = Utils.DecodeStringUTF8(DirectXTex.GetPixelsNative(img));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
 		[NativeName(NativeNameType.Func, "GetPixelsSize")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
-		public static ulong GetPixelsSize(this ScratchImage img)
+		public static nuint GetPixelsSize(this ScratchImage img)
 		{
-			ulong ret = DirectXTex.GetPixelsSizeNative(img);
+			nuint ret = DirectXTex.GetPixelsSizeNative(img);
 			return ret;
 		}
 
@@ -999,20 +286,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "BlobInitialize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size)
+		public static HResult Initialize(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size)
 		{
-			int ret = DirectXTex.BlobInitializeNative(blob, size);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "BlobInitialize")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Initialize(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size)
-		{
-			int ret = DirectXTex.BlobInitializeNative(blob, size);
+			HResult ret = DirectXTex.BlobInitializeNative(blob, size);
 			return ret;
 		}
 
@@ -1042,9 +318,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "BlobGetBufferSize")]
 		[return: NativeName(NativeNameType.Type, "size_t")]
-		public static ulong GetBufferSize(this Blob blob)
+		public static nuint GetBufferSize(this Blob blob)
 		{
-			ulong ret = DirectXTex.BlobGetBufferSizeNative(blob);
+			nuint ret = DirectXTex.BlobGetBufferSizeNative(blob);
 			return ret;
 		}
 
@@ -1053,20 +329,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "BlobResize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size)
+		public static HResult Resize(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size)
 		{
-			int ret = DirectXTex.BlobResizeNative(blob, size);
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		[NativeName(NativeNameType.Func, "BlobResize")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Resize(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size)
-		{
-			int ret = DirectXTex.BlobResizeNative(blob, size);
+			HResult ret = DirectXTex.BlobResizeNative(blob, size);
 			return ret;
 		}
 
@@ -1075,20 +340,9 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "BlobTrim")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Trim(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] ulong size)
+		public static HResult Trim(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size)
 		{
-			int ret = DirectXTex.BlobTrimNative(blob, size);
-			return ret;
-		}
-
-		/// <summary>
-		/// Reallocate for a new size<br/>
-		/// </summary>
-		[NativeName(NativeNameType.Func, "BlobTrim")]
-		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static int Trim(this Blob blob, [NativeName(NativeNameType.Param, "size")] [NativeName(NativeNameType.Type, "size_t")] nuint size)
-		{
-			int ret = DirectXTex.BlobTrimNative(blob, size);
+			HResult ret = DirectXTex.BlobTrimNative(blob, size);
 			return ret;
 		}
 

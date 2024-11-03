@@ -10,11 +10,7 @@
   "GenerateDelegates": true,
   "GenerateMetadata": true,
   "BoolType": 0,
-  "KnownConstantNames": {},
   "KnownEnumValueNames": { "Blob": "BlobRelease" },
-  "KnownEnumPrefixes": {},
-  "KnownExtensionNames": {
-  },
   "KnownMemberFunctions": { "TexMetadata": [ "ComputeIndex", "IsCubemap", "IsPMAlpha", "SetAlphaMode", "GetAlphaMode", "IsVolumemap" ] },
   "IgnoredParts": [ "bit" ],
   "IgnoredFunctions": [
@@ -36,8 +32,6 @@
     "IWICImagingFactory",
     "IWICMetadataQueryReader"
   ],
-  "PreserveCaps": [ "" ],
-  "Keywords": [ "object", "event" ],
   "TypeMappings": {
     "wchar": "char",
     "uint8_t": "byte",

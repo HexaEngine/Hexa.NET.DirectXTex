@@ -22,7 +22,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "SetCustomProps")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void SetCustomProps([NativeName(NativeNameType.Param, "pBag")] [NativeName(NativeNameType.Type, "IPropertyBag2*")] void* pBag);
+	public unsafe delegate void SetCustomProps([NativeName(NativeNameType.Param, "pBag")] [NativeName(NativeNameType.Type, "IPropertyBag2 *")] void* pBag);
 
 	#else
 	/// <summary>
@@ -30,7 +30,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "SetCustomProps")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void SetCustomProps([NativeName(NativeNameType.Param, "pBag")] [NativeName(NativeNameType.Type, "IPropertyBag2*")] nint pBag);
+	public unsafe delegate void SetCustomProps([NativeName(NativeNameType.Param, "pBag")] [NativeName(NativeNameType.Type, "IPropertyBag2 *")] nint pBag);
 
 	#endif
 
@@ -40,7 +40,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "GetMQR")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void GetMQR([NativeName(NativeNameType.Param, "qMqr")] [NativeName(NativeNameType.Type, "IWICMetadataQueryReader*")] void* qMqr);
+	public unsafe delegate void GetMQR([NativeName(NativeNameType.Param, "qMqr")] [NativeName(NativeNameType.Type, "IWICMetadataQueryReader *")] void* qMqr);
 
 	#else
 	/// <summary>
@@ -48,7 +48,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "GetMQR")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void GetMQR([NativeName(NativeNameType.Param, "qMqr")] [NativeName(NativeNameType.Type, "IWICMetadataQueryReader*")] nint qMqr);
+	public unsafe delegate void GetMQR([NativeName(NativeNameType.Param, "qMqr")] [NativeName(NativeNameType.Type, "IWICMetadataQueryReader *")] nint qMqr);
 
 	#endif
 
@@ -58,7 +58,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "EvaluateImageFunc")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void EvaluateImageFunc([NativeName(NativeNameType.Param, "pixels")] [NativeName(NativeNameType.Type, "const XMVECTOR*")] Vector4* pixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
+	public unsafe delegate void EvaluateImageFunc([NativeName(NativeNameType.Param, "pixels")] [NativeName(NativeNameType.Type, "XMVECTOR const *")] Vector4* pixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
 
 	#else
 	/// <summary>
@@ -66,7 +66,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "EvaluateImageFunc")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void EvaluateImageFunc([NativeName(NativeNameType.Param, "pixels")] [NativeName(NativeNameType.Type, "const XMVECTOR*")] nint pixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
+	public unsafe delegate void EvaluateImageFunc([NativeName(NativeNameType.Param, "pixels")] [NativeName(NativeNameType.Type, "XMVECTOR const *")] nint pixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
 
 	#endif
 
@@ -76,7 +76,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "TransformImageFunc")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void TransformImageFunc([NativeName(NativeNameType.Param, "outPixels")] [NativeName(NativeNameType.Type, "XMVECTOR*")] Vector4* outPixels, [NativeName(NativeNameType.Param, "inPixels")] [NativeName(NativeNameType.Type, "const XMVECTOR*")] Vector4* inPixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
+	public unsafe delegate void TransformImageFunc([NativeName(NativeNameType.Param, "outPixels")] [NativeName(NativeNameType.Type, "XMVECTOR *")] Vector4* outPixels, [NativeName(NativeNameType.Param, "inPixels")] [NativeName(NativeNameType.Type, "XMVECTOR const *")] Vector4* inPixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
 
 	#else
 	/// <summary>
@@ -84,7 +84,7 @@ namespace Hexa.NET.DirectXTex
 	/// </summary>
 	[NativeName(NativeNameType.Delegate, "TransformImageFunc")]
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public unsafe delegate void TransformImageFunc([NativeName(NativeNameType.Param, "outPixels")] [NativeName(NativeNameType.Type, "XMVECTOR*")] nint outPixels, [NativeName(NativeNameType.Param, "inPixels")] [NativeName(NativeNameType.Type, "const XMVECTOR*")] nint inPixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
+	public unsafe delegate void TransformImageFunc([NativeName(NativeNameType.Param, "outPixels")] [NativeName(NativeNameType.Type, "XMVECTOR *")] nint outPixels, [NativeName(NativeNameType.Param, "inPixels")] [NativeName(NativeNameType.Type, "XMVECTOR const *")] nint inPixels, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "y")] [NativeName(NativeNameType.Type, "size_t")] nuint y);
 
 	#endif
 

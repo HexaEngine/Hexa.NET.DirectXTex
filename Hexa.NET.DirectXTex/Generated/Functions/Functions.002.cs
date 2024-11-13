@@ -23,7 +23,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -40,7 +40,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Resize2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult Resize2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "width")] [NativeName(NativeNameType.Type, "size_t")] nuint width, [NativeName(NativeNameType.Param, "height")] [NativeName(NativeNameType.Type, "size_t")] nuint height, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -61,7 +61,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Convert")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ConvertNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		internal static HResult ConvertNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, int, TexFilterFlags, float, ScratchImage*, HResult>)funcTable[98])(srcImage, format, filter, threshold, image);
@@ -75,7 +75,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			HResult ret = ConvertNative(srcImage, format, filter, threshold, image);
 			return ret;
@@ -86,7 +86,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -100,7 +100,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ScratchImage* pimage = &image)
 			{
@@ -114,7 +114,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Convert([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -132,7 +132,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult Convert2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		internal static HResult Convert2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, int, TexFilterFlags, float, ScratchImage*, HResult>)funcTable[99])(srcImages, nimages, metadata, format, filter, threshold, result);
@@ -146,7 +146,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			HResult ret = Convert2Native(srcImages, nimages, metadata, format, filter, threshold, result);
 			return ret;
@@ -157,7 +157,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -171,7 +171,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -185,7 +185,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -202,7 +202,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ScratchImage* presult = &result)
 			{
@@ -216,7 +216,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -233,7 +233,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -250,7 +250,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Convert2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult Convert2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -271,7 +271,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ConvertToSinglePlaneNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		internal static HResult ConvertToSinglePlaneNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, ScratchImage*, HResult>)funcTable[100])(srcImage, image);
@@ -285,7 +285,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			HResult ret = ConvertToSinglePlaneNative(srcImage, image);
 			return ret;
@@ -296,7 +296,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -310,7 +310,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ScratchImage* pimage = &image)
 			{
@@ -324,7 +324,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult ConvertToSinglePlane([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -342,7 +342,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ConvertToSinglePlane2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		internal static HResult ConvertToSinglePlane2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, ScratchImage*, HResult>)funcTable[101])(srcImages, nimages, metadata, image);
@@ -356,7 +356,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			HResult ret = ConvertToSinglePlane2Native(srcImages, nimages, metadata, image);
 			return ret;
@@ -367,7 +367,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -381,7 +381,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -395,7 +395,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -412,7 +412,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ScratchImage* pimage = &image)
 			{
@@ -426,7 +426,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -443,7 +443,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -460,7 +460,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ConvertToSinglePlane2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult ConvertToSinglePlane2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -481,7 +481,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult GenerateMipMapsNative([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] byte allow1D)
+		internal static HResult GenerateMipMapsNative([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] byte allow1D)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, TexFilterFlags, nuint, ScratchImage*, byte, HResult>)funcTable[102])(baseImage, filter, levels, mipChain, allow1D);
@@ -495,7 +495,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
+		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
 		{
 			HResult ret = GenerateMipMapsNative(baseImage, filter, levels, mipChain, allow1D ? (byte)1 : (byte)0);
 			return ret;
@@ -506,7 +506,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
+		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
 		{
 			fixed (Image* pbaseImage = &baseImage)
 			{
@@ -520,7 +520,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
+		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
 		{
 			fixed (ScratchImage* pmipChain = &mipChain)
 			{
@@ -534,7 +534,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
+		public static HResult GenerateMipMaps([NativeName(NativeNameType.Param, "baseImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image baseImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D)
 		{
 			fixed (Image* pbaseImage = &baseImage)
 			{
@@ -552,7 +552,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult GenerateMipMaps2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		internal static HResult GenerateMipMaps2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, TexFilterFlags, nuint, ScratchImage*, HResult>)funcTable[103])(srcImages, nimages, metadata, filter, levels, mipChain);
@@ -566,7 +566,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			HResult ret = GenerateMipMaps2Native(srcImages, nimages, metadata, filter, levels, mipChain);
 			return ret;
@@ -577,7 +577,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -591,7 +591,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -605,7 +605,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -622,7 +622,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (ScratchImage* pmipChain = &mipChain)
 			{
@@ -636,7 +636,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -653,7 +653,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -670,7 +670,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -692,7 +692,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult GenerateMipMaps3DNative([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		internal static HResult GenerateMipMaps3DNative([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexFilterFlags, nuint, ScratchImage*, HResult>)funcTable[104])(baseImages, depth, filter, levels, mipChain);
@@ -707,7 +707,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			HResult ret = GenerateMipMaps3DNative(baseImages, depth, filter, levels, mipChain);
 			return ret;
@@ -719,7 +719,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (Image* pbaseImages = &baseImages)
 			{
@@ -734,7 +734,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (ScratchImage* pmipChain = &mipChain)
 			{
@@ -749,7 +749,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps3D([NativeName(NativeNameType.Param, "baseImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image baseImages, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (Image* pbaseImages = &baseImages)
 			{
@@ -767,7 +767,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult GenerateMipMaps3D2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		internal static HResult GenerateMipMaps3D2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexFilterFlags, nuint, ScratchImage*, HResult>)funcTable[105])(srcImages, nimages, filter, levels, mipChain);
@@ -781,7 +781,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			HResult ret = GenerateMipMaps3D2Native(srcImages, nimages, filter, levels, mipChain);
 			return ret;
@@ -792,7 +792,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -806,7 +806,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (ScratchImage* pmipChain = &mipChain)
 			{
@@ -820,7 +820,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GenerateMipMaps3D2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult GenerateMipMaps3D2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "levels")] [NativeName(NativeNameType.Type, "size_t")] nuint levels, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -839,7 +839,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ScaleMipMapsAlphaForCoverageNative([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		internal static HResult ScaleMipMapsAlphaForCoverageNative([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, nuint, float, ScratchImage*, HResult>)funcTable[106])(srcImages, nimages, metadata, item, alphaReference, mipChain);
@@ -854,7 +854,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			HResult ret = ScaleMipMapsAlphaForCoverageNative(srcImages, nimages, metadata, item, alphaReference, mipChain);
 			return ret;
@@ -866,7 +866,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -881,7 +881,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -896,7 +896,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -914,7 +914,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (ScratchImage* pmipChain = &mipChain)
 			{
@@ -929,7 +929,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -947,7 +947,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -965,7 +965,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ScaleMipMapsAlphaForCoverage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage mipChain)
+		public static HResult ScaleMipMapsAlphaForCoverage([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "alphaReference")] [NativeName(NativeNameType.Type, "float")] float alphaReference, [NativeName(NativeNameType.Param, "mipChain")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage mipChain)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -986,7 +986,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult PremultiplyAlphaNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		internal static HResult PremultiplyAlphaNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, TexPMAlphaFlags, ScratchImage*, HResult>)funcTable[107])(srcImage, flags, image);
@@ -1000,7 +1000,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			HResult ret = PremultiplyAlphaNative(srcImage, flags, image);
 			return ret;
@@ -1011,7 +1011,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -1025,7 +1025,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ScratchImage* pimage = &image)
 			{
@@ -1039,7 +1039,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult PremultiplyAlpha([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -1057,7 +1057,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult PremultiplyAlpha2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		internal static HResult PremultiplyAlpha2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, TexPMAlphaFlags, ScratchImage*, HResult>)funcTable[108])(srcImages, nimages, metadata, flags, result);
@@ -1071,7 +1071,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			HResult ret = PremultiplyAlpha2Native(srcImages, nimages, metadata, flags, result);
 			return ret;
@@ -1082,7 +1082,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1096,7 +1096,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1110,7 +1110,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1127,7 +1127,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ScratchImage* presult = &result)
 			{
@@ -1141,7 +1141,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1158,7 +1158,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1175,7 +1175,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "PremultiplyAlpha2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult PremultiplyAlpha2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "TEX_PMALPHA_FLAGS")] TexPMAlphaFlags flags, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1196,7 +1196,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Compress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CompressNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImage)
+		internal static HResult CompressNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImage)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, int, TexCompressFlags, float, ScratchImage*, HResult>)funcTable[109])(srcImage, format, compress, threshold, cImage);
@@ -1210,7 +1210,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImage)
+		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImage)
 		{
 			HResult ret = CompressNative(srcImage, format, compress, threshold, cImage);
 			return ret;
@@ -1221,7 +1221,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImage)
+		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImage)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -1235,7 +1235,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImage)
+		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImage)
 		{
 			fixed (ScratchImage* pcImage = &cImage)
 			{
@@ -1249,7 +1249,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImage)
+		public static HResult Compress([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImage)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -1267,7 +1267,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult Compress2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		internal static HResult Compress2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, int, TexCompressFlags, float, ScratchImage*, HResult>)funcTable[110])(srcImages, nimages, metadata, format, compress, threshold, cImages);
@@ -1281,7 +1281,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			HResult ret = Compress2Native(srcImages, nimages, metadata, format, compress, threshold, cImages);
 			return ret;
@@ -1292,7 +1292,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1306,7 +1306,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1320,7 +1320,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1337,7 +1337,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (ScratchImage* pcImages = &cImages)
 			{
@@ -1351,7 +1351,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1368,7 +1368,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1385,7 +1385,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "threshold")] [NativeName(NativeNameType.Type, "float")] float threshold, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1406,7 +1406,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult Compress3Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		internal static HResult Compress3Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, Image*, int, TexCompressFlags, float, ScratchImage*, HResult>)funcTable[111])(pDevice, srcImage, format, compress, alphaWeight, image);
@@ -1420,7 +1420,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			HResult ret = Compress3Native(pDevice, srcImage, format, compress, alphaWeight, image);
 			return ret;
@@ -1431,7 +1431,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1445,7 +1445,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -1459,7 +1459,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1476,7 +1476,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ScratchImage* pimage = &image)
 			{
@@ -1490,7 +1490,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1507,7 +1507,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -1524,7 +1524,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress3")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Compress3([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1545,7 +1545,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult Compress4Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		internal static HResult Compress4Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, Image*, nuint, TexMetadata*, int, TexCompressFlags, float, ScratchImage*, HResult>)funcTable[112])(pDevice, srcImages, nimages, metadata, format, compress, alphaWeight, cImages);
@@ -1559,7 +1559,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			HResult ret = Compress4Native(pDevice, srcImages, nimages, metadata, format, compress, alphaWeight, cImages);
 			return ret;
@@ -1570,7 +1570,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1584,7 +1584,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1598,7 +1598,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1615,7 +1615,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1629,7 +1629,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1646,7 +1646,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1663,7 +1663,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1683,7 +1683,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (ScratchImage* pcImages = &cImages)
 			{
@@ -1697,7 +1697,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1714,7 +1714,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1731,7 +1731,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1751,7 +1751,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1768,7 +1768,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1788,7 +1788,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -1808,7 +1808,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Compress4")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage cImages)
+		public static HResult Compress4([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "compress")] [NativeName(NativeNameType.Type, "TEX_COMPRESS_FLAGS")] TexCompressFlags compress, [NativeName(NativeNameType.Param, "alphaWeight")] [NativeName(NativeNameType.Type, "float")] float alphaWeight, [NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage cImages)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -1832,7 +1832,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Decompress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult DecompressNative([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		internal static HResult DecompressNative([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, int, ScratchImage*, HResult>)funcTable[113])(cImage, format, image);
@@ -1846,7 +1846,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			HResult ret = DecompressNative(cImage, format, image);
 			return ret;
@@ -1857,7 +1857,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* image)
+		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* image)
 		{
 			fixed (Image* pcImage = &cImage)
 			{
@@ -1871,7 +1871,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (ScratchImage* pimage = &image)
 			{
@@ -1885,7 +1885,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage image)
+		public static HResult Decompress([NativeName(NativeNameType.Param, "cImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image cImage, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage image)
 		{
 			fixed (Image* pcImage = &cImage)
 			{
@@ -1903,7 +1903,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult Decompress2Native([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* images)
+		internal static HResult Decompress2Native([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* images)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, int, ScratchImage*, HResult>)funcTable[114])(cImages, nimages, metadata, format, images);
@@ -1917,7 +1917,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* images)
 		{
 			HResult ret = Decompress2Native(cImages, nimages, metadata, format, images);
 			return ret;
@@ -1928,7 +1928,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* images)
 		{
 			fixed (Image* pcImages = &cImages)
 			{
@@ -1942,7 +1942,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* images)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -1956,7 +1956,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* images)
 		{
 			fixed (Image* pcImages = &cImages)
 			{
@@ -1973,7 +1973,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage images)
 		{
 			fixed (ScratchImage* pimages = &images)
 			{
@@ -1987,7 +1987,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage images)
 		{
 			fixed (Image* pcImages = &cImages)
 			{
@@ -2004,7 +2004,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage images)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -2021,7 +2021,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Decompress2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage images)
+		public static HResult Decompress2([NativeName(NativeNameType.Param, "cImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image cImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage images)
 		{
 			fixed (Image* pcImages = &cImages)
 			{
@@ -2042,7 +2042,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ComputeNormalMapNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMap)
+		internal static HResult ComputeNormalMapNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMap)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, CNMAPFlags, float, int, ScratchImage*, HResult>)funcTable[115])(srcImage, flags, amplitude, format, normalMap);
@@ -2056,7 +2056,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMap)
+		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMap)
 		{
 			HResult ret = ComputeNormalMapNative(srcImage, flags, amplitude, format, normalMap);
 			return ret;
@@ -2067,7 +2067,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMap)
+		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMap)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -2081,7 +2081,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage normalMap)
+		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage normalMap)
 		{
 			fixed (ScratchImage* pnormalMap = &normalMap)
 			{
@@ -2095,7 +2095,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage normalMap)
+		public static HResult ComputeNormalMap([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMap")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage normalMap)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -2113,7 +2113,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ComputeNormalMap2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMaps)
+		internal static HResult ComputeNormalMap2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMaps)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, CNMAPFlags, float, int, ScratchImage*, HResult>)funcTable[116])(srcImages, nimages, metadata, flags, amplitude, format, normalMaps);
@@ -2127,7 +2127,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMaps)
 		{
 			HResult ret = ComputeNormalMap2Native(srcImages, nimages, metadata, flags, amplitude, format, normalMaps);
 			return ret;
@@ -2138,7 +2138,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMaps)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2152,7 +2152,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMaps)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -2166,7 +2166,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* normalMaps)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2183,7 +2183,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage normalMaps)
 		{
 			fixed (ScratchImage* pnormalMaps = &normalMaps)
 			{
@@ -2197,7 +2197,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage normalMaps)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2214,7 +2214,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage normalMaps)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -2231,7 +2231,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeNormalMap2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage normalMaps)
+		public static HResult ComputeNormalMap2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CNMAP_FLAGS")] CNMAPFlags flags, [NativeName(NativeNameType.Param, "amplitude")] [NativeName(NativeNameType.Type, "float")] float amplitude, [NativeName(NativeNameType.Param, "format")] [NativeName(NativeNameType.Type, "DXGI_FORMAT")] int format, [NativeName(NativeNameType.Param, "normalMaps")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage normalMaps)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2252,7 +2252,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CopyRectangleNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		internal static HResult CopyRectangleNative([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, Rect*, Image*, TexFilterFlags, nuint, nuint, HResult>)funcTable[117])(srcImage, srcRect, dstImage, filter, xOffset, yOffset);
@@ -2266,7 +2266,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			HResult ret = CopyRectangleNative(srcImage, srcRect, dstImage, filter, xOffset, yOffset);
 			return ret;
@@ -2277,7 +2277,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -2291,7 +2291,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Rect* psrcRect = &srcRect)
 			{
@@ -2305,7 +2305,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -2322,7 +2322,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Image* pdstImage = &dstImage)
 			{
@@ -2336,7 +2336,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] Rect* srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -2353,7 +2353,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] Image* srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Rect* psrcRect = &srcRect)
 			{
@@ -2370,7 +2370,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CopyRectangle")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "const Rect&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "const Image&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
+		public static HResult CopyRectangle([NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image srcImage, [NativeName(NativeNameType.Param, "srcRect")] [NativeName(NativeNameType.Type, "Rect const&")] ref Rect srcRect, [NativeName(NativeNameType.Param, "dstImage")] [NativeName(NativeNameType.Type, "Image const&")] ref Image dstImage, [NativeName(NativeNameType.Param, "filter")] [NativeName(NativeNameType.Type, "TEX_FILTER_FLAGS")] TexFilterFlags filter, [NativeName(NativeNameType.Param, "xOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint xOffset, [NativeName(NativeNameType.Param, "yOffset")] [NativeName(NativeNameType.Type, "size_t")] nuint yOffset)
 		{
 			fixed (Image* psrcImage = &srcImage)
 			{
@@ -2391,7 +2391,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult ComputeMSENative([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		internal static HResult ComputeMSENative([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, Image*, float*, float*, CMSEFlags, HResult>)funcTable[118])(image1, image2, mse, mseV, flags);
@@ -2405,7 +2405,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			HResult ret = ComputeMSENative(image1, image2, mse, mseV, flags);
 			return ret;
@@ -2416,7 +2416,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2430,7 +2430,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage2 = &image2)
 			{
@@ -2444,7 +2444,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2461,7 +2461,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (float* pmse = &mse)
 			{
@@ -2475,7 +2475,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2492,7 +2492,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage2 = &image2)
 			{
@@ -2509,7 +2509,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] float* mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2529,7 +2529,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (float* pmseV = &mseV)
 			{
@@ -2543,7 +2543,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2560,7 +2560,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage2 = &image2)
 			{
@@ -2577,7 +2577,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] float* mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2597,7 +2597,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (float* pmse = &mse)
 			{
@@ -2614,7 +2614,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] Image* image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2634,7 +2634,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] Image* image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage2 = &image2)
 			{
@@ -2654,7 +2654,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "ComputeMSE")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float*")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
+		public static HResult ComputeMSE([NativeName(NativeNameType.Param, "image1")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image1, [NativeName(NativeNameType.Param, "image2")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image2, [NativeName(NativeNameType.Param, "mse")] [NativeName(NativeNameType.Type, "float&")] ref float mse, [NativeName(NativeNameType.Param, "mseV")] [NativeName(NativeNameType.Type, "float *")] ref float mseV, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CMSE_FLAGS")] CMSEFlags flags)
 		{
 			fixed (Image* pimage1 = &image1)
 			{
@@ -2678,7 +2678,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "EvaluateImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult EvaluateImageNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		internal static HResult EvaluateImageNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, delegate*<Vector4*, nuint, nuint, void>, HResult>)funcTable[119])(image, (delegate*<Vector4*, nuint, nuint, void>)Utils.GetFunctionPointerForDelegate(pixelFunc));
@@ -2692,7 +2692,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EvaluateImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EvaluateImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		public static HResult EvaluateImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			HResult ret = EvaluateImageNative(image, pixelFunc);
 			return ret;
@@ -2703,7 +2703,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EvaluateImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EvaluateImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		public static HResult EvaluateImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			fixed (Image* pimage = &image)
 			{
@@ -2718,7 +2718,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "EvaluateImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult EvaluateImage2Native([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		internal static HResult EvaluateImage2Native([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, delegate*<Vector4*, nuint, nuint, void>, HResult>)funcTable[120])(images, nimages, metadata, (delegate*<Vector4*, nuint, nuint, void>)Utils.GetFunctionPointerForDelegate(pixelFunc));
@@ -2732,7 +2732,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EvaluateImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			HResult ret = EvaluateImage2Native(images, nimages, metadata, pixelFunc);
 			return ret;
@@ -2743,7 +2743,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EvaluateImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			fixed (Image* pimages = &images)
 			{
@@ -2757,7 +2757,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EvaluateImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] Image* images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -2771,7 +2771,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EvaluateImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
+		public static HResult EvaluateImage2([NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] ref Image images, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "EvaluateImageFunc")] EvaluateImageFunc pixelFunc)
 		{
 			fixed (Image* pimages = &images)
 			{
@@ -2789,7 +2789,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "TransformImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult TransformImageNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		internal static HResult TransformImageNative([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, delegate*<Vector4*, Vector4*, nuint, nuint, void>, ScratchImage*, HResult>)funcTable[121])(image, (delegate*<Vector4*, Vector4*, nuint, nuint, void>)Utils.GetFunctionPointerForDelegate(pixelFunc), result);
@@ -2803,7 +2803,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			HResult ret = TransformImageNative(image, pixelFunc, result);
 			return ret;
@@ -2814,7 +2814,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* pimage = &image)
 			{
@@ -2828,7 +2828,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] Image* image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ScratchImage* presult = &result)
 			{
@@ -2842,7 +2842,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "const Image&")] ref Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult TransformImage([NativeName(NativeNameType.Param, "image")] [NativeName(NativeNameType.Type, "Image const&")] ref Image image, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* pimage = &image)
 			{
@@ -2860,7 +2860,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult TransformImage2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		internal static HResult TransformImage2Native([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Image*, nuint, TexMetadata*, delegate*<Vector4*, Vector4*, nuint, nuint, void>, ScratchImage*, HResult>)funcTable[122])(srcImages, nimages, metadata, (delegate*<Vector4*, Vector4*, nuint, nuint, void>)Utils.GetFunctionPointerForDelegate(pixelFunc), result);
@@ -2874,7 +2874,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			HResult ret = TransformImage2Native(srcImages, nimages, metadata, pixelFunc, result);
 			return ret;
@@ -2885,7 +2885,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2899,7 +2899,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -2913,7 +2913,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2930,7 +2930,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ScratchImage* presult = &result)
 			{
@@ -2944,7 +2944,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -2961,7 +2961,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -2978,7 +2978,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "TransformImage2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult TransformImage2([NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "pixelFunc")] [NativeName(NativeNameType.Type, "TransformImageFunc")] TransformImageFunc pixelFunc, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3023,7 +3023,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
+		[return: NativeName(NativeNameType.Type, "IWICImagingFactory *")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static IWICImagingFactory* GetWICFactoryNative([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool&")] bool* iswic2)
 		{
@@ -3038,7 +3038,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
+		[return: NativeName(NativeNameType.Type, "IWICImagingFactory *")]
 		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool&")] bool* iswic2)
 		{
 			IWICImagingFactory* ret = GetWICFactoryNative(iswic2);
@@ -3049,7 +3049,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetWICFactory")]
-		[return: NativeName(NativeNameType.Type, "IWICImagingFactory*")]
+		[return: NativeName(NativeNameType.Type, "IWICImagingFactory *")]
 		public static IWICImagingFactory* GetWICFactory([NativeName(NativeNameType.Param, "iswic2")] [NativeName(NativeNameType.Type, "bool&")] ref bool iswic2)
 		{
 			fixed (bool* piswic2 = &iswic2)
@@ -3065,7 +3065,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "SetWICFactory")]
 		[return: NativeName(NativeNameType.Type, "void")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static void SetWICFactoryNative([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory*")] IWICImagingFactory* pWiC)
+		internal static void SetWICFactoryNative([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory *")] IWICImagingFactory* pWiC)
 		{
 			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<IWICImagingFactory*, void>)funcTable[125])(pWiC);
@@ -3079,7 +3079,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "SetWICFactory")]
 		[return: NativeName(NativeNameType.Type, "void")]
-		public static void SetWICFactory([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory*")] IWICImagingFactory* pWiC)
+		public static void SetWICFactory([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory *")] IWICImagingFactory* pWiC)
 		{
 			SetWICFactoryNative(pWiC);
 		}
@@ -3089,7 +3089,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "SetWICFactory")]
 		[return: NativeName(NativeNameType.Type, "void")]
-		public static void SetWICFactory([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory*")] ref IWICImagingFactory pWiC)
+		public static void SetWICFactory([NativeName(NativeNameType.Param, "pWIC")] [NativeName(NativeNameType.Type, "IWICImagingFactory *")] ref IWICImagingFactory pWiC)
 		{
 			fixed (IWICImagingFactory* ppWiC = &pWiC)
 			{
@@ -3103,7 +3103,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult EncodeDDSHeaderNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] nuint* required)
+		internal static HResult EncodeDDSHeaderNative([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void *")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] nuint* required)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<TexMetadata*, DDSFlags, void*, nuint, nuint*, HResult>)funcTable[126])(metadata, flags, pDestination, maxsize, required);
@@ -3117,7 +3117,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] nuint* required)
+		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void *")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] nuint* required)
 		{
 			HResult ret = EncodeDDSHeaderNative(metadata, flags, pDestination, maxsize, required);
 			return ret;
@@ -3128,7 +3128,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] nuint* required)
+		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void *")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] nuint* required)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3142,7 +3142,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] ref nuint required)
+		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void *")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] ref nuint required)
 		{
 			fixed (nuint* prequired = &required)
 			{
@@ -3156,7 +3156,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "EncodeDDSHeader")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void*")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] ref nuint required)
+		public static HResult EncodeDDSHeader([NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "DDS_FLAGS")] DDSFlags flags, [NativeName(NativeNameType.Param, "pDestination")] [NativeName(NativeNameType.Type, "void *")] void* pDestination, [NativeName(NativeNameType.Param, "maxsize")] [NativeName(NativeNameType.Type, "size_t")] nuint maxsize, [NativeName(NativeNameType.Param, "required")] [NativeName(NativeNameType.Type, "size_t&")] ref nuint required)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3174,7 +3174,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
 		[return: NativeName(NativeNameType.Type, "bool")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static byte IsSupportedTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata)
+		internal static byte IsSupportedTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, TexMetadata*, byte>)funcTable[127])(pDevice, metadata);
@@ -3188,7 +3188,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata)
+		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata)
 		{
 			byte ret = IsSupportedTextureNative(pDevice, metadata);
 			return ret != 0;
@@ -3199,7 +3199,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata)
+		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3213,7 +3213,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata)
+		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3227,7 +3227,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTexture")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata)
+		public static bool IsSupportedTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3245,7 +3245,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		internal static HResult CreateTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, Image*, nuint, TexMetadata*, ID3D11Resource**, HResult>)funcTable[128])(pDevice, srcImages, nimages, metadata, ppResource);
@@ -3259,7 +3259,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			HResult ret = CreateTextureNative(pDevice, srcImages, nimages, metadata, ppResource);
 			return ret;
@@ -3270,7 +3270,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3284,7 +3284,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3298,7 +3298,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3315,7 +3315,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3329,7 +3329,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3346,7 +3346,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3363,7 +3363,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3383,7 +3383,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Resource** pppResource = &ppResource)
 			{
@@ -3397,7 +3397,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3414,7 +3414,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3431,7 +3431,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3451,7 +3451,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3468,7 +3468,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3488,7 +3488,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3508,7 +3508,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3532,7 +3532,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateShaderResourceViewNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		internal static HResult CreateShaderResourceViewNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, Image*, nuint, TexMetadata*, ID3D11ShaderResourceView**, HResult>)funcTable[129])(pDevice, srcImages, nimages, metadata, ppSRV);
@@ -3546,7 +3546,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			HResult ret = CreateShaderResourceViewNative(pDevice, srcImages, nimages, metadata, ppSRV);
 			return ret;
@@ -3557,7 +3557,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3571,7 +3571,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3585,7 +3585,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3602,7 +3602,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3616,7 +3616,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3633,7 +3633,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3650,7 +3650,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3670,7 +3670,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
 			{
@@ -3684,7 +3684,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3701,7 +3701,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3718,7 +3718,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3738,7 +3738,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3755,7 +3755,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3775,7 +3775,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3795,7 +3795,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceView")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceView([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3819,7 +3819,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateTextureExNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		internal static HResult CreateTextureExNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, Image*, nuint, TexMetadata*, int, uint, uint, uint, CreateTexFlags, ID3D11Resource**, HResult>)funcTable[130])(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
@@ -3833,7 +3833,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			HResult ret = CreateTextureExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
 			return ret;
@@ -3844,7 +3844,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3858,7 +3858,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3872,7 +3872,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3889,7 +3889,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -3903,7 +3903,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3920,7 +3920,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -3937,7 +3937,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3957,7 +3957,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Resource** pppResource = &ppResource)
 			{
@@ -3971,7 +3971,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -3988,7 +3988,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -4005,7 +4005,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4025,7 +4025,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -4042,7 +4042,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4062,7 +4062,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -4082,7 +4082,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4106,7 +4106,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateTextureEx2Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		internal static HResult CreateTextureEx2Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, ScratchImage, uint, uint, uint, uint, CreateTexFlags, ID3D11Resource**, HResult>)funcTable[131])(pDevice, img, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
@@ -4120,7 +4120,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			HResult ret = CreateTextureEx2Native(pDevice, img, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppResource);
 			return ret;
@@ -4131,7 +4131,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ID3D11Resource** ppResource)
+		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ID3D11Resource** ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4145,7 +4145,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Resource** pppResource = &ppResource)
 			{
@@ -4159,7 +4159,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureEx2")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource**")] ref ID3D11Resource* ppResource)
+		public static HResult CreateTextureEx2([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "img")] [NativeName(NativeNameType.Type, "ScratchImageT")] ScratchImage img, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "uint32_t")] uint usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "uint32_t")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D11Resource * *")] ref ID3D11Resource* ppResource)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4177,7 +4177,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateShaderResourceViewExNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		internal static HResult CreateShaderResourceViewExNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, Image*, nuint, TexMetadata*, int, uint, uint, uint, CreateTexFlags, ID3D11ShaderResourceView**, HResult>)funcTable[132])(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
@@ -4191,7 +4191,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			HResult ret = CreateShaderResourceViewExNative(pDevice, srcImages, nimages, metadata, usage, bindFlags, cpuAccessFlags, miscFlags, createFlags, ppSRV);
 			return ret;
@@ -4202,7 +4202,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4216,7 +4216,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -4230,7 +4230,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4247,7 +4247,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -4261,7 +4261,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4278,7 +4278,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -4295,7 +4295,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ID3D11ShaderResourceView** ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ID3D11ShaderResourceView** ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4315,7 +4315,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11ShaderResourceView** pppSRV = &ppSRV)
 			{
@@ -4329,7 +4329,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4346,7 +4346,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -4363,7 +4363,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4383,7 +4383,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -4400,7 +4400,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] Image* srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4420,7 +4420,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (Image* psrcImages = &srcImages)
 			{
@@ -4440,7 +4440,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateShaderResourceViewEx")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "const Image*")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView**")] ref ID3D11ShaderResourceView* ppSRV)
+		public static HResult CreateShaderResourceViewEx([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "srcImages")] [NativeName(NativeNameType.Type, "Image const *")] ref Image srcImages, [NativeName(NativeNameType.Param, "nimages")] [NativeName(NativeNameType.Type, "size_t")] nuint nimages, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "usage")] [NativeName(NativeNameType.Type, "D3D11_USAGE")] int usage, [NativeName(NativeNameType.Param, "bindFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint bindFlags, [NativeName(NativeNameType.Param, "cpuAccessFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint cpuAccessFlags, [NativeName(NativeNameType.Param, "miscFlags")] [NativeName(NativeNameType.Type, "unsigned int")] uint miscFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppSRV")] [NativeName(NativeNameType.Type, "ID3D11ShaderResourceView * *")] ref ID3D11ShaderResourceView* ppSRV)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4464,7 +4464,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CaptureTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		internal static HResult CaptureTextureNative([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D11Device*, ID3D11DeviceContext*, ID3D11Resource*, ScratchImage*, HResult>)funcTable[133])(pDevice, pContext, pSource, result);
@@ -4478,7 +4478,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			HResult ret = CaptureTextureNative(pDevice, pContext, pSource, result);
 			return ret;
@@ -4489,7 +4489,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4503,7 +4503,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11DeviceContext* ppContext = &pContext)
 			{
@@ -4517,7 +4517,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4534,7 +4534,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11Resource* ppSource = &pSource)
 			{
@@ -4548,7 +4548,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4565,7 +4565,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11DeviceContext* ppContext = &pContext)
 			{
@@ -4582,7 +4582,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ScratchImage* result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ScratchImage* result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4602,7 +4602,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ScratchImage* presult = &result)
 			{
@@ -4616,7 +4616,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4633,7 +4633,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11DeviceContext* ppContext = &pContext)
 			{
@@ -4650,7 +4650,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ID3D11Resource* pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4670,7 +4670,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11Resource* ppSource = &pSource)
 			{
@@ -4687,7 +4687,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ID3D11DeviceContext* pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4707,7 +4707,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ID3D11Device* pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11DeviceContext* ppContext = &pContext)
 			{
@@ -4727,7 +4727,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CaptureTexture")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device*")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext*")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource*")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT*")] ref ScratchImage result)
+		public static HResult CaptureTexture([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D11Device *")] ref ID3D11Device pDevice, [NativeName(NativeNameType.Param, "pContext")] [NativeName(NativeNameType.Type, "ID3D11DeviceContext *")] ref ID3D11DeviceContext pContext, [NativeName(NativeNameType.Param, "pSource")] [NativeName(NativeNameType.Type, "ID3D11Resource *")] ref ID3D11Resource pSource, [NativeName(NativeNameType.Param, "result")] [NativeName(NativeNameType.Type, "ScratchImageT *")] ref ScratchImage result)
 		{
 			fixed (ID3D11Device* ppDevice = &pDevice)
 			{
@@ -4751,7 +4751,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "bool")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static byte IsSupportedTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata)
+		internal static byte IsSupportedTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D12Device*, TexMetadata*, byte>)funcTable[134])(pDevice, metadata);
@@ -4765,7 +4765,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata)
+		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata)
 		{
 			byte ret = IsSupportedTextureD3D12Native(pDevice, metadata);
 			return ret != 0;
@@ -4776,7 +4776,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata)
+		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -4790,7 +4790,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata)
+		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -4804,7 +4804,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "IsSupportedTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "bool")]
-		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata)
+		public static bool IsSupportedTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -4822,7 +4822,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		internal static HResult CreateTextureD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D12Device*, TexMetadata*, ID3D12Resource**, HResult>)funcTable[135])(pDevice, metadata, ppResource);
@@ -4836,7 +4836,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			HResult ret = CreateTextureD3D12Native(pDevice, metadata, ppResource);
 			return ret;
@@ -4847,7 +4847,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -4861,7 +4861,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -4875,7 +4875,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -4892,7 +4892,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ref ID3D12Resource* ppResource)
 		{
 			fixed (ID3D12Resource** pppResource = &ppResource)
 			{
@@ -4906,7 +4906,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ref ID3D12Resource* ppResource)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -4923,7 +4923,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ref ID3D12Resource* ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -4940,7 +4940,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ref ID3D12Resource* ppResource)
+		public static HResult CreateTextureD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ref ID3D12Resource* ppResource)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -4961,7 +4961,7 @@ namespace Hexa.NET.DirectXTex
 		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static HResult CreateTextureExD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		internal static HResult CreateTextureExD3D12Native([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ID3D12Device*, TexMetadata*, int, CreateTexFlags, ID3D12Resource**, HResult>)funcTable[136])(pDevice, metadata, resFlags, createFlags, ppResource);
@@ -4975,7 +4975,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			HResult ret = CreateTextureExD3D12Native(pDevice, metadata, resFlags, createFlags, ppResource);
 			return ret;
@@ -4986,7 +4986,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{
@@ -5000,7 +5000,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ID3D12Device* pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			fixed (TexMetadata* pmetadata = &metadata)
 			{
@@ -5014,7 +5014,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "CreateTextureExD3D12")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device*")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource**")] ID3D12Resource** ppResource)
+		public static HResult CreateTextureExD3D12([NativeName(NativeNameType.Param, "pDevice")] [NativeName(NativeNameType.Type, "ID3D12Device *")] ref ID3D12Device pDevice, [NativeName(NativeNameType.Param, "metadata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata metadata, [NativeName(NativeNameType.Param, "resFlags")] [NativeName(NativeNameType.Type, "D3D12_RESOURCE_FLAGS")] int resFlags, [NativeName(NativeNameType.Param, "createFlags")] [NativeName(NativeNameType.Type, "CREATETEX_FLAGS")] CreateTexFlags createFlags, [NativeName(NativeNameType.Param, "ppResource")] [NativeName(NativeNameType.Type, "ID3D12Resource * *")] ID3D12Resource** ppResource)
 		{
 			fixed (ID3D12Device* ppDevice = &pDevice)
 			{

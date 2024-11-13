@@ -22,7 +22,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] TexMetadata* mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] TexMetadata* mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			HResult ret = DirectXTex.InitializeNative(img, mdata, flags);
 			return ret;
@@ -33,7 +33,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "const TexMetadata&")] ref TexMetadata mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize(this ScratchImage img, [NativeName(NativeNameType.Param, "mdata")] [NativeName(NativeNameType.Type, "TexMetadata const&")] ref TexMetadata mdata, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (TexMetadata* pmdata = &mdata)
 			{
@@ -91,7 +91,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeFromImage")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult InitializeFromImage(this ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "const Image")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeFromImage(this ScratchImage img, [NativeName(NativeNameType.Param, "srcImage")] [NativeName(NativeNameType.Type, "Image const")] Image srcImage, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			HResult ret = DirectXTex.InitializeFromImageNative(img, srcImage, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
@@ -102,7 +102,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			HResult ret = DirectXTex.InitializeArrayFromImagesNative(img, images, nImages, allow1D ? (byte)1 : (byte)0, flags);
 			return ret;
@@ -113,7 +113,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeArrayFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeArrayFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "allow1D")] [NativeName(NativeNameType.Type, "bool")] bool allow1D, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
@@ -127,7 +127,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeCubeFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] Image* images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			HResult ret = DirectXTex.InitializeCubeFromImagesNative(img, images, nImages, flags);
 			return ret;
@@ -138,7 +138,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "InitializeCubeFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult InitializeCubeFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] ref Image images, [NativeName(NativeNameType.Param, "nImages")] [NativeName(NativeNameType.Type, "size_t")] nuint nImages, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
@@ -152,7 +152,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize3DFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] Image* images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] Image* images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			HResult ret = DirectXTex.Initialize3DFromImagesNative(img, images, depth, flags);
 			return ret;
@@ -163,7 +163,7 @@ namespace Hexa.NET.DirectXTex
 		/// </summary>
 		[NativeName(NativeNameType.Func, "Initialize3DFromImages")]
 		[return: NativeName(NativeNameType.Type, "HRESULT")]
-		public static HResult Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "const Image*")] ref Image images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
+		public static HResult Initialize3DFromImages(this ScratchImage img, [NativeName(NativeNameType.Param, "images")] [NativeName(NativeNameType.Type, "Image const *")] ref Image images, [NativeName(NativeNameType.Param, "depth")] [NativeName(NativeNameType.Type, "size_t")] nuint depth, [NativeName(NativeNameType.Param, "flags")] [NativeName(NativeNameType.Type, "CP_FLAGS")] CPFlags flags)
 		{
 			fixed (Image* pimages = &images)
 			{
@@ -197,7 +197,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetMetadata")]
-		[return: NativeName(NativeNameType.Type, "const TexMetadata")]
+		[return: NativeName(NativeNameType.Type, "TexMetadata const")]
 		public static TexMetadata GetMetadata(this ScratchImage img)
 		{
 			TexMetadata ret = DirectXTex.GetMetadataNative(img);
@@ -208,7 +208,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetImage")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
+		[return: NativeName(NativeNameType.Type, "Image const *")]
 		public static Image* GetImage(this ScratchImage img, [NativeName(NativeNameType.Param, "mip")] [NativeName(NativeNameType.Type, "size_t")] nuint mip, [NativeName(NativeNameType.Param, "item")] [NativeName(NativeNameType.Type, "size_t")] nuint item, [NativeName(NativeNameType.Param, "slice")] [NativeName(NativeNameType.Type, "size_t")] nuint slice)
 		{
 			Image* ret = DirectXTex.GetImageNative(img, mip, item, slice);
@@ -219,7 +219,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetImages")]
-		[return: NativeName(NativeNameType.Type, "const Image*")]
+		[return: NativeName(NativeNameType.Type, "Image const *")]
 		public static Image* GetImages(this ScratchImage img)
 		{
 			Image* ret = DirectXTex.GetImagesNative(img);
@@ -241,7 +241,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetPixels")]
-		[return: NativeName(NativeNameType.Type, "uint8_t*")]
+		[return: NativeName(NativeNameType.Type, "uint8_t *")]
 		public static byte* GetPixels(this ScratchImage img)
 		{
 			byte* ret = DirectXTex.GetPixelsNative(img);
@@ -252,7 +252,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "GetPixels")]
-		[return: NativeName(NativeNameType.Type, "uint8_t*")]
+		[return: NativeName(NativeNameType.Type, "uint8_t *")]
 		public static string GetPixelsS(this ScratchImage img)
 		{
 			string ret = Utils.DecodeStringUTF8(DirectXTex.GetPixelsNative(img));
@@ -306,7 +306,7 @@ namespace Hexa.NET.DirectXTex
 		/// To be documented.
 		/// </summary>
 		[NativeName(NativeNameType.Func, "BlobGetBufferPointer")]
-		[return: NativeName(NativeNameType.Type, "void*")]
+		[return: NativeName(NativeNameType.Type, "void *")]
 		public static void* GetBufferPointer(this Blob blob)
 		{
 			void* ret = DirectXTex.BlobGetBufferPointerNative(blob);

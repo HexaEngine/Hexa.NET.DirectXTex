@@ -1,0 +1,117 @@
+name: Build DirectXTex Libraries (Debug)
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x86_64
+            cmake-arch: x64
+            vcpkg-triplet: x64-linux
+#          - os: ubuntu-latest
+#            arch: arm64
+#            cmake-arch: aarch64
+#            vcpkg-triplet: arm64-linux
+#          - os: windows-latest
+#            arch: x86_64
+#            cmake-arch: x64
+#            vcpkg-triplet: x64-windows-static
+#          - os: windows-latest
+#            arch: x86
+#            cmake-arch: win32
+#            vcpkg-triplet: x86-windows-static
+#          - os: windows-latest
+#            arch: arm64
+#            cmake-arch: arm64
+#            vcpkg-triplet: arm64-windows-static
+#          - os: macos-latest
+#            arch: x86_64
+#            cmake-arch: x86_64
+#            vcpkg-triplet: x64-osx
+#          - os: macos-latest
+#            arch: arm64
+#            cmake-arch: arm64
+#            vcpkg-triplet: arm64-osx
+    steps:
+    - uses: actions/checkout@v4.1.7
+      with:
+        repository: 'HexaEngine/Hexa.NET.DirectXTex'
+        path: 'DirectXTex'
+        submodules: true
+
+    - name: Install dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
+
+    - name: Install Cross-Compilation Tools for ARM64
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
+      run: |
+        sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+        
+    - name: Install vcpkg (Other)
+      if: matrix.os != 'windows-latest'
+      run: |
+        cd DirectXTex
+        git clone https://github.com/microsoft/vcpkg.git
+        ./vcpkg/bootstrap-vcpkg.sh
+        ./vcpkg/vcpkg install directx-headers --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install directxmath --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install libpng --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install libjpeg-turbo --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg install openexr --triplet ${{ matrix.vcpkg-triplet }}
+
+    - name: Install vcpkg (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        cd DirectXTex
+        git clone https://github.com/microsoft/vcpkg.git
+        ./vcpkg/bootstrap-vcpkg.bat
+        ./vcpkg/vcpkg.exe install directx-headers --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install directxmath --allow-unsupported --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install libpng --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install libjpeg-turbo --triplet ${{ matrix.vcpkg-triplet }}
+        ./vcpkg/vcpkg.exe install openexr --triplet ${{ matrix.vcpkg-triplet }}
+
+    - name: Configure cimgui with CMake for ARM64 on Linux
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
+      run: |
+        cd DirectXTex
+        cmake -S ./ -B ./build -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure cimgui with CMake on Linux (x86_64)
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+      run: |
+        cd DirectXTex
+        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF
+
+    - name: Configure cimgui with CMake for macOS
+      if: matrix.os == 'macos-latest'
+      run: | 
+        cd DirectXTex
+        cmake -S ./ -B ./build -DCMAKE_OSX_ARCHITECTURES=${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DENABLE_DX12=OFF -DENABLE_DX11=OFF 
+
+    - name: Configure cimgui with CMake for Windows
+      if: matrix.os == 'windows-latest'
+      run: | 
+        cd DirectXTex
+        cmake -S ./ -B ./build -A ${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }}
+
+    - name: Build DirectXTex
+      run: cmake --build DirectXTex/build --config Debug
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4.3.4
+      with:
+        name: DirectXTex-${{ matrix.os }}-${{ matrix.arch }}-artifacts 
+        path: |
+          DirectXTex/build/bin/Release/*.dll
+          DirectXTex/build/lib/*.so
+          DirectXTex/build/lib/*.dylib
+          DirectXTex/build/bin/CMake/*.dylib
+        if-no-files-found: ignore # 'warn' or 'ignore' or 'error'

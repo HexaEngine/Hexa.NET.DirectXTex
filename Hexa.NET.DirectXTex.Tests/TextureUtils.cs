@@ -1,7 +1,5 @@
 ﻿namespace Hexa.NET.DirectXTex.Tests
 {
-    using Silk.NET.Core.Win32Extras;
-
     public unsafe class TextureUtils
     {
         [Platform("Win")]
@@ -14,7 +12,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -44,7 +42,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -57,7 +55,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 1024,
                 Width = 1024,
                 MipLevels = 1,
@@ -88,7 +86,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -101,7 +99,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR16G16B16A16Unorm,
+                Format = (int)Format.R16G16B16A16Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -113,7 +111,7 @@
 
             ScratchImage image1 = DirectXTex.CreateScratchImage();
             var meta = image.GetMetadata();
-            DirectXTex.Convert2(image.GetImages(), image.GetImageCount(), ref meta, (int)Format.FormatR16G16B16A16Unorm, TexFilterFlags.Default, 0.5f, ref image1);
+            DirectXTex.Convert2(image.GetImages(), image.GetImageCount(), ref meta, (int)Format.R16G16B16A16Unorm, TexFilterFlags.Default, 0.5f, ref image1);
 
             Assert.That(DirectXTex.GetMetadata(image), Is.EqualTo(metadata));
             var metadata2 = image1.GetMetadata();
@@ -132,7 +130,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatP010,
+                Format = (int)Format.P010,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -145,7 +143,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatY210,
+                Format = (int)Format.Y210,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -176,7 +174,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
@@ -189,7 +187,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -220,7 +218,7 @@
                 ArraySize = 1,
                 Depth = 6,
                 Dimension = TexDimension.Texture3D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
@@ -233,7 +231,7 @@
                 ArraySize = 1,
                 Depth = 6,
                 Dimension = TexDimension.Texture3D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -262,7 +260,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 2048,
                 Width = 2048,
                 MipLevels = 1,
@@ -294,7 +292,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 2048,
                 Width = 2048,
                 MipLevels = 1,
@@ -321,7 +319,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR32G32B32A32Float,
+                Format = (int)Format.R32G32B32A32Float,
                 Height = 512,
                 Width = 512,
                 MipLevels = 1,
@@ -333,9 +331,9 @@
             srcImage.Initialize(ref metadata, CPFlags.None);
 
             ScratchImage destImage = DirectXTex.CreateScratchImage();
-            DirectXTex.BitsPerPixel((int)Format.FormatBC7Unorm);
+            DirectXTex.BitsPerPixel((int)Format.Bc7Unorm);
             var meta = srcImage.GetMetadata();
-            DirectXTex.Compress2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, (int)Format.FormatBC7Unorm, TexCompressFlags.Bc7Quick | TexCompressFlags.Parallel, 0.5f, ref destImage);
+            DirectXTex.Compress2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, (int)Format.Bc7Unorm, TexCompressFlags.Bc7Quick | TexCompressFlags.Parallel, 0.5f, ref destImage);
 
             srcImage.Release();
             destImage.Release();
@@ -349,7 +347,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatBC7Unorm,
+                Format = (int)Format.Bc7Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 1,
@@ -362,7 +360,7 @@
 
             ScratchImage destImage = DirectXTex.CreateScratchImage();
             var meta = srcImage.GetMetadata();
-            DirectXTex.Decompress2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, (int)Format.FormatR8G8B8A8Unorm, ref destImage);
+            DirectXTex.Decompress2(srcImage.GetImages(), srcImage.GetImageCount(), ref meta, (int)Format.R8G8B8A8Unorm, ref destImage);
 
             srcImage.Release();
             destImage.Release();

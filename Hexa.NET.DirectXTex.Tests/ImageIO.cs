@@ -1,7 +1,5 @@
 ﻿namespace Hexa.NET.DirectXTex.Tests
 {
-    using Silk.NET.Core;
-
     public unsafe class ImageIO : IDisposable
     {
         private const string DDSFilename = "assets/textures/test.dds";
@@ -28,7 +26,7 @@
             DirectXTex.SaveToDDSMemory2(image.GetImages(), image.GetImageCount(), ref metadata, DDSFlags.None, ref blob);
 
             Span<byte> dest = blob.AsBytes();
-            Assert.True(src.SequenceEqual(dest));
+            Assert.That(src.SequenceEqual(dest), Is.True);
 
             blob.Release();
             image.Release();
@@ -49,7 +47,7 @@
 
             Span<byte> src = LoadTexture(DDSFilename);
             Span<byte> dest = LoadTexture(path);
-            Assert.True(src.SequenceEqual(dest));
+            Assert.That(src.SequenceEqual(dest), Is.True);
 
             image.Release();
         }
@@ -70,7 +68,7 @@
             DirectXTex.SaveToHDRMemory(image.GetImages(), ref blob);
 
             Span<byte> dest = blob.AsBytes();
-            Assert.True(src.SequenceEqual(dest));
+            Assert.That(src.SequenceEqual(dest), Is.True);
 
             blob.Release();
             image.Release();
@@ -91,7 +89,7 @@
 
             Span<byte> src = LoadTexture(HDRFilename);
             Span<byte> dest = LoadTexture(path);
-            Assert.True(src.SequenceEqual(dest));
+            Assert.That(src.SequenceEqual(dest), Is.True);
 
             image.Release();
         }
@@ -150,7 +148,7 @@
             DirectXTex.SaveToWICMemory2(image.GetImages(), image.GetImageCount(), WICFlags.None, guid, ref blob, null, default);
 
             Span<byte> dest = blob.AsBytes();
-            Assert.True(src.SequenceEqual(dest));
+            Assert.That(src.SequenceEqual(dest), Is.True);
 
             blob.Release();
             image.Release();
@@ -171,7 +169,7 @@
 
             Span<byte> src = LoadTexture(WICFilename);
             Span<byte> dest = LoadTexture(path);
-            Assert.True(src.SequenceEqual(dest));
+            Assert.That(src.SequenceEqual(dest), Is.True);
 
             image.Release();
         }

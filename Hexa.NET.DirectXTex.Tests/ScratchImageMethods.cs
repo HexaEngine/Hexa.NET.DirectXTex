@@ -18,7 +18,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -42,7 +42,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture1D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 1,
                 Width = 64,
                 MipLevels = 4,
@@ -50,7 +50,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize1D((int)Format.FormatR8G8B8A8Unorm, 64, 1, 4, CPFlags.None);
+            image.Initialize1D((int)Format.R8G8B8A8Unorm, 64, 1, 4, CPFlags.None);
 
             var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
@@ -65,7 +65,7 @@ namespace Hexa.NET.DirectXTex.Tests
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Width = 64,
                 Height = 32,
                 Depth = 1,
@@ -75,7 +75,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize2D((int)Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
+            image.Initialize2D((int)Format.R8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
 
             var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
@@ -90,7 +90,7 @@ namespace Hexa.NET.DirectXTex.Tests
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture3D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Width = 64,
                 Height = 32,
                 Depth = 4,
@@ -100,7 +100,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.Initialize3D((int)Format.FormatR8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
+            image.Initialize3D((int)Format.R8G8B8A8Unorm, 64, 32, 4, 2, CPFlags.None);
 
             var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
@@ -115,7 +115,7 @@ namespace Hexa.NET.DirectXTex.Tests
             TexMetadata metadata = new()
             {
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Width = 64,
                 Height = 32,
                 Depth = 1,
@@ -125,7 +125,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 MiscFlags2 = 0,
             };
 
-            image.InitializeCube((int)Format.FormatR8G8B8A8Unorm, 64, 32, 1, 2, CPFlags.None);
+            image.InitializeCube((int)Format.R8G8B8A8Unorm, 64, 32, 1, 2, CPFlags.None);
 
             var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
@@ -142,7 +142,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -155,12 +155,12 @@ namespace Hexa.NET.DirectXTex.Tests
             }
 
             {
-                bool result = image.OverrideFormat((int)Format.FormatB8G8R8A8Unorm);
+                bool result = image.OverrideFormat((int)Format.B8G8R8A8Unorm);
                 if (!result)
                     throw new Exception();
             }
 
-            metadata.Format = (int)Format.FormatB8G8R8A8Unorm;
+            metadata.Format = (int)Format.B8G8R8A8Unorm;
             var meta = image.GetMetadata();
             Assert.That(meta, Is.EqualTo(metadata));
 
@@ -176,7 +176,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -201,7 +201,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -233,7 +233,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -269,7 +269,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -299,7 +299,7 @@ namespace Hexa.NET.DirectXTex.Tests
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR16G16Float,
+                Format = (int)Format.R16G16Float,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,

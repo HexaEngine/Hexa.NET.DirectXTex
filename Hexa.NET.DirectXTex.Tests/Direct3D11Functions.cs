@@ -1,22 +1,18 @@
 ﻿namespace Hexa.NET.DirectXTex.Tests
 {
-    using Silk.NET.Direct3D11;
-    using Silk.NET.DXGI;
+    using Hexa.NET.D3D11;
+    using Hexa.NET.D3DCommon;
+    using Hexa.NET.DXGI;
+    using HexaGen.Runtime.COM;
     using System;
     using System.Diagnostics;
-    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
-    using static System.Net.Mime.MediaTypeNames;
 
     [Platform("Win")]
     public unsafe class Direct3D11Functions : IDisposable
     {
-        private readonly DXGI DXGI;
-
         private ComPtr<IDXGIFactory2> IDXGIFactory;
         private ComPtr<IDXGIAdapter1> IDXGIAdapter;
-
-        private readonly D3D11 D3D11;
 
         private readonly ComPtr<ID3D11Device> Device;
         private readonly ComPtr<ID3D11DeviceContext> DeviceContext;
@@ -25,18 +21,14 @@
 
         public Direct3D11Functions()
         {
-            DXGI = DXGI.GetApi();
-
             DXGI.CreateDXGIFactory2(0, out IDXGIFactory);
 
             IDXGIAdapter = GetHardwareAdapter();
 
-            D3D11 = D3D11.GetApi();
-
-            D3DFeatureLevel[] levelsArr = new D3DFeatureLevel[]
+            FeatureLevel[] levelsArr = new FeatureLevel[]
             {
-                D3DFeatureLevel.Level111,
-                D3DFeatureLevel.Level110
+                FeatureLevel.Level111,
+                FeatureLevel.Level110
             };
 
             CreateDeviceFlag flags = CreateDeviceFlag.BgraSupport;
@@ -48,10 +40,10 @@
             ID3D11Device* tempDevice;
             ID3D11DeviceContext* tempContext;
 
-            D3DFeatureLevel level = 0;
-            D3DFeatureLevel* levels = (D3DFeatureLevel*)Unsafe.AsPointer(ref levelsArr[0]);
+            FeatureLevel level = 0;
+            FeatureLevel* levels = (FeatureLevel*)Unsafe.AsPointer(ref levelsArr[0]);
 
-            D3D11.CreateDevice((IDXGIAdapter*)IDXGIAdapter.Handle, D3DDriverType.Unknown, nint.Zero, (uint)flags, levels, (uint)levelsArr.Length, D3D11.SdkVersion, &tempDevice, &level, &tempContext).ThrowHResult();
+            D3D11.CreateDevice((IDXGIAdapter*)IDXGIAdapter.Handle, DriverType.Unknown, nint.Zero, (uint)flags, levels, (uint)levelsArr.Length, D3D11.D3D11_SDK_VERSION, &tempDevice, &level, &tempContext).ThrowIf();
 
             tempDevice->QueryInterface(out Device);
             tempContext->QueryInterface(out DeviceContext);
@@ -73,7 +65,7 @@
             if (factory6.Handle != null)
             {
                 for (uint adapterIndex = 0;
-                    (ResultCode)factory6.EnumAdapterByGpuPreference(adapterIndex, GpuPreference.HighPerformance, out adapter) !=
+                    (ResultCode)factory6.EnumAdapterByGpuPreference(adapterIndex, GpuPreference.HighPerformance, out adapter).Value !=
                     ResultCode.DXGI_ERROR_NOT_FOUND;
                     adapterIndex++)
                 {
@@ -95,12 +87,12 @@
             if (adapter.Handle == null)
             {
                 for (uint adapterIndex = 0;
-                    (ResultCode)IDXGIFactory.EnumAdapters1(adapterIndex, &adapter.Handle) != ResultCode.DXGI_ERROR_NOT_FOUND;
+                    (ResultCode)IDXGIFactory.EnumAdapters1(adapterIndex, &adapter.Handle).Value != ResultCode.DXGI_ERROR_NOT_FOUND;
                     adapterIndex++)
                 {
                     AdapterDesc1 desc;
                     adapter.GetDesc1(&desc);
-                    string name = new(desc.Description);
+                    string name = new(&desc.Description_0);
 
                     Trace.WriteLine($"Found Adapter {name}");
 
@@ -126,14 +118,14 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
                 MiscFlags = 0,
                 MiscFlags2 = 0,
             };
-            Assert.True(DirectXTex.IsSupportedTexture((NET.DirectXTex.ID3D11Device*)Device.Handle, ref metadata));
+            Assert.That(DirectXTex.IsSupportedTexture((NET.DirectXTex.ID3D11Device*)Device.Handle, ref metadata), Is.True);
         }
 
         [Test]
@@ -144,7 +136,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -169,7 +161,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -193,7 +185,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -203,7 +195,7 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, ref metadata, CPFlags.None);
             ID3D11Resource* resource;
-            DirectXTex.CreateTextureEx((NET.DirectXTex.ID3D11Device*)Device.Handle, image.GetImages(), image.GetImageCount(), ref metadata, (int)Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, (NET.DirectXTex.ID3D11Resource**)&resource);
+            DirectXTex.CreateTextureEx((NET.DirectXTex.ID3D11Device*)Device.Handle, image.GetImages(), image.GetImageCount(), ref metadata, (int)Usage.Immutable, (uint)BindFlag.ShaderResource, 0, 0, CreateTexFlags.Default, (NET.DirectXTex.ID3D11Resource**)&resource);
             if (resource == null)
                 Assert.Fail("Fail");
             resource->Release();
@@ -217,7 +209,7 @@
                 ArraySize = 1,
                 Depth = 1,
                 Dimension = TexDimension.Texture2D,
-                Format = (int)Format.FormatR8G8B8A8Unorm,
+                Format = (int)Format.R8G8B8A8Unorm,
                 Height = 64,
                 Width = 64,
                 MipLevels = 4,
@@ -227,7 +219,7 @@
             ScratchImage image = DirectXTex.CreateScratchImage();
             DirectXTex.Initialize(image, ref metadata, CPFlags.None);
             ID3D11ShaderResourceView* srv;
-            DirectXTex.CreateShaderResourceViewEx((NET.DirectXTex.ID3D11Device*)Device.Handle, image.GetImages(), image.GetImageCount(), ref metadata, (int)Usage.Immutable, (uint)BindFlag.ShaderResource, (uint)CpuAccessFlag.None, (uint)ResourceMiscFlag.None, CreateTexFlags.Default, (NET.DirectXTex.ID3D11ShaderResourceView**)&srv);
+            DirectXTex.CreateShaderResourceViewEx((NET.DirectXTex.ID3D11Device*)Device.Handle, image.GetImages(), image.GetImageCount(), ref metadata, (int)Usage.Immutable, (uint)BindFlag.ShaderResource, 0, 0, CreateTexFlags.Default, (NET.DirectXTex.ID3D11ShaderResourceView**)&srv);
             if (srv == null)
                 Assert.Fail("Fail");
             srv->Release();
@@ -237,7 +229,7 @@
         public void CaptureTexture()
         {
             ID3D11Resource* resource;
-            Texture2DDesc desc = new(64, 64, 1, 1, Format.FormatR8G8B8A8Unorm, new(1, 0), Usage.Default, 8, 0, 0);
+            Texture2DDesc desc = new(64, 64, 1, 1, Format.R8G8B8A8Unorm, new(1, 0), Usage.Default, 8, 0, 0);
             Device.CreateTexture2D(&desc, (SubresourceData*)null, (ID3D11Texture2D**)&resource);
 
             ScratchImage image = DirectXTex.CreateScratchImage();
@@ -247,12 +239,12 @@
 
             TexMetadata metadata = DirectXTex.GetMetadata(image);
 
-            Assert.That(metadata.Height, Is.EqualTo((ulong)desc.Height));
-            Assert.That(metadata.Width, Is.EqualTo((ulong)desc.Width));
-            Assert.That(metadata.ArraySize, Is.EqualTo((ulong)desc.ArraySize));
+            Assert.That(metadata.Height, Is.EqualTo((nuint)desc.Height));
+            Assert.That(metadata.Width, Is.EqualTo((nuint)desc.Width));
+            Assert.That(metadata.ArraySize, Is.EqualTo((nuint)desc.ArraySize));
             Assert.That((Format)metadata.Format, Is.EqualTo(desc.Format));
             Assert.That(metadata.MiscFlags, Is.EqualTo(desc.MiscFlags));
-            Assert.That(metadata.MipLevels, Is.EqualTo((ulong)desc.MipLevels));
+            Assert.That(metadata.MipLevels, Is.EqualTo((nuint)desc.MipLevels));
 
             image.Release();
         }

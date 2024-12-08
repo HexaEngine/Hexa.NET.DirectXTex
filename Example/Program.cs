@@ -5,25 +5,27 @@
 
     public class Program
     {
+        private const string DDSFilename = "assets/textures/test.dds";
+
+        private static byte[] LoadTexture(string path) => File.ReadAllBytes(Path.GetFullPath(path));
+
         private static unsafe void Main(string[] args)
         {
+            var path = Path.Combine("results", "LoadAndSaveFromDDSFile", "test.dds");
+            Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
             ScratchImage image = DirectXTex.CreateScratchImage();
-            TexMetadata metadata = default;
+            TexMetadata metadata;
 
-            string inputPath = "assets/textures/test.png";
-            DirectXTex.LoadFromWICFile(inputPath, WICFlags.None, ref metadata, ref image, default).ThrowIf();
-            ScratchImage mipChain = DirectXTex.CreateScratchImage();
+            DirectXTex.LoadFromDDSFile(DDSFilename, DDSFlags.None, &metadata, ref image);
 
-            int mipLevels = 4;
-            DirectXTex.GenerateMipMaps2(image.GetImages(), 1, ref metadata, TexFilterFlags.ForceNonWic, (nuint)mipLevels, ref mipChain).ThrowIf();
-            image.Release();
+            Console.WriteLine(path);
+            metadata = image.GetMetadata();
+            DirectXTex.SaveToDDSFile2(image.GetImages(), image.GetImageCount(), ref metadata, DDSFlags.None, path);
 
-            metadata = mipChain.GetMetadata();
+            Console.WriteLine(path);
 
-            string outputPath = "test.dds";
-            DirectXTex.SaveToDDSFile2(mipChain.GetImages(), mipChain.GetImageCount(), ref metadata, DDSFlags.None, outputPath).ThrowIf();
-
-            mipChain.Release();
+            Span<byte> src = LoadTexture(DDSFilename);
+            Span<byte> dest = LoadTexture(path);
         }
     }
 }

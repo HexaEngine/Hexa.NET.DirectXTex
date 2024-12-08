@@ -2,12 +2,12 @@
 {
     public unsafe class MetadataIO
     {
-        private const string DDSFilename = "assets\\textures\\test.dds";
-        private const string HDRFilename = "assets\\textures\\test.hdr";
-        private const string TGAFilename = "assets\\textures\\test.tga";
-        private const string WICFilename = "assets\\textures\\test.png";
+        private const string DDSFilename = "assets/textures/test.dds";
+        private const string HDRFilename = "assets/textures/test.hdr";
+        private const string TGAFilename = "assets/textures/test.tga";
+        private const string WICFilename = "assets/textures/test.png";
 
-        private static byte[] LoadTexture(string path) => File.ReadAllBytes(path);
+        private static byte[] LoadTexture(string path) => File.ReadAllBytes(Path.GetFullPath(path));
 
         [Test]
         public void GetMetadataFromDDSMemoryAndFile()
@@ -60,6 +60,7 @@
             Assert.That(metadata2, Is.EqualTo(metadata1));
         }
 
+        [Platform("Win")]
         [Test]
         public void GetMetadataFromWICMemoryAndFile()
         {

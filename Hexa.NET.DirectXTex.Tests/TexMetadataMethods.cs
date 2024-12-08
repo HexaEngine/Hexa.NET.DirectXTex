@@ -70,7 +70,7 @@
         [Test]
         public void ComputeIndex()
         {
-            Assert.That(texArray.ComputeIndex(1, 1, 0), Is.EqualTo((ulong)5));
+            Assert.That(texArray.ComputeIndex(1, 1, 0), Is.EqualTo((nuint)5));
         }
 
         [Test]

@@ -137,8 +137,8 @@
             nuint slicePitch = 0;
             DirectXTex.ComputePitch((int)Format.FormatR8G8B8A8Uint, width, height, &rowPitch, &slicePitch, CPFlags.None).ThrowIf();
 
-            ulong rowPitch2 = width * 4;
-            ulong slicePitch2 = rowPitch2 * height;
+            nuint rowPitch2 = width * 4;
+            nuint slicePitch2 = rowPitch2 * height;
 
             Assert.That(rowPitch, Is.EqualTo(rowPitch2));
             Assert.That(slicePitch, Is.EqualTo(slicePitch2));
@@ -149,7 +149,7 @@
         {
             uint height = 64;
             var result = DirectXTex.ComputeScanlines((int)Format.FormatR8G8B8A8Uint, height);
-            ulong expected = 64;
+            nuint expected = 64;
             Assert.That(expected, Is.EqualTo(result));
         }
 

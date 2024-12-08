@@ -4,6 +4,7 @@
 
     public unsafe class TextureUtils
     {
+        [Platform("Win")]
         [Test]
         public void FlipRotate()
         {

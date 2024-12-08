@@ -8,6 +8,7 @@
     using System.Runtime.CompilerServices;
     using static System.Net.Mime.MediaTypeNames;
 
+    [Platform("Win")]
     public unsafe class Direct3D11Functions : IDisposable
     {
         private readonly DXGI DXGI;

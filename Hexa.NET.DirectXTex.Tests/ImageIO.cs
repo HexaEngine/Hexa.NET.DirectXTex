@@ -9,7 +9,7 @@
         private const string TGAFilename = "assets/textures/test.tga";
         private const string WICFilename = "assets/textures/test.png";
 
-        private static byte[] LoadTexture(string path) => File.ReadAllBytes(path);
+        private static byte[] LoadTexture(string path) => File.ReadAllBytes(Path.GetFullPath(path));
 
         [Test]
         public void LoadAndSaveFromDDSMemory()
@@ -133,6 +133,7 @@
             image.Release();
         }
 
+        [Platform("Win")]
         [Test]
         public void LoadAndSaveFromWICMemory()
         {
@@ -155,6 +156,7 @@
             image.Release();
         }
 
+        [Platform("Win")]
         [Test]
         public void LoadAndSaveFromWICFile()
         {

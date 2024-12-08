@@ -1,5 +1,6 @@
 ﻿namespace Hexa.NET.DirectXTex.Tests
 {
+    [Platform("Win")]
     public unsafe class WICUtilities
     {
         [Test]
